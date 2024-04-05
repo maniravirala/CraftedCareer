@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="text-2xl font-bold pt-14">
+      <div className="text-2xl font-bold pt-14 h-full">
         Hello{" "}
         {currentUser.displayName ? currentUser.displayName : currentUser.email},
         you are now logged in.

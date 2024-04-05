@@ -57,7 +57,7 @@ const Form = ({ formData, handleChange, handleProfilePic }) => {
  
   return (
     <div className="my-8">
-      <div className="flex h-[80vh] ">
+      <div className="flex  ">
         <div className="bg-white p-4 rounded-lg">
           <div className="flex flex-col h-full justify-between">
             {sections.map((section) => (

@@ -20,34 +20,14 @@ const Header = () => {
         <Link to="/resume" className="text-blue-600 hover:underline">
           Resume
         </Link>
-        <div>
-          {userLoggedIn ? (
-            <>
-              <button
-                onClick={() => {
-                  doSignOut().then(() => {
-                    navigate("/login");
-                  });
-                }}
-                className="text-blue-600 hover:underline"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="text-blue-600 hover:underline">
-                Login
-              </Link>
-              <Link
-                to="/register"
-                className="text-blue-600 hover:underline ml-2"
-              >
-                Register New Account
-              </Link>
-            </>
-          )}
-        </div>
+        {userLoggedIn ? (<Link to="/download" className="text-blue-600 hover:underline"> Download </Link>) : null}
+        {userLoggedIn ? (
+          <Link to="/login" className="text-blue-600 hover:underline" onClick={() => doSignOut(navigate)}> Logout </Link>
+        ) : (
+          <Link to="/login" className="text-blue-600 hover:underline">
+            Login
+          </Link>
+        )}
       </nav>
 
       <div className="w-1/3">

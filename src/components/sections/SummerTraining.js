@@ -88,7 +88,7 @@ const SummerTraining = ({ formData, handleChange }) => {
                             name={`description-${trainingIndex}`}
                             value={training.description}
                             onChange={(e) => handleSummerTrainingChange(e, trainingIndex)}
-                            attributes={{ maxLength: 50, autoCorrect: "off", autoCapitalize: "off", spellCheck: "false" }}
+                            attributes={{ autoCorrect: "off", autoCapitalize: "off", spellCheck: "false" }}
                         />
 
                         <div className="flex items-center gap-2 justify-center -mt-5">

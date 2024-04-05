@@ -2,6 +2,7 @@ import React from 'react';
 import { BiLogoGithub, BiLogoGmail, BiLogoLinkedinSquare, BiSolidMap, BiSolidPhone } from 'react-icons/bi';
 import dayjs from 'dayjs';
 import { Divider } from 'antd';
+import Markdown from 'react-markdown';
 
 const Template1 = ({ formData }) => {
 
@@ -13,6 +14,7 @@ const Template1 = ({ formData }) => {
       return 'Present';
     }
   };
+
 
   return (
     <div className=' overflow-y-auto' //max-h-[82vh]
@@ -91,7 +93,7 @@ const Template1 = ({ formData }) => {
 
               <ul className="flex flex-col gap-1">
                 {formData.certifications.map((certification, index) => (
-                  <li key={index} className="ml-4 list-disc">
+                  <li key={index} className="ml-4">
                     <div className="text-xs flex flex-col gap-2">
                       <div className="flex justify-between">
                         <span className=" ">{certification.title}</span>
@@ -170,7 +172,9 @@ const Template1 = ({ formData }) => {
                       <span>{training.location}</span>
                     </div>
                     <div className="flex gap-2">
-                      <p>{training.description}</p>
+                      {/* <p>{training.description}</p> */}
+                      <Markdown className={'ml-4'}
+                      >{training.description}</Markdown>
                     </div>
                   </div>
                 ))}
@@ -192,7 +196,9 @@ const Template1 = ({ formData }) => {
                       <span>{project.technologies}</span>
                     </div>
                     <div className="flex gap-2">
-                      <p>{project.description}</p>
+                      {/* <p>{project.description}</p> */}
+                      <Markdown className={'ml-4'}
+                      >{project.description}</Markdown>
                     </div>
                   </div>
                 ))}

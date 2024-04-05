@@ -1,7 +1,7 @@
 import React from "react";
 import FormData from "../Data/FormData";
 import Form from "../../components/Form";
-import Preview from "../../components/Preview";
+import Preview from "../../components/Preview"; 
 
 const Resume = () => {
   const { formData, handleChange, handleProfilePic } = FormData();
@@ -23,9 +23,9 @@ const Resume = () => {
             formData={formData}
             handleChange={handleChange}
             handleProfilePic={handleProfilePic}
-          />
+          />  
         </div>
-        <div className="">
+        <div className="max-h-[90vh] overflow-y-auto w-full">
           <Preview formData={formData} />
         </div>
       </div>

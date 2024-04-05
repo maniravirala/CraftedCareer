@@ -1,11 +1,11 @@
 import React from "react";
+import Template1  from "./Template1";
+import FormData from "../../app/Data/FormData";
 
-const Template2 = ({ formData }) => {
+const Template2 = () => {
+    const { formData } = FormData();
     return (
-        <div>
-            <h1>Template 2</h1>
-            <pre>{JSON.stringify(formData, null, 2)}</pre>
-        </div>
+        <Template1 formData={formData} />
     );
 }
 
