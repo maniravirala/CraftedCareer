@@ -5,7 +5,12 @@ import TextAreaMani from "../Inputs/TextAreaMani";
 import DatePickerMani from "../Inputs/DatepickerMani";
 import * as dayjs from 'dayjs';
 
-const SummerTraining = ({ formData, handleChange }) => {
+import { useFormData } from "../../contexts/Data/FormDataContext";
+
+const SummerTraining = ( ) => {
+
+    const {formData, handleChange} = useFormData();
+    
     const [summerTraining, setSummerTraining] = useState(formData.summerTraining || []);
 
     const handleSummerTrainingChange = (e, trainingIndex) => {

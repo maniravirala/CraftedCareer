@@ -5,7 +5,12 @@ import DatePickerMani from "../Inputs/DatepickerMani";
 import DropDownMani from "../Inputs/DropDownMani";
 import * as dayjs from 'dayjs';
 
-const Education = ({ formData, handleChange }) => {
+import { useFormData } from "../../contexts/Data/FormDataContext";
+
+const Education = ( ) => {
+
+    const {formData, handleChange} = useFormData();
+
     const [education, setEducation] = useState(formData.education || []);
 
     const handleEducationChange = (e, educationIndex) => {

@@ -5,7 +5,12 @@ import TextAreaMani from "../Inputs/TextAreaMani";
 import DatePickerMani from "../Inputs/DatepickerMani";
 import * as dayjs from 'dayjs';
 
-const Projects = ({ formData, handleChange }) => {
+import { useFormData } from "../../contexts/Data/FormDataContext";
+
+const Projects = ( ) => {
+
+    const {formData, handleChange} = useFormData();
+    
     const [projects, setProjects] = useState(formData.projects || []);
 
     const handleProjectChange = (e, projectIndex) => {

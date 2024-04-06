@@ -6,8 +6,12 @@ import { BiMap, BiUser, BiLogoGmail, BiPhone, BiRepost, BiLogoLinkedin, BiLogoGi
 import InputMani from "../Inputs/InputMani";
 import TextAreaMani from "../Inputs/TextAreaMani";
 
+import { useFormData } from "../../contexts/Data/FormDataContext";
 
-const PersonalInfo = ({ formData, handleChange }) => {
+const PersonalInfo = () => {
+
+  const {formData, handleChange} = useFormData();
+
   return (
     <div>
       <div className="flex flex-col w-full p-5 sm:p-10 gap-8">

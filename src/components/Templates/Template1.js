@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BiLogoGithub, BiLogoGmail, BiLogoLinkedinSquare, BiSolidMap, BiSolidPhone } from 'react-icons/bi';
 import dayjs from 'dayjs';
 import { Divider } from 'antd';
 import Markdown from 'react-markdown';
 
-const Template1 = ({ formData }) => {
+import { useFormData } from "../../contexts/Data/FormDataContext";
 
+const Template1 = () => {
+
+  const { formData } = useFormData();
+  
   const formatDate = (date) => {
     if (date.length > 0) {
       return dayjs(date, 'MM/YYYY').format('MMM YYYY');
@@ -17,7 +21,7 @@ const Template1 = ({ formData }) => {
 
 
   return (
-    <div className=' overflow-y-auto' //max-h-[82vh]
+    <div className=' overflow-y-auto w-full' //max-h-[82vh]
       style={{ fontFamily: 'Poppins, sans-serif' }}
     >
       <div className="bg-gray-100 text-gray-800" style={{ width: '210mm', minHeight: '297mm', margin: '0 auto' }}>

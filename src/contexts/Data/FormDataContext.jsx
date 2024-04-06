@@ -1,6 +1,12 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
-const FormData = () => {
+const FormDataContext = React.createContext();
+
+export const useFormData = () => {
+    return useContext(FormDataContext);
+};
+
+export const FormDataProvider = ({ children }) => {
     const [formData, setFormData] = useState(() => {
         const savedFormData = localStorage.getItem("formData");
         return savedFormData ? JSON.parse(savedFormData) : {
@@ -28,7 +34,7 @@ const FormData = () => {
     useEffect(() => {
         localStorage.setItem("formData", JSON.stringify(formData));
     }, [formData]);
-    
+
     const handleChange = (e, section, index) => {
         const { name, value } = e.target;
         setFormData((prevData) => {
@@ -40,16 +46,20 @@ const FormData = () => {
           }
           return updatedData;
         });
-      };
+    };
 
     const handleProfilePic = (url) => {
         setFormData((prevData) => ({
             ...prevData,
             profilePic: url,
         }));
-    };       
-    
-    return { formData, handleChange, handleProfilePic };
-}
+    };
 
-export default FormData;
+    return (
+        <FormDataContext.Provider value={{ formData, handleChange, handleProfilePic }}>
+            {children}
+        </FormDataContext.Provider>
+    );
+};
+
+export default FormDataContext;

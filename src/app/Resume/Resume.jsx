@@ -1,32 +1,38 @@
-import React from "react";
-import FormData from "../Data/FormData";
-import Form from "../../components/Form";
-import Preview from "../../components/Preview"; 
+import React, { useState, useEffect } from "react";
+import Form from "../Pages/Form";
+import Preview from "../Pages/Preview";
+import LeftSectionChanger from "../Pages/LeftSectionChanger";
 
 const Resume = () => {
-  const { formData, handleChange, handleProfilePic } = FormData();
+  const [currentSection, setCurrentSection] = useState(() => {
+    const savedSection = localStorage.getItem("currentSection");
+    return savedSection || "personalInfo";
+  });
 
-  const handleProfilePicChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      handleProfilePic(reader.result);
-    };
-  };
+  useEffect(() => {
+    const savedSection = localStorage.getItem("currentSection");
+    if (!savedSection) {
+      localStorage.setItem("currentSection", "personalInfo");
+    }
+  }, []);
 
   return (
-    <div className=" ">
-      <div className="flex mx-6">
-        <div className="w-full">
-          <Form
-            formData={formData}
-            handleChange={handleChange}
-            handleProfilePic={handleProfilePic}
-          />  
+    <div className="flex">
+      <div className="flex items-center ">
+        <LeftSectionChanger
+          currentSection={currentSection}
+          setCurrentSection={setCurrentSection}
+        />
+      </div>
+      <div
+        className="grid max-h-[89vh] w-full"
+        style={{ gridTemplateColumns: "1fr 210mm" }}
+      >
+        <div className="col-span-1 overflow-y-auto">
+          <Form currentSection={currentSection} />
         </div>
-        <div className="max-h-[90vh] overflow-y-auto w-full">
-          <Preview formData={formData} />
+        <div className="col-span-1 overflow-y-auto">
+          <Preview />
         </div>
       </div>
     </div>

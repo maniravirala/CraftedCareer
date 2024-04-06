@@ -5,7 +5,12 @@ import TextAreaMani from "../Inputs/TextAreaMani";
 import DatePickerMani from "../Inputs/DatepickerMani";
 import * as dayjs from 'dayjs';
 
-const Achievements = ({ formData, handleChange }) => {
+import { useFormData } from "../../contexts/Data/FormDataContext";
+
+const Achievements = ( ) => {
+
+    const {formData, handleChange} = useFormData();
+    
     const [achievements, setAchievements] = useState(formData.achievements || []);
 
     const handleAchievementChange = (e, achievementIndex) => {

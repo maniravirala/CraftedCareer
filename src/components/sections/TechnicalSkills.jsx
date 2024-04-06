@@ -3,7 +3,12 @@ import { BiAddToQueue, BiCodeAlt, BiEraser } from "react-icons/bi";
 import InputMani from "../Inputs/InputMani";
 import TextAreaMani from "../Inputs/TextAreaMani";
 
-const TechnicalSkills = ({ formData, handleChange }) => {
+import { useFormData } from "../../contexts/Data/FormDataContext";
+
+const TechnicalSkills = ( ) => {
+
+    const { formData, handleChange } = useFormData();
+
     const [domains, setDomains] = useState(formData.technicalSkills || []);
 
     const handletechnicalSkillsChange = (e, domainIndex) => {

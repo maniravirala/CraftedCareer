@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Template1 from './Templates/Template1';
-import Template2 from './Templates/Template2';
-import Template3 from './Templates/Template3';
-import DropDownMani from './Inputs/DropDownMani';
+import Template1 from '../../components/Templates/Template1';
+import Template2 from '../../components/Templates/Template2';
+import Template3 from '../../components/Templates/Template3';
+import DropDownMani from '../../components/Inputs/DropDownMani';
 
 const Preview = ({ formData }) => {
   const [selectedTemplate, setSelectedTemplate] = useState(() => {

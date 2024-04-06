@@ -5,8 +5,12 @@ import TextAreaMani from "../Inputs/TextAreaMani";
 import DatePickerMani from "../Inputs/DatepickerMani";
 import * as dayjs from 'dayjs';
 
+import { useFormData } from "../../contexts/Data/FormDataContext";
 
-const Internships = ({ formData, handleChange }) => {
+const Internships = ( ) => {
+
+    const {formData, handleChange} = useFormData();
+    
     const [internships, setInternships] = useState(formData.internships || []);
     // Company, position, location, start date, enddate and experience
     const handleInternshipChange = (e, internshipIndex) => {

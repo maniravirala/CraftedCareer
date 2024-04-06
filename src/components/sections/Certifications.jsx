@@ -4,8 +4,12 @@ import InputMani from "../Inputs/InputMani";
 import DatePickerMani from "../Inputs/DatepickerMani";
 import * as dayjs from 'dayjs';
 
+import { useFormData } from "../../contexts/Data/FormDataContext";
 
-const Certifications = ({ formData, handleChange }) => {
+const Certifications = ( ) => {
+
+    const {formData, handleChange} = useFormData();
+    
     const [certificates, setCertificates] = useState(formData.certifications || []);
 
     const handleCertificateChange = (e, certificateIndex) => {

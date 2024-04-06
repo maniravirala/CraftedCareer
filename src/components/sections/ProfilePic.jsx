@@ -1,7 +1,11 @@
 import React from "react";
 import UploadMani from "../Inputs/UploadMani";
 
-const ProfilePic = ({formData, handleProfilePic}) => {
+import { useFormData } from "../../contexts/Data/FormDataContext";
+
+const ProfilePic = ( ) => {
+
+    const { formData, handleProfilePic } = useFormData();
 
     return (
         <div>

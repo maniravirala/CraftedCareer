@@ -4,7 +4,12 @@ import InputMani from "../Inputs/InputMani";
 import DatePickerMani from "../Inputs/DatepickerMani";
 import * as dayjs from 'dayjs';
 
-const ExtraCurricularActivities = ({ formData, handleChange }) => {
+import { useFormData } from "../../contexts/Data/FormDataContext";
+
+const ExtraCurricularActivities = ( ) => {
+
+    const {formData, handleChange} = useFormData();
+    
     const [activities, setActivities] = useState(formData.extraCurricularActivities || []);
 
     const handleActivityChange = (e, index) => {
