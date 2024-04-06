@@ -12,6 +12,7 @@ const InputMani = ({
     inputClassName = "",
     decorationClassName = "",
     attributes = {},
+    onKeyDown,
   }) => {
     return (
       <div className={`relative flex flex-row-reverse items-stretch w-full rounded-xl bg-white shadow-[0_4px_10px_rgba(0,0,0,0.03)] ${className} `}>
@@ -27,6 +28,7 @@ const InputMani = ({
           placeholder=" "
           disabled={disabled}
           {...attributes}
+          onKeyDown={onKeyDown}
         />
         <label
           htmlFor={name}

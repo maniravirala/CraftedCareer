@@ -1,8 +1,31 @@
-import React, { useState } from "react";
-import { Input } from "antd";
-import { BiXCircle } from "react-icons/bi";
+import React, { useState } from 'react';
+import { closestCenter, DndContext, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import {
+  arrayMove,
+  horizontalListSortingStrategy,
+  SortableContext,
+} from '@dnd-kit/sortable';
+import { Flex, message } from 'antd';
+
+import DraggableTag from '../Inputs/DraggableTag';
 
 const Template3 = () => {
+  const sensors = useSensors(useSensor(PointerSensor));
+
+const handleDragEnd = (event) => {
+    const { active, over } = event;
+    if (!over) {
+      return;
+    }
+    if (active.id !== over.id) {
+      setTags((data) => {
+        const oldIndex = data.findIndex((item) => item.id === active.id);
+        const newIndex = data.findIndex((item) => item.id === over.id);
+        return arrayMove(data, oldIndex, newIndex);
+      });
+    }
+  };  
+
   const [inputValue, setInputValue] = useState("");
   const [tags, setTags] = useState([]);
 
@@ -11,64 +34,45 @@ const Template3 = () => {
   };
 
   const handleInputConfirm = () => {
-    if (inputValue && !tags.includes(inputValue)) {
-      setTags([...tags, inputValue]);
+    if (inputValue && !tags.some((tag) => tag.text === inputValue)) {
+      const newTag = {
+        id: tags.length + 1, // Generate a unique id for the new tag
+        text: inputValue,
+      };
+      setTags([...tags, newTag]);
       setInputValue("");
+    } else {
+      message.error("Skill already exists or empty tag");
     }
   };
 
-  const handleClose = (removedTag) => {
-    const newTags = tags.filter((tag) => tag !== removedTag);
-    setTags(newTags);
-  };
+  const handleTagClose = (tag) => {
+    setTags(tags.filter((item) => item.id !== tag.id));
+  }
 
-  const handleDragStart = (e, index) => {
-    e.dataTransfer.setData("tagIndex", index.toString());
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e, dropIndex) => {
-    e.preventDefault();
-    const tagIndex = parseInt(e.dataTransfer.getData("tagIndex"));
-    const newTags = [...tags];
-    const [removedTag] = newTags.splice(tagIndex, 1);
-    newTags.splice(dropIndex, 0, removedTag);
-    setTags(newTags);
-  };
 
   return (
-    <div className="flex flex-col gap-4">
-      <h1>Template 3</h1>
-      <Input
+    <>
+      <input
         value={inputValue}
         onChange={handleInputChange}
-        onPressEnter={handleInputConfirm}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            handleInputConfirm();
+          }
+        }}
         placeholder="Enter tags"
       />
-      <div className="flex flex-wrap">
-        {tags.map((tag, index) => (
-          <span
-            key={index}
-            className="bg-gray-500 p-2 m-1 rounded-lg text-white cursor-move"
-            style={{ userSelect: "none" }}
-            draggable
-            onDragStart={(e) => handleDragStart(e, index)}
-            onDragOver={handleDragOver}
-            onDrop={(e) => handleDrop(e, index)}
-          >
-            {tag}
-            <BiXCircle
-              onClick={() => handleClose(tag)}
-              className="inline-block ml-2 cursor-pointer"
-            />
-          </span>
-        ))}
-      </div>
-    </div>
+      <DndContext sensors={sensors} onDragEnd={handleDragEnd} collisionDetection={closestCenter}>
+        <SortableContext items={tags} strategy={horizontalListSortingStrategy}>
+          <Flex gap="4px 0" wrap="wrap">
+            {tags.map((tag) => (
+              <DraggableTag tag={tag} key={tag.id} handleTagClose={handleTagClose}/>
+            ))}
+          </Flex>
+        </SortableContext>
+      </DndContext>
+    </>
   );
 };
-
 export default Template3;
