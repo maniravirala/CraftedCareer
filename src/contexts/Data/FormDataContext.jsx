@@ -28,6 +28,14 @@ export const FormDataProvider = ({ children }) => {
             projects: [],
             achievements: [],
             education: [],
+            visibility: {
+                certifications: true,
+                extraCurricularActivities: true,
+                internships: true,
+                summerTraining: true,
+                projects: true,
+                achievements: true,
+            }
         };
     });
 

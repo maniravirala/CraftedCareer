@@ -22,7 +22,11 @@ const Preview = ({ formData }) => {
   };
 
   return (
-    <div>
+    <div 
+    style={{
+      userSelect: "none",
+    }}
+    >
       <DropDownMani
         className="h-full outline-none my-2"
         handleChange={handleTemplateChange}
@@ -43,7 +47,7 @@ const Preview = ({ formData }) => {
         ]}
       />
 
-      <TemplateComponent formData={formData} />
+      <TemplateComponent  />
     </div>
   );
 };

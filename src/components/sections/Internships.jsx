@@ -12,6 +12,7 @@ const Internships = ( ) => {
     const {formData, handleChange} = useFormData();
     
     const [internships, setInternships] = useState(formData.internships || []);
+    const [visibility, setVisibility] = useState(formData.visibility || []);
     // Company, position, location, start date, enddate and experience
     const handleInternshipChange = (e, internshipIndex) => {
         const updatedInternships = [...internships];
@@ -28,6 +29,12 @@ const Internships = ( ) => {
         handleChange({ target: { name: "internships", value: updatedInternships } }, "internships");
     }
 
+    const toggleInternshipVisibility = () => {
+        const updatedVisibility = [...visibility];
+        updatedVisibility.internships = !visibility.internships;
+        setVisibility(updatedVisibility);
+        handleChange({ target: { name: "visibility", value: updatedVisibility } }, "visibility");
+    }
     
     const today1 = dayjs().format('MM/YYYY');
     const today2 = dayjs().format('MM/YYYY');
@@ -48,6 +55,7 @@ const Internships = ( ) => {
         <div>
             <div className="flex items-center justify-between w-full p-3 sm:p-10 gap-8">
                 <h2 className="text-xl font-semibold">Internships</h2>
+                
                 <button type="button" onClick={addInternship} className="flex items-center gap-2 text-blue-500 font-semibold focus:outline-none">
                     <BiAddToQueue className="inline-block" size="1.5rem" onClick={addInternship} />
                     Add Internship

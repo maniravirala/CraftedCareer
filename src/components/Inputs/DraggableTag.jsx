@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Tag } from 'antd';
 import { useSortable } from '@dnd-kit/sortable';
 
@@ -10,7 +9,7 @@ const commonStyle = {
 
 
 const DraggableTag = (props) => {
-    const { tag, handleTagClose } = props;
+    const { tag, handleTagClose, className } = props;
     const { listeners, transform, transition, isDragging, setNodeRef } = useSortable({
       id: tag.id,
     });
@@ -29,7 +28,7 @@ const DraggableTag = (props) => {
     };
   
     return (
-      <Tag style={style} ref={setNodeRef} {...listeners} onContextMenu={handleContextMenu} className='bg-white shadow-[0_4px_10px_rgba(0,0,0,0.03)] px-2 py-1 border-0'>
+      <Tag style={style} ref={setNodeRef} {...listeners} onContextMenu={handleContextMenu} className={`${className} bg-white border-0 shadow-[0.4px 10px rgba(0,0,0,0.03)] px-3 py-1`}>
         {tag.text}
         <span>
         </span>

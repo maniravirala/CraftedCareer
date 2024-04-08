@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BiLogoGithub, BiLogoGmail, BiLogoLinkedinSquare, BiSolidMap, BiSolidPhone } from 'react-icons/bi';
 import dayjs from 'dayjs';
 import { Divider } from 'antd';
@@ -9,7 +9,7 @@ import { useFormData } from "../../contexts/Data/FormDataContext";
 const Template1 = () => {
 
   const { formData } = useFormData();
-  
+
   const formatDate = (date) => {
     if (date.length > 0) {
       return dayjs(date, 'MM/YYYY').format('MMM YYYY');
@@ -69,8 +69,12 @@ const Template1 = () => {
           </div>
         </div>
 
-        <div className="grid "
-          style={{ gridTemplateColumns: '1fr 2px 1fr 1fr' }}
+        <div className="grid " style={{
+          gridTemplateColumns: '1fr 2px 2fr',
+          width: '210mm', // A4 paper width
+          wordWrap: 'break-word', // Wrap long words
+          overflowWrap: 'anywhere', // Wrap overflowing content
+        }}
         >
           <div className="col-span-1 p-6">
             <div className="flex flex-col gap-2">
@@ -85,7 +89,14 @@ const Template1 = () => {
                 {formData.technicalSkills.map((skill, index) => (
                   <div key={index} className="text-xs flex flex-col gap-2">
                     <h1 className="font-semibold">{skill.domain}:</h1>
-                    <p className='pl-3'>{skill.skills}</p>
+                    <div className='flex flex-wrap ml-4'>
+                      {skill.skills.map((tag, index) => (
+                        <span key={tag.id} className={index === skill.skills.length - 1 ? '' : 'mr-2'}>
+                          {tag.text}{index !== skill.skills.length - 1 && ','}
+                        </span>
+                      ))}
+                    </div>
+
                   </div>
                 ))}
               </div>
@@ -138,9 +149,10 @@ const Template1 = () => {
           <div className="col-span-1 bg-main my-6 rounded-lg">
           </div>
 
-          <div className="col-span-2 p-6">
+          <div className="col-span-1 p-6">
             <div className="flex flex-col gap-2">
               <h1 className="text-sm font-semibold uppercase text-main">Internship</h1>
+              {/* <span>{formData.visibility.internships ? "True" : "False"}</span> */}
               <div className="flex flex-col gap-1">
                 {formData.internships.map((intern, index) => (
                   <div key={index} className="text-xs flex flex-col gap-2">

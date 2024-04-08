@@ -25,8 +25,9 @@ const Resume = () => {
         />
       </div>
       <div
-        className="grid max-h-[89vh] w-full"
-        style={{ gridTemplateColumns: "1fr 210mm" }}
+        className="grid h-[89vh] w-full"
+        // style={{ gridTemplateColumns: "1fr 210mm" }}
+        style={{ gridTemplateColumns: "1fr 2fr" }}  
       >
         <div className="col-span-1 overflow-y-auto">
           <Form currentSection={currentSection} />
