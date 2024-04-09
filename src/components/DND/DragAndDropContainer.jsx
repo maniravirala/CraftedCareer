@@ -9,11 +9,10 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import { arrayMove } from "@dnd-kit/sortable";
 
 import { Column } from "./Column";
 
-const DragAndDropContainer = ({ items, setItems, ItemClassName }) => {
+const DragAndDropContainer = ({ items, setItems, ItemClassName, close=false }) => {
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(TouchSensor),
@@ -24,13 +23,26 @@ const DragAndDropContainer = ({ items, setItems, ItemClassName }) => {
     const { active, over } = event;
 
     if (active.id === over.id) return;
-
-    setItems((items) => {
-      const originalPos = items.findIndex((item) => item.id === active.id);
-      const newPos = items.findIndex((item) => item.id === over.id);
-      return arrayMove(items, originalPos, newPos);
-    });
+    
+    const oldIndex = items.findIndex((item) => item.id === active.id);
+    const newIndex = items.findIndex((item) => item.id === over.id);
+    
+    let newItems = [...items];
+    newItems.splice(oldIndex, 1);
+    newItems.splice(newIndex, 0, items[oldIndex]);
+    // const newItems = arrayMove(items, oldIndex, newIndex);
+    setItems(newItems);
   };
+
+  const handleTagClose = (id) => {
+    const newItems = items.filter((item) => item.id !== id);
+    newItems.forEach((item, index) => {
+      item.id = index + 1;
+    });
+    setItems(newItems);
+  };
+
+
 
   return (
     <DndContext
@@ -38,7 +50,7 @@ const DragAndDropContainer = ({ items, setItems, ItemClassName }) => {
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
     >
-      <Column items={items} ItemClassName={ItemClassName} />
+      <Column items={items} ItemClassName={ItemClassName} handleTagClose={close ? handleTagClose : null} />
     </DndContext>
   );
 };

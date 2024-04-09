@@ -88,11 +88,11 @@ const Template1 = () => {
               <div className="flex flex-col gap-1">
                 {formData.technicalSkills.map((skill, index) => (
                   <div key={index} className="text-xs flex flex-col gap-2">
-                    <h1 className="font-semibold">{skill.domain}:</h1>
+                    <h1 className="font-semibold">{skill.content.domain}:</h1>
                     <div className='flex flex-wrap ml-4'>
-                      {skill.skills.map((tag, index) => (
-                        <span key={tag.id} className={index === skill.skills.length - 1 ? '' : 'mr-2'}>
-                          {tag.text}{index !== skill.skills.length - 1 && ','}
+                      {skill.content.skills.map((tag, index) => (
+                        <span key={tag.id} className={index === skill.content.skills.length - 1 ? '' : 'mr-2'}>
+                          {tag.content}{index !== skill.content.skills.length - 1 && ','}
                         </span>
                       ))}
                     </div>
