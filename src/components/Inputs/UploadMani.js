@@ -23,7 +23,7 @@ const UploadMani = ({ handleProfilePic }) => {
                 className="hidden"
                 id="profilePicInput"
             />
-            <label htmlFor="profilePicInput" className="cursor-pointer">
+            <label htmlFor="profilePicInput" className="cursor-pointer bg-white shadow-[0_4px_10px_rgba(0,0,0,0.03)] px-4 py-3 rounded-lg">
                 Upload Profile Picture
             </label>
         </div>

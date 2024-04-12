@@ -1,6 +1,6 @@
 import React from "react";
 
-const InputMani = ({
+const Input = ({
   label,
   name,
   value,
@@ -15,15 +15,18 @@ const InputMani = ({
   onKeyDown,
 }) => {
   return (
-    <div className={`relative flex flex-row-reverse items-stretch w-full rounded-xl bg-white shadow-[0_4px_10px_rgba(0,0,0,0.03)] ${className} `}>
+    <div
+      className={`relative flex flex-row-reverse items-stretch w-full rounded-xl shadow-[0_4px_10px_rgba(0,0,0,0.03)] ${className} `}
+    >
       <input
         type={type}
         id={name}
         name={name}
         value={value}
         onChange={onChange}
-        className={`peer block w-full p-3 text-gray-600 focus:outline-none focus:ring-0 appearance-none border-0 border-b-[2px] ${disabled ? "bg-gray-200 rounded-r-xl" : "bg-transparent"
-          } ${inputClassName}`}
+        className={`peer block w-full p-3 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-0 appearance-none ${
+          disabled ? "bg-gray-200 rounded-r-xl" : "bg-transparent"
+        } ${decoration ? "rounded-r-lg" : "rounded-lg"} ${inputClassName}`}
         placeholder=" "
         disabled={disabled}
         {...attributes}
@@ -35,17 +38,19 @@ const InputMani = ({
           ${disabled ? "text-gray-300" : "text-gray-400"}`}
       >
         {label}
-
       </label>
 
-      {decoration && (<div
-        className={`flex items-center pl-3 py-3 text-gray-600 ${disabled ? "bg-gray-200 rounded-l-xl" : ""
+      {decoration && (
+        <div
+          className={`flex items-center pl-3 py-3 rounded-l-lg disabled:opacity-50 disabled:pointer-events-none ${
+            disabled ? "bg-gray-200 rounded-l-xl" : ""
           } ${decorationClassName}`}
-      >
-        {decoration}
-      </div>)}
+        >
+          {decoration}
+        </div>
+      )}
     </div>
   );
 };
 
-export default InputMani;
+export default Input;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/authContext";
+import RegisterTemplate from "./RegisterTemplate";
 import { doCreateUserWithEmailAndPassword } from "../../../firebase/auth";
 import InputMani from "../../../components/Inputs/InputMani";
 import {
@@ -13,31 +14,7 @@ import {
 import { Carousel } from "antd";
 
 const Register = () => {
-  const navigate = useNavigate();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setconfirmPassword] = useState("");
-  const [isRegistering, setIsRegistering] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [passwordError, setPasswordError] = useState(false);
-
   const { userLoggedIn } = useAuth();
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (!isRegistering && !passwordError) {
-      setIsRegistering(true);
-      // await doCreateUserWithEmailAndPassword(email, password)
-      try {
-        await doCreateUserWithEmailAndPassword(email, password);
-        navigate("/login");
-      } catch (err) {
-        setErrorMessage(err.message);
-      }
-      setIsRegistering(false);
-    }
-  };
 
   const contentStyle = {
     height: "80px",
@@ -46,15 +23,7 @@ const Register = () => {
     // lineHeight: "10px",
     textAlign: "center",
     // background: "#364d79",
-  }; 
-
-  useEffect(() => {
-    if (password !== confirmPassword && confirmPassword.length > 0) {
-      setPasswordError(true);
-    } else {
-      setPasswordError(false);
-    }
-  }, [password, confirmPassword]);
+  };
 
   return (
     <>
@@ -143,7 +112,7 @@ const Register = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center mx-16">
+        {/* <div className="flex justify-center mx-16">
           <div className="w-96 text-gray-600 space-y-5 p-4 shadow-xl border rounded-xl">
             <div className="text-center mb-6">
               <div className="mt-2">
@@ -227,6 +196,9 @@ const Register = () => {
               </div>
             </form>
           </div>
+        </div> */}
+        <div className="flex justify-center mx-16">
+          <RegisterTemplate />
         </div>
       </main>
     </>

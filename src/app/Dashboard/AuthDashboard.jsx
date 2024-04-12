@@ -1,18 +1,14 @@
 import React from "react";
-import { useAuth } from "../../contexts/authContext";
-import { Spin } from "antd";
+import { useAuth } from "../../contexts/authContext"; 
+import PublicDashboard from "./PublicDashboard";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();  
-
-  // if (!currentUser) {
-  //   return (
-  //     <>
-  //       <Spin fullscreen />
-  //     </>
-  //   );
-  // }
-
+  
+  if (!currentUser) {
+    return <PublicDashboard />;
+  }
+  
   return (
     <>
       <div className="text-2xl font-bold pt-14 h-full">

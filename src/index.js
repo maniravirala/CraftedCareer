@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { ThemeProvider } from "@material-tailwind/react";
-import "tw-elements-react/dist/css/tw-elements-react.min.css";
 import { BrowserRouter } from 'react-router-dom';
 
 // import { initializeApp } from "firebase/app";

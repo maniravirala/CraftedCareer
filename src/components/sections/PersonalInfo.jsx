@@ -1,7 +1,5 @@
 import React from "react";
 
-import { Input } from "@material-tailwind/react";
-import { TEInput } from "tw-elements-react";
 import { BiMap, BiUser, BiLogoGmail, BiPhone, BiRepost, BiLogoLinkedin, BiLogoGithub } from "react-icons/bi";
 import InputMani from "../Inputs/InputMani";
 import TextAreaMani from "../Inputs/TextAreaMani";
@@ -14,7 +12,7 @@ const PersonalInfo = () => {
 
   return (
     <div>
-      <div className="flex flex-col w-full p-5 sm:p-10 gap-8">
+      <div className="flex flex-col w-full p-5 gap-8">
         <InputMani
           name="name"
           label="Name"

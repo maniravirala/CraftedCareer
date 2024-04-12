@@ -63,8 +63,16 @@ export const FormDataProvider = ({ children }) => {
         }));
     };
 
+    const handleVisibility = (section) => {
+        setFormData((prevData) => {
+            const updatedData = { ...prevData };
+            updatedData.visibility[section] = !updatedData.visibility[section];
+            return updatedData;
+        });
+    }
+
     return (
-        <FormDataContext.Provider value={{ formData, handleChange, handleProfilePic }}>
+        <FormDataContext.Provider value={{ formData, handleChange, handleProfilePic, handleVisibility }}>
             {children}
         </FormDataContext.Provider>
     );

@@ -40,6 +40,7 @@ const TextAreaMani = ({
         disabled={disabled}
         style={{ resize }}
         {...attributes}
+        onInput={textAreaAutoHeight}
       />
       <label
         htmlFor={name}

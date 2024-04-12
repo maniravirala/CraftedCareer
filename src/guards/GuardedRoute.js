@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthProvider, useAuth } from '../contexts/authContext';
+import { useAuth } from '../contexts/authContext';
 import { Navigate } from 'react-router-dom';
 
 const GuardedRoute = ({ children }) => {

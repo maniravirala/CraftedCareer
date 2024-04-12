@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { BiAddToQueue, BiCodeAlt, BiEraser } from "react-icons/bi";
+import {
+  BiCodeAlt,
+  BiPlusCircle,
+} from "react-icons/bi";
 import InputMani from "../Inputs/InputMani";
 import {
   DndContext,
@@ -67,9 +70,9 @@ const TechnicalSkills = () => {
       );
     } else {
       message.error("Skill already exists or empty tag");
-      updatedDomains[index].temp="";
+      updatedDomains[index].temp = "";
       setDomains(updatedDomains);
-    };
+    }
   };
 
   const sensors = useSensors(useSensor(PointerSensor));
@@ -117,22 +120,21 @@ const TechnicalSkills = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-between w-full p-3 sm:p-10 gap-8">
+      <div className="flex items-center justify-between w-full p-3 gap-8">
         <h2 className="text-xl font-semibold">Technical Skills</h2>
         <button
           type="button"
           onClick={addDomain}
-          className="flex items-center gap-2 text-blue-500 font-semibold focus:outline-none"
+          className="flex items-center gap-2 text-primary font-semibold focus:outline-none"
         >
-          <BiAddToQueue className="inline-block" size="1.5rem" />
-          Add Domain
+          <BiPlusCircle className="inline-block" size="1.5rem" />
         </button>
       </div>
       <div>
         {domains.map((domain, domainIndex) => (
           <div
             key={domainIndex}
-            className="flex flex-col w-full p-5 sm:p-10 gap-8"
+            className="flex flex-col w-full p-5 gap-8"
           >
             <InputMani
               name={`domain-${domainIndex}`}
@@ -177,10 +179,9 @@ const TechnicalSkills = () => {
               <button
                 type="button"
                 onClick={() => removeDomain(domainIndex)}
-                className="text-red-500 font-semibold focus:outline-none"
+                className="text-danger_mani font-semibold focus:outline-none border-2 border-danger_mani py-1 px-4 rounded-xl hover:bg-red-100 hover:shadow-[0_4px_10px_rgba(0,0,0,0.1)]"
               >
-                <BiEraser className="inline-block" size="1.5rem" />
-                Remove Domain
+                Remove
               </button>
             </div>
           </div>

@@ -1,11 +1,7 @@
-import React, { useState } from "react";
-import { Navigate, Link } from "react-router-dom";
-import {
-  doSignInWithEmailAndPassword,
-  doSignInWithGoogle,
-} from "../../../firebase/auth";
+import React from "react";
+import LoginTemplate from "./LoginTemplate";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/authContext";
-import InputMani from "../../../components/Inputs/InputMani";
 import {
   BiLogoFacebook,
   BiLogoGoogle,
@@ -18,37 +14,6 @@ import { Carousel } from "antd";
 const Login = () => {
   const { userLoggedIn } = useAuth();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isSigningIn, setIsSigningIn] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (!isSigningIn) {
-      setIsSigningIn(true);
-        // await doSignInWithEmailAndPassword(email, password);
-      try {
-        await doSignInWithEmailAndPassword(email, password);
-      } catch (err) {
-        setErrorMessage(err.message);
-      }
-      setIsSigningIn(false);
-
-    }
-  };
-
-  const onGoogleSignIn = (e) => {
-    e.preventDefault();
-    if (!isSigningIn) {
-      setIsSigningIn(true);
-      doSignInWithGoogle().catch((err) => {
-        setIsSigningIn(false);
-        setErrorMessage(err.message);
-      });
-    }
-  };
-
   const contentStyle = {
     height: "80px",
     // width: "40%",
@@ -59,13 +24,13 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="h-[calc(100vh-4rem)] overflow-auto">
       {userLoggedIn && <Navigate to={"/dashboard"} replace={true} />}
 
-      <main className=" h-[90vh] flex self-center place-content-center place-items-center justify-end">
+      <main className="h-full flex self-center place-content-center place-items-center xl:justify-end">
         {/* clip-path: polygon(67% 0, 28% 100%, 0 100%, 0 0); use this for the clip path */}
         <div
-          className="hidden md:block w-2/3 h-screen absolute left-0 top-0 -z-[1] pt-12 bg-[#6495ed]"
+          className="hidden xl:block w-2/3 h-screen absolute left-0 top-0 -z-[0] pt-12 bg-secondary dark:bg-secondary-dark" //bg-[#6495ed]
           style={{ clipPath: "polygon(100% 0, 75% 100%, 0 100%, 0 0)" }}
         >
           <div className="flex flex-col justify-between h-full p-8">
@@ -130,23 +95,23 @@ const Login = () => {
             <div>
               {/* Group of social media icons */}
               <ul className="flex gap-x-2 p-4">
-                <li className="flex items-center gap-x-2 p-2 bg-white rounded-full">
-                  <BiLogoFacebook className="text-[#6495ed] text-2xl" />
+                <li className="flex items-center gap-x-2 p-2 bg-background dark:bg-background-dark rounded-full">
+                  <BiLogoFacebook className="text-secondary dark:text-primary text-2xl" />
                 </li>
-                <li className="flex items-center gap-x-2 p-2 bg-white rounded-full">
-                  <BiLogoGoogle className="text-[#6495ed] text-2xl" />
+                <li className="flex items-center gap-x-2 p-2 bg-background dark:bg-background-dark rounded-full">
+                  <BiLogoGoogle className="text-secondary dark:text-primary text-2xl" />
                 </li>
-                <li className="flex items-center gap-x-2 p-2 bg-white rounded-full">
-                  <BiLogoTwitter className="text-[#6495ed] text-2xl" />
+                <li className="flex items-center gap-x-2 p-2 bg-background dark:bg-background-dark rounded-full">
+                  <BiLogoTwitter className="text-secondary dark:text-primary text-2xl" />
                 </li>
-                <li className="flex items-center gap-x-2 p-2 bg-white rounded-full">
-                  <BiLogoInstagram className="text-[#6495ed] text-2xl" />
+                <li className="flex items-center gap-x-2 p-2 bg-background dark:bg-background-dark rounded-full">
+                  <BiLogoInstagram className="text-secondary dark:text-primary text-2xl" />
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <div className="flex justify-center mx-16">
+        {/* <div className="hidden justify-center mx-16 ">
           <div className="w-96 text-gray-600 space-y-5 p-4 shadow-xl border rounded-xl">
             <div className="text-center mb-6">
               <div className="mt-2">
@@ -256,6 +221,9 @@ const Login = () => {
               {isSigningIn ? "Signing In..." : "Continue with Google"}
             </button>
           </div>
+        </div> */}
+        <div className="flex w-96 justify-center sm:mx-16">
+          <LoginTemplate />
         </div>
       </main>
     </div>
