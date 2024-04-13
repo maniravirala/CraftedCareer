@@ -58,7 +58,7 @@ const Education = () => {
         location: "",
         date: "",
         score: "",
-        scoreType: "cgpa",
+        scoreType: "CGPA",
       },
     ]);
   };
