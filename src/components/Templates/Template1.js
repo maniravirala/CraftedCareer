@@ -1,6 +1,5 @@
 import React from 'react';
 import { BiLogoGithub, BiLogoGmail, BiLogoLinkedinSquare, BiSolidMap, BiSolidPhone } from 'react-icons/bi';
-import dayjs from 'dayjs';
 import { Divider } from 'antd';
 import Markdown from 'react-markdown';
 
@@ -9,19 +8,74 @@ import { useFormData } from "../../contexts/Data/FormDataContext";
 const Template1 = () => {
 
   const { formData } = useFormData();
+  const settings = formData.settings || {};
 
-  const formatDate = (date) => {
-    if (date.length > 0) {
-      return dayjs(date, 'MM/YYYY').format('MMM YYYY');
-    }
-    else {
-      return 'Present';
+  const getFontSizeClass = () => {
+    if (settings.fontSize <= 12) return 'text-xs';
+    else if (settings.fontSize <= 14) return 'text-sm';
+    else if (settings.fontSize <= 16) return 'text-base';
+    else if (settings.fontSize <= 18) return 'text-lg';
+    else if (settings.fontSize <= 20) return 'text-xl';
+    else return 'text-base';
+  }
+
+  const getLineHeightClass = () => {
+    if (settings.lineHeight <= 12) return 'leading-3';
+    else if (settings.lineHeight <= 16) return 'leading-4';
+    else if (settings.lineHeight <= 20) return 'leading-5';
+    else return 'leading-4';
+  }
+
+  const getPageMarginClass = () => {
+    if (settings.pageMargins <= 12) return 'p-3';
+    else if (settings.pageMargins <= 14) return 'p-3.5';
+    else if (settings.pageMargins <= 16) return 'p-4';
+    else if (settings.pageMargins <= 20) return 'p-5';
+    else if (settings.pageMargins <= 24) return 'p-6';
+    else if (settings.pageMargins <= 28) return 'p-7';
+    else if (settings.pageMargins <= 32) return 'p-8';
+    else if (settings.pageMargins <= 36) return 'p-9';
+    else if (settings.pageMargins <= 40) return 'p-10';
+    else return 'p-6';
+  }
+
+  const getFontFamilyClass = () => {
+    switch (settings.fontFamily) {
+      case "Arial":
+        return "font-sans";
+      case "Courier New":
+        return "font-mono";
+      case "Poppins":
+        return "font-poppins";
+      case "Roboto":
+        return "font-roboto";
+      case "Times New Roman":
+        return "font-serif";
+      case "Verdana":
+        return "font-verdana";
+      default:
+        return "font-poppins";
     }
   };
 
+  const getTitleCaseClass = () => {
+    switch (settings.titleCase) {
+      case "uppercase":
+        return "uppercase";
+      case "lowercase":
+        return "lowercase";
+      case "capitalize":
+        return "capitalize";
+      default:
+        return "uppercase";
+    }
+  };
+
+  console.log(getFontSizeClass(), getLineHeightClass(), getPageMarginClass(), getFontFamilyClass(), getTitleCaseClass());
+
 
   return (
-    <div id='a4' className="bg-gray-100 text-gray-800 " style={{ width: '210mm', height: '297mm', margin: '0 auto', fontFamily: 'Poppins, sans-serif' }}>
+    <div id='a4' className="bg-gray-100 text-gray-800 " style={{ width: '210mm', height: '297mm', margin: '0 auto' }}>
       <div className="bg-background text-main px-4 py-4 flex gap-6 justify-between">
         <div className="w-[20%] flex items-center justify-center">
           {/* <img src='https://via.placeholder.com/120' alt='profile' className='rounded-full' /> */}
@@ -37,7 +91,7 @@ const Template1 = () => {
           <span className='text-center text-2xl font-bold'>{formData.personalInfo.name}</span>
           <span className='text-center text-sm'>{formData.personalInfo.position}</span>
         </div>
-        <div className="max-w-[40%] min-w-[25%] text-xs flex justify-center break-all flex-wrap items-start flex-col"
+        <div className={` max-w-[40%] min-w-[25%] text-xs flex justify-center break-all flex-wrap items-start flex-col`}
         >
           <div className='flex flex-col gap-2 justify-center items-start'>
             <div className='flex gap-1 items-center'>
@@ -113,7 +167,7 @@ const Template1 = () => {
                     <div className="flex gap-2">
                       <span>{certification.issuedBy}</span>
                       <span>|</span>
-                      <span>{formatDate(certification.date)}</span>
+                      <span>{certification.date}</span>
                     </div>
                   </div>
                 </li>
@@ -132,7 +186,7 @@ const Template1 = () => {
                       <span className=" ">{activity.activity}</span>
                     </div>
                     <div className="flex justify-end gap-0">
-                      <span>{formatDate(activity.date)}</span>
+                      <span>{activity.date}</span>
                     </div>
                   </div>
                 </li>
@@ -155,7 +209,7 @@ const Template1 = () => {
                 <div key={index} className="text-xs flex flex-col gap-2">
                   <div className="flex justify-between">
                     <h1 className="font-semibold ">{intern.company}</h1>
-                    <span>{formatDate(intern.date[0])} - {formatDate(intern.date[1])}</span>
+                    <span>{intern.date}</span>
                   </div>
                   <div className="flex gap-2">
                     <span>{intern.position}</span>
@@ -177,7 +231,7 @@ const Template1 = () => {
                 <div key={index} className="text-xs flex flex-col gap-2">
                   <div className="flex justify-between">
                     <h1 className="font-semibold ">{training.title}</h1>
-                    <span>{formatDate(training.date[0])} - {formatDate(training.date[1])}</span>
+                    <span>{training.date}</span>
                   </div>
                   <div className="flex gap-2">
                     <span>{training.organization}</span>
@@ -201,7 +255,7 @@ const Template1 = () => {
                 <div key={index} className="text-xs flex flex-col gap-2">
                   <div className="flex justify-between">
                     <h1 className="font-semibold ">{project.title}</h1>
-                    <span>{formatDate(project.date)}</span>
+                    <span>{project.date}</span>
                   </div>
                   <div className="flex gap-2">
                     <span>{project.domain}</span>
@@ -225,7 +279,7 @@ const Template1 = () => {
                 <div key={index} className="text-xs flex flex-col gap-2">
                   <div className="flex justify-between">
                     <h1 className="font-semibold ">{achievement.title}</h1>
-                    <span>{formatDate(achievement.date)}</span>
+                    <span>{achievement.date}</span>
                   </div>
                   <div className="flex gap-2">
                     <p>{achievement.description}</p>
@@ -242,7 +296,7 @@ const Template1 = () => {
                 <div key={index} className="text-xs flex flex-col gap-2">
                   <div className="flex justify-between">
                     <h1 className="font-semibold ">{edu.degree}</h1>
-                    <span>{formatDate(edu.date[0])} - {formatDate(edu.date[1])}</span>
+                    <span>{edu.date}</span>
                   </div>
                   <div className="flex justify-between">
                     <div className='flex gap-2'>

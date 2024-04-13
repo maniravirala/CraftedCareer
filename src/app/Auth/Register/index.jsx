@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Navigate, Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/authContext";
 import RegisterTemplate from "./RegisterTemplate";
-import { doCreateUserWithEmailAndPassword } from "../../../firebase/auth";
-import InputMani from "../../../components/Inputs/InputMani";
 import {
   BiLogoFacebook,
   BiLogoGoogle,
@@ -26,12 +24,12 @@ const Register = () => {
   };
 
   return (
-    <>
-      {userLoggedIn && <Navigate to={"/home"} replace={true} />}
+    <div className="h-[calc(100vh-4rem)] overflow-auto">
+      {userLoggedIn && <Navigate to={"/dashboard"} replace={true} />}
 
-      <main className=" h-[90vh] flex self-center place-content-center place-items-center justify-end">
+      <main className=" h-full flex self-center place-content-center place-items-center xl:justify-end">
         <div
-          className="hidden md:block w-2/3 h-screen absolute left-0 top-0 -z-[1] pt-12 bg-[#6495ed]"
+          className="hidden xl:block w-2/3 h-screen absolute left-0 top-0 -z-[0] pt-12 bg-secondary dark:bg-secondary-dark" //bg-[#6495ed]
           style={{ clipPath: "polygon(100% 0, 75% 100%, 0 100%, 0 0)" }}
         >
           <div className="flex flex-col justify-between h-full p-8">
@@ -197,11 +195,11 @@ const Register = () => {
             </form>
           </div>
         </div> */}
-        <div className="flex justify-center mx-16">
+        <div className="flex w-96 justify-center sm:mx-16">
           <RegisterTemplate />
         </div>
       </main>
-    </>
+    </div>
   );
 };
 

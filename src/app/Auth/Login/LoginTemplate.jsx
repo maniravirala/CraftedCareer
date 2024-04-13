@@ -39,14 +39,14 @@ const LoginTemplate = () => {
   
   return (
     <div className="w-full h-full mx-auto ">
-      <div className="h-full bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <div className="h-full bg-white rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
         <div className="p-4 sm:p-7">
           <div className="text-center">
             <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
               Sign in
             </h1>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              Don't have an account yet?
+              Don't have an account yet? {"  "}
               <Link
                 className="text-blue-600 decoration-2 hover:underline font-medium"
                 to={"/register"}

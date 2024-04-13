@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Input from "../../../components/Inputs/Input";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   doCreateUserWithEmailAndPassword,
   doSignInWithGoogle,
 } from "../../../firebase/auth";
 
 const RegisterTemplate = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +23,7 @@ const RegisterTemplate = () => {
       // await doCreateUserWithEmailAndPassword(email, password)
       try {
         await doCreateUserWithEmailAndPassword(email, password);
-        navigate("/login");
+        // navigate("/login");
       } catch (err) {
         setErrorMessage(err.message);
       }
@@ -52,17 +52,17 @@ const RegisterTemplate = () => {
 
   return (
     <div className="w-full h-full mx-auto ">
-      <div className="h-full bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <div className="h-full bg-white rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
         <div className="p-4 sm:p-7">
           <div className="text-center">
             <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
               Sign up
             </h1>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              Already have an account?{" "}
+              Already have an account?{"  "}
               <Link
                 className="text-blue-600 decoration-2 hover:underline font-medium"
-                to={"/register"}
+                to={"/login"}
               >
                 Log in
               </Link>
@@ -131,6 +131,7 @@ const RegisterTemplate = () => {
                         ariaDescribedby: "email-error",
                       }}
                       className="bg-tertiary dark:bg-slate-900 dark:text-white text-background-dark "
+                      disabled={isRegistering}
                     />
                     <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                       <svg
@@ -171,6 +172,7 @@ const RegisterTemplate = () => {
                         ariaDescribedby: "password-error",
                       }}
                       className="bg-tertiary dark:bg-slate-900 dark:text-white text-background-dark "
+                      disabled={isRegistering}
                     />
                     <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                       <svg
@@ -219,6 +221,7 @@ const RegisterTemplate = () => {
                         ariaDescribedby: "confirm-password-error",
                       }}
                       className="bg-tertiary dark:bg-slate-900 dark:text-white text-background-dark "
+                      disabled={isRegistering}
                     />
                     <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                       <svg
@@ -248,7 +251,7 @@ const RegisterTemplate = () => {
                     isRegistering ? "cursor-not-allowed " : ""
                   }`}
                 >
-                  {isRegistering ? "Signing In..." : "Sign In"}
+                  {isRegistering ? "Signing Up..." : "Sign Up"}
                 </button>
               </div>
             </form>

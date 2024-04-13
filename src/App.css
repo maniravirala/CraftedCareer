@@ -12,3 +12,7 @@
     background-color: #99999990;
 }
 
+select option {
+    background-color: #f32e34;
+    color: #000;
+}

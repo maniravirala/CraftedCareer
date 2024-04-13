@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import {
-  BiCodeAlt,
-  BiPlusCircle,
-} from "react-icons/bi";
-import InputMani from "../Inputs/InputMani";
+import { BiCodeAlt, BiPlusCircle } from "react-icons/bi";
+import Input from "../Inputs/Input";
 import {
   DndContext,
   PointerSensor,
@@ -119,32 +116,30 @@ const TechnicalSkills = () => {
   };
 
   return (
-    <div>
+    <div className="h-full pt-8">
       <div className="flex items-center justify-between w-full p-3 gap-8">
         <h2 className="text-xl font-semibold">Technical Skills</h2>
         <button
           type="button"
           onClick={addDomain}
-          className="flex items-center gap-2 text-primary font-semibold focus:outline-none"
+          className="flex items-center gap-2 text-primary dark:text-primary-dark font-semibold focus:outline-none"
         >
           <BiPlusCircle className="inline-block" size="1.5rem" />
         </button>
       </div>
       <div>
         {domains.map((domain, domainIndex) => (
-          <div
-            key={domainIndex}
-            className="flex flex-col w-full p-5 gap-8"
-          >
-            <InputMani
+          <div key={domainIndex} className="flex flex-col w-full p-5 gap-8">
+            <Input
               name={`domain-${domainIndex}`}
               label="Domain"
               value={domain.domain}
               onChange={(e) => handletechnicalSkillsChange(e, domainIndex)}
               decoration={<BiCodeAlt size="1rem" className="text-gray-400" />}
+              className="bg-white dark:bg-slate-700 text-background-dark dark:text-gray-300"
             />
 
-            <InputMani
+            <Input
               name={`temp-${domainIndex}`}
               label="Skills"
               value={domain.temp}
@@ -153,33 +148,37 @@ const TechnicalSkills = () => {
                 e.key === "Enter" && handleOnKeyDown(domainIndex)
               }
               decoration={<BiCodeAlt size="1rem" className="text-gray-400" />}
+              className="bg-white dark:bg-slate-700 text-background-dark dark:text-gray-300"
             />
 
-            <DndContext
-              sensors={sensors}
-              onDragEnd={(event) => handleDragEnd(event, domainIndex)}
-            >
-              <SortableContext
-                items={domain.skills.map((tag) => tag.id)}
-                strategy={horizontalListSortingStrategy}
+            <div className="-mt-4">
+              <DndContext
+                sensors={sensors}
+                onDragEnd={(event) => handleDragEnd(event, domainIndex)}
               >
-                <Flex gap="4px 0" wrap="wrap">
-                  {domain.skills.map((tag) => (
-                    <DraggableTag
-                      tag={tag}
-                      key={tag.id}
-                      handleTagClose={() => handleTagClose(tag, domainIndex)}
-                    />
-                  ))}
-                </Flex>
-              </SortableContext>
-            </DndContext>
+                <SortableContext
+                  items={domain.skills.map((tag) => tag.id)}
+                  strategy={horizontalListSortingStrategy}
+                >
+                  <Flex gap="4px 0" wrap="wrap">
+                    {domain.skills.map((tag) => (
+                      <DraggableTag
+                        tag={tag}
+                        key={tag.id}
+                        handleTagClose={() => handleTagClose(tag, domainIndex)}
+                        className="bg-white dark:bg-slate-700 text-background-dark dark:text-gray-300"
+                      />
+                    ))}
+                  </Flex>
+                </SortableContext>
+              </DndContext>
+            </div>
 
             <div className="flex items-center gap-2 justify-center -mt-5">
               <button
                 type="button"
                 onClick={() => removeDomain(domainIndex)}
-                className="text-danger_mani font-semibold focus:outline-none border-2 border-danger_mani py-1 px-4 rounded-xl hover:bg-red-100 hover:shadow-[0_4px_10px_rgba(0,0,0,0.1)]"
+                className="text-danger_mani dark:text-danger_mani-dark font-semibold focus:outline-none border-2 border-danger_mani py-1 px-4 rounded-xl hover:bg-red-100 hover:shadow-[0_4px_10px_rgba(0,0,0,0.1)]"
               >
                 Remove
               </button>

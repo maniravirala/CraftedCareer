@@ -34,7 +34,7 @@ const Input = ({
       />
       <label
         htmlFor={name}
-        className={`absolute text-sm text-gray-500 duration-300 transform -translate-y-8 scale-75 top-2 z-10 origin-[0] peer-placeholder-shown:cursor-text left-3 peer-placeholder-shown:left-10 peer-focus:left-3 peer-focus:top-2 peer-placeholder-shown:top-[0.9rem] peer-focus:text-primary peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-8
+        className={`absolute select-none text-sm duration-300 transform -translate-y-8 scale-75 top-2 z-10 origin-[0] peer-placeholder-shown:cursor-text left-3 peer-placeholder-shown:left-10 peer-focus:left-3 peer-focus:top-2 peer-placeholder-shown:top-[0.9rem] peer-focus:text-primary peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-8
           ${disabled ? "text-gray-300" : "text-gray-400"}`}
       >
         {label}

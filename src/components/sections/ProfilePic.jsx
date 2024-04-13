@@ -8,7 +8,7 @@ const ProfilePic = () => {
   const { formData, handleProfilePic } = useFormData();
 
   return (
-    <div>
+    <div className="h-full pt-8">
       <div className="flex items-center justify-between w-full p-3 gap-8">
         <h2 className="text-xl font-semibold">Profile Picture</h2>
       </div>
@@ -28,7 +28,7 @@ const ProfilePic = () => {
         {formData.profilePic && (
           <BiMinusCircle
             onClick={() => handleProfilePic("")}
-            className="text-danger_mani cursor-pointer w-6 h-6"
+            className="text-danger_mani dark:text-danger_mani-dark  cursor-pointer w-6 h-6"
           />
         )}
       </div>

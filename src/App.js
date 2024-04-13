@@ -7,7 +7,7 @@ import GuardedRoute from './guards/GuardedRoute';
 import Resume from './app/Resume/Resume';
 import DownloadResume from './app/Resume/DownloadResume';
 import AuthDashboard from './app/Dashboard/AuthDashboard';
-import Login from './app/Auth/Login'; 
+import Login from './app/Auth/Login';
 import Register from './app/Auth/Register';
 import NotFound from './app/Pages/404';
 import { FormDataProvider } from './contexts/Data/FormDataContext';
@@ -20,22 +20,22 @@ function App() {
     return (
         <AuthProvider>
             <DarkModeProvider>
-                <FormDataProvider>
-                    {shouldRenderHeader && <Header />}
-                    <div className=" bg-background dark:bg-background-dark"> {/*h-[calc(100vh-4rem)] overflow-auto*/}
-                        <Routes>
-                            <Route path="/404" element={<NotFound />} />
-                            <Route path="*" element={<Navigate to="/404" replace={true} />} />
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/register" element={<Register />} />
-                            <Route path="/" element={<Navigate to="/login" replace={true} />} />
-                            {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-                            <Route path="/dashboard" element={<AuthDashboard />} />
-                            <Route path="/resume" element={<Resume />} />
-                            <Route path="/download" element={<GuardedRoute><DownloadResume /></GuardedRoute>} />
-                        </Routes>
-                    </div>
-                </FormDataProvider>
+                    <FormDataProvider>
+                        {shouldRenderHeader && <Header />}
+                        <div className=" bg-background dark:bg-background-dark"> {/*h-[calc(100vh-4rem)] overflow-auto*/}
+                            <Routes>
+                                <Route path="/404" element={<NotFound />} />
+                                <Route path="*" element={<Navigate to="/404" replace={true} />} />
+                                <Route path="/login" element={<Login />} />
+                                <Route path="/register" element={<Register />} />
+                                <Route path="/" element={<Navigate to="/login" replace={true} />} />
+                                {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                                <Route path="/dashboard" element={<AuthDashboard />} />
+                                <Route path="/resume" element={<Resume />} />
+                                <Route path="/download" element={<GuardedRoute><DownloadResume /></GuardedRoute>} />
+                            </Routes>
+                        </div>
+                    </FormDataProvider>
             </DarkModeProvider>
         </AuthProvider>
     );

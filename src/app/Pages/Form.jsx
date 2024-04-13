@@ -14,9 +14,9 @@ import Settings from "../../components/sections/Settings";
 
 const Form = ({ currentSection }) => {
   return (
-    <div className="mt-8 ml-2">
-      <div className="flex">
-        <div className=" overflow-auto w-full mr-2"> {/*  max-h-[80vh] */}
+    <div className="h-full ml-2">
+      <div className="flex h-full">
+        <div className=" overflow-auto w-full mr-2 h-full"> {/*  max-h-[80vh] */}
           {currentSection === "personalInfo" && <PersonalInfo />}
           {currentSection === "profilePic" && <ProfilePic />}
           {currentSection === "technicalSkills" && <TechnicalSkills />}

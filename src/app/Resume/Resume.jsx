@@ -70,7 +70,7 @@ const Resume = () => {
   }  
 
   return (
-    <>
+    <div className="h-[calc(100vh-4rem)] overflow-auto text-background-dark dark:text-gray-300">
       <div className="flex">
         <div className="flex items-center ">
           <LeftSectionChanger
@@ -79,14 +79,14 @@ const Resume = () => {
           />
         </div>
         <div
-          className="grid h-[89vh] w-full"
+          className="sm:grid h-[calc(100vh-4rem)] w-full"
           // style={{ gridTemplateColumns: "1fr 210mm" }}
           style={{ gridTemplateColumns: "1fr 2fr" }}
         >
-          <div className="col-span-1 overflow-y-auto">
+          <div className="sm:col-span-1 overflow-y-auto">
             <Form currentSection={currentSection} />
           </div>
-          <div className="col-span-1 overflow-y-auto">
+          <div className="sm:col-span-1 overflow-y-auto">
             <Preview />
           </div>
         </div>
@@ -106,7 +106,7 @@ const Resume = () => {
         <FloatButton icon={<DownloadOutlined />} onClick={handlePDFDownload} />
         <FloatButton icon={<ClearOutlined />} onClick={handleClear} />
       </FloatButton.Group>
-    </>
+    </div>
   );
 };
 

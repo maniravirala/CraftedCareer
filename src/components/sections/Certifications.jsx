@@ -1,12 +1,6 @@
 import React, { useState } from "react";
-import { 
-  BiFile,
-  BiPlusCircle,
-  BiSolidSchool, 
-} from "react-icons/bi";
-import InputMani from "../Inputs/InputMani";
-import DatePickerMani from "../Inputs/DatepickerMani";
-import * as dayjs from "dayjs";
+import { BiCalendar, BiFile, BiPlusCircle, BiSolidSchool } from "react-icons/bi";
+import Input from "../Inputs/Input";
 import { Switch } from "antd";
 
 import { useFormData } from "../../contexts/Data/FormDataContext";
@@ -29,22 +23,10 @@ const Certifications = () => {
     );
   };
 
-  const handleDateChange = (date, dateString, index) => {
-    const updatedCertificates = [...certificates];
-    updatedCertificates[index].date = dateString;
-    setCertificates(updatedCertificates);
-    handleChange(
-      { target: { name: "certifications", value: updatedCertificates } },
-      "certifications"
-    );
-  };
-
-  const today = dayjs().format("MM/YYYY");
-
   const addCertificate = () => {
     setCertificates([
       ...certificates,
-      { title: "", issuedBy: "", date: today },
+      { title: "", issuedBy: "", date: "" },
     ]);
   };
 
@@ -63,7 +45,7 @@ const Certifications = () => {
   };
 
   return (
-    <div>
+    <div className="h-full pt-8">
       <div className="flex items-center justify-between w-full p-3 gap-8">
         <h2 className="text-xl font-semibold">Certifications</h2>
         <div className="flex gap-4">
@@ -96,14 +78,15 @@ const Certifications = () => {
             key={certificateIndex}
             className="flex flex-col w-full p-5 gap-8"
           >
-            <InputMani
+            <Input
               name={`title-${certificateIndex}`}
               label="Title"
               value={certificate.title}
               onChange={(e) => handleCertificateChange(e, certificateIndex)}
               decoration={<BiFile size="1rem" className="text-gray-400" />}
+              className="bg-white dark:bg-slate-700 text-background-dark dark:text-gray-300"
             />
-            <InputMani
+            <Input
               name={`issuedBy-${certificateIndex}`}
               label="Issued By"
               value={certificate.issuedBy}
@@ -111,13 +94,25 @@ const Certifications = () => {
               decoration={
                 <BiSolidSchool size="1rem" className="text-gray-400" />
               }
+              className="bg-white dark:bg-slate-700 text-background-dark dark:text-gray-300"
             />
-            <DatePickerMani
+
+            {/* <DatePickerMani
               name={`date-${certificateIndex}`}
               value={certificate.date}
               onChange={handleDateChange}
               index={certificateIndex}
               range={false}
+              className="bg-white dark:bg-slate-700 text-background-dark dark:text-gray-300 hover:bg-white dark:hover:bg-slate-700"
+            /> */}
+
+            <Input
+              name={`date-${certificateIndex}`}
+              label="Date"
+              value={certificate.date}
+              onChange={(e) => handleCertificateChange(e, certificateIndex)}
+              decoration={<BiCalendar size="1rem" className="text-gray-400" />}
+              className="bg-white dark:bg-slate-700 text-background-dark dark:text-gray-300"
             />
 
             <div className="flex items-center gap-2 justify-center -mt-5">

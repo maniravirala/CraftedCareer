@@ -11,11 +11,10 @@ import {
   faTrophy,
   faGraduationCap,
   faAddressCard,
-  faGear
+  faGear,
 } from "@fortawesome/free-solid-svg-icons";
 
 const LeftSectionChanger = ({ currentSection, setCurrentSection }) => {
-
   const [hoveredSection, setHoveredSection] = useState(null);
 
   const handleSectionChange = (section) => {
@@ -51,7 +50,7 @@ const LeftSectionChanger = ({ currentSection, setCurrentSection }) => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg">
+    <div className="p-4 rounded-lg bg-white dark:bg-slate-700 text-background-dark dark:text-gray-300 shadow-md">
       <div className="flex flex-col h-full justify-between">
         {sections.map((section) => (
           <div
