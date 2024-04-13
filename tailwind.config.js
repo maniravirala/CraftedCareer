@@ -51,6 +51,9 @@ module.exports = {
           light: '#eaeef6',
           dark: '#1e2433',
         },
+        main: {
+          template1: '#0c3760'
+        },
         border: {
           DEFAULT: '#c4a079',
           light: '#c4a079',

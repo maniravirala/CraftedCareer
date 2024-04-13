@@ -39,11 +39,11 @@ export const FormDataProvider = ({ children }) => {
             achievements: true,
           },
           settings: {
-            fontSize: "16",
+            fontSize: "12",
             fontFamily: "Poppins",
-            titleCase: "Capitalize",
+            titleCase: "Uppercase",
             pageMargins: "24",
-            lineHeight: "16",
+            lineHeight: "8",
           },
         };
   });
