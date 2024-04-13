@@ -134,19 +134,19 @@ const Template1 = () => {
             <Divider className='bg-main h-[2px] rounded-lg mt-1 mb-3' />
           </div>
 
-          <div className="flex flex-col gap-2">
-            <h1 className="text-sm font-semibold uppercase text-main">Technical Skills</h1>
-            <div className="flex flex-col gap-1">
-              {formData.technicalSkills.map((skill, index) => (
-                <div key={index} className="text-xs flex flex-col gap-1">
-                  <h1 className="font-semibold">{skill.domain}:</h1>
-                  <div className='flex flex-wrap ml-4 '>
-                    {skill.skills.map((tag, index) => (
-                      <span key={tag.id} className={index === skill.skills.length - 1 ? '' : 'mr-2'}>
-                        {tag.text}{index !== skill.skills.length - 1 && ','}
-                      </span>
-                    ))}
-                  </div>
+            <div className="flex flex-col gap-2">
+              <h1 className="text-sm font-semibold uppercase text-main">Technical Skills</h1>
+              <div className="flex flex-col gap-1">
+                {formData.technicalSkills.map((skill, index) => (
+                  <div key={index} className="text-xs flex flex-col gap-2">
+                    <h1 className="font-semibold">{skill.domain}:</h1>
+                    <div className='flex flex-wrap ml-4'>
+                      {skill.skills.map((tag, index) => (
+                        <span key={tag.id} className={index === skill.skills.length - 1 ? '' : 'mr-2'}>
+                          {tag.text}{index !== skill.skills.length - 1 && ','}
+                        </span>
+                      ))}
+                    </div>
 
                 </div>
               ))}
