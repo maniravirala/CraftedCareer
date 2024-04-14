@@ -138,7 +138,7 @@ const Template1 = () => {
       </div>
 
       <div className="grid " style={{
-        gridTemplateColumns: '1fr 2px 2fr',
+        gridTemplateColumns: '1fr 1px 2fr',
         width: '210mm', // A4 paper width
         wordWrap: 'break-word', // Wrap long words
         overflowWrap: 'anywhere', // Wrap overflowing content
@@ -148,7 +148,7 @@ const Template1 = () => {
           <div className={`${getLineHeightClass()} flex flex-col`}>
             <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} font-semibold text-main`}>Summary</h1>
             <p className={`${getFontSizeClass()}`}>{formData.personalInfo.summary}</p>
-            <Divider className='bg-border h-[2px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
           </div>
 
           <div className={`${getLineHeightClass()} flex flex-col`}>
@@ -168,7 +168,7 @@ const Template1 = () => {
                 </div>
               ))}
             </div>
-            <Divider className='bg-border h-[2px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
           </div>
 
           <div className={`flex flex-col ${getLineHeightClass()} ${formData.visibility.certifications ? '' : 'hidden'}`} >
@@ -190,7 +190,7 @@ const Template1 = () => {
                 </li>
               ))}
             </ul>
-            <Divider className='bg-border h-[2px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
           </div>
 
           <div className={`flex flex-col ${getLineHeightClass()} ${formData.visibility.extraCurricularActivities ? '' : 'hidden'}`} >
@@ -209,7 +209,7 @@ const Template1 = () => {
                 </li>
               ))}
             </ul>
-            <Divider className='bg-border h-[2px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
           </div>
 
         </div>
@@ -239,7 +239,7 @@ const Template1 = () => {
                 </div>
               ))}
             </div>
-            <Divider className='bg-border h-[2px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
           </div>
           <div className={`flex flex-col ${getLineHeightClass()} ${formData.visibility.summerTraining ? '' : 'hidden'}`}>
             <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} font-semibold text-main`}>Summer Training</h1>
@@ -263,7 +263,7 @@ const Template1 = () => {
                 </div>
               ))}
             </div>
-            <Divider className='bg-border h-[2px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
           </div>
           <div className={`flex flex-col ${getLineHeightClass()}${formData.visibility.projects ? '' : 'hidden'}`} >
             <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} font-semibold text-main`}>Projects</h1>
@@ -287,7 +287,7 @@ const Template1 = () => {
                 </div>
               ))}
             </div>
-            <Divider className='bg-border h-[2px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
           </div>
           <div className={`flex flex-col ${getLineHeightClass()} ${formData.visibility.achievements ? '' : 'hidden'}`} >
             <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} font-semibold text-main`}>Achievements</h1>
@@ -304,7 +304,7 @@ const Template1 = () => {
                 </div>
               ))}
             </div>
-            <Divider className='bg-border h-[2px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
           </div>
           <div className={`${getLineHeightClass()} flex flex-col `}>
             <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} font-semibold text-main`}>Education</h1>
@@ -331,7 +331,7 @@ const Template1 = () => {
                 </div>
               ))}
             </div>
-            <Divider className='bg-border h-[2px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
           </div>
         </div>
       </div>

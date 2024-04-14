@@ -36,7 +36,7 @@ const LoginTemplate = () => {
       });
     }
   };
-  
+
   return (
     <div className="w-full h-full mx-auto ">
       <div className="h-full bg-white rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
@@ -163,7 +163,8 @@ const LoginTemplate = () => {
                         required: true,
                         ariaDescribedby: "password-error",
                       }}
-                      className="bg-tertiary dark:bg-slate-900 dark:text-white text-background-dark "
+                      className="bg-tertiary dark:bg-slate-900 dark:text-white text-background-dark"
+                      inputClassName="pr-10"
                     />
                     <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                       <svg

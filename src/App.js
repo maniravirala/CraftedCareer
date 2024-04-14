@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocation, Navigate, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/authContext';
-// import Header from './app/Header';
-import Header from './app/Header/Header';
+import Header from './app/Header';
+//import Header from './app/Header/Header';
 import GuardedRoute from './guards/GuardedRoute';
 import Resume from './app/Resume/Resume';
 import DownloadResume from './app/Resume/DownloadResume';

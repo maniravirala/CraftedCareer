@@ -55,8 +55,8 @@ const LeftSectionChanger = ({ currentSection, setCurrentSection }) => {
         {sections.map((section) => (
           <div
             key={section.key}
-            className={`p-3 my-1 cursor-pointer hover:bg-primary text-[#6a778e] hover:text-white rounded-lg relative flex justify-center ${
-              currentSection === section.key ? "bg-primary text-white" : ""
+            className={`p-3 my-1 cursor-pointer hover:bg-primary hover:text-white hover:dark:text-white rounded-lg relative flex justify-center ${
+              currentSection === section.key ? "bg-primary text-white dark:text-white" : "text-[#6a778e] dark:text-slate-400 "
             }`}
             onClick={() => handleSectionChange(section.key)}
             onMouseEnter={() => handleMouseEnter(section.key)}
@@ -64,7 +64,7 @@ const LeftSectionChanger = ({ currentSection, setCurrentSection }) => {
           >
             <FontAwesomeIcon icon={section.icon} className="h-4" />
             {hoveredSection === section.key && (
-              <span className="absolute z-[9999] left-full top-0 ml-4 bg-primary text-white px-4 py-2 rounded whitespace-nowrap shadow-md">
+              <span className="absolute z-[9999] left-full top-0 ml-4 bg-primary text-white dark:text-white px-4 py-2 rounded whitespace-nowrap shadow-md">
                 {section.name}
               </span>
             )}

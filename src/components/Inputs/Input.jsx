@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { BiShow, BiHide } from "react-icons/bi";
 
 const Input = ({
   label,
@@ -13,13 +14,16 @@ const Input = ({
   decorationClassName = "",
   attributes = {},
   onKeyDown,
+  passwordClassName = "",
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div
       className={`relative flex flex-row-reverse items-stretch w-full rounded-xl shadow-[0_4px_10px_rgba(0,0,0,0.03)] ${className} `}
     >
       <input
-        type={type}
+        type={showPassword ? "text" : type}
         id={name}
         name={name}
         value={value}
@@ -48,6 +52,16 @@ const Input = ({
         >
           {decoration}
         </div>
+      )}
+
+      {type === "password" && (
+        <button
+          type="button"
+          className={`${passwordClassName} absolute top-0 right-2 focus:outline-none h-full rounded-xl `}
+          onClick={() => setShowPassword((prev) => !prev)}
+        >
+          {showPassword ? <BiShow /> : <BiHide />}
+        </button>
       )}
     </div>
   );
