@@ -23,7 +23,7 @@ const Resume = () => {
       localStorage.setItem("currentSection", "personalInfo");
     }
   }, []);
-  
+
   const handleJSONUpload = (e) => {
     const file = document.createElement("input");
     file.type = "file";
@@ -39,19 +39,21 @@ const Resume = () => {
       };
       reader.readAsText(e.target.files[0]);
     };
-  }
+  };
 
   const handleJSONDownload = () => {
     const json = localStorage.getItem("formData");
     // const json = JSON.stringify(data);
-    const url = URL.createObjectURL(new Blob([json], { type: "application/json" }));
+    const url = URL.createObjectURL(
+      new Blob([json], { type: "application/json" })
+    );
     const a = document.createElement("a");
     a.href = url;
     a.download = "resume.json";
     a.click();
     URL.revokeObjectURL(url);
   };
-  
+
   const handlePDFDownload = () => {
     const data = localStorage.getItem("formData");
     const json = JSON.stringify(data);
@@ -67,10 +69,12 @@ const Resume = () => {
   const handleClear = () => {
     localStorage.removeItem("formData");
     window.location.reload();
-  }  
+  };
 
   return (
-    <div className="h-[calc(100vh-4rem)] overflow-auto text-background-dark dark:text-gray-300">
+    <div className="h-[calc(100vh-4rem)] overflow-auto text-background-dark dark:text-gray-300 ">
+      {" "}
+      {/* bg-background dark:bg-background-dark */}
       <div className="flex">
         <div className="flex items-center ">
           <LeftSectionChanger
@@ -91,7 +95,6 @@ const Resume = () => {
           </div>
         </div>
       </div>
-
       <FloatButton.Group
         trigger="click"
         type="primary"
@@ -101,8 +104,14 @@ const Resume = () => {
         }}
         icon={<PlusOutlined />}
       >
-        <FloatButton icon={<CloudDownloadOutlined />} onClick={handleJSONDownload} />
-        <FloatButton icon={<CloudUploadOutlined />} onClick={handleJSONUpload} />
+        <FloatButton
+          icon={<CloudDownloadOutlined />}
+          onClick={handleJSONDownload}
+        />
+        <FloatButton
+          icon={<CloudUploadOutlined />}
+          onClick={handleJSONUpload}
+        />
         <FloatButton icon={<DownloadOutlined />} onClick={handlePDFDownload} />
         <FloatButton icon={<ClearOutlined />} onClick={handleClear} />
       </FloatButton.Group>

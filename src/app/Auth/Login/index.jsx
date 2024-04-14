@@ -24,7 +24,7 @@ const Login = () => {
   };
 
   return (
-    <div className="h-[calc(100vh-4rem)] overflow-auto">
+    <div className="h-[calc(100vh-4rem)] overflow-auto ">{/* bg-background dark:bg-background-dark */}
       {userLoggedIn && <Navigate to={"/dashboard"} replace={true} />}
 
       <main className="h-full flex self-center place-content-center place-items-center xl:justify-end">

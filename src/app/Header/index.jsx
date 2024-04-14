@@ -22,8 +22,16 @@ const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
+
+  console.log("userLoggedIn", userLoggedIn);
+
   return (
-    <div className="bg-background dark:bg-background-dark">
+    <div className="">
+      {" "}
+      {/*bg-background dark:bg-background-dark*/}
       <header className="mx-auto max-w-7xl ">
         <div className="px-4 mx-auto sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 lg:h-16">
@@ -48,9 +56,24 @@ const Header = () => {
             <div className="flex items-center justify-center lg:space-x-4">
               <ThemeToggle ButtonClassName={"lg:scale-[0.9] scale-[0.8]"} />
 
-              <Link className="hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-secondary font-semibold text-white bg-primary rounded-full">
-                Join Now
-              </Link>
+              {userLoggedIn ? (
+                <Link
+                  className="hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-secondary font-semibold text-white bg-primary rounded-full"
+                  onClick={() => {
+                    doSignOut();
+                    navigate("/login");
+                  }}
+                >
+                  Sign out
+                </Link>
+              ) : (
+                <Link
+                  to="/register"
+                  className="hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-secondary font-semibold text-white bg-primary rounded-full"
+                >
+                  Get Started
+                </Link>
+              )}
 
               {/* Mobile menu button*/}
               <div className="flex lg:hidden">
@@ -73,12 +96,32 @@ const Header = () => {
           <div className="lg:hidden bg-gray-100 dark:bg-gray-800 text-background-dark dark:text-tertiary">
             <ul className="flex flex-col items-center py-4 space-y-4">
               {navigation.map((item) => (
-                <li key={item.name} className="list-none">
-                  <NavLink to={item.to} onClick={handleToggleMobileMenu}>
-                    {item.name}
-                  </NavLink>
-                </li>
+                <>
+                  <li key={item.name} className="list-none">
+                    <NavLink to={item.to} onClick={handleToggleMobileMenu}>
+                      {item.name}
+                    </NavLink>
+                  </li>
+                </>
               ))}
+              {userLoggedIn ? (
+                <Link
+                  className="inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-secondary font-semibold text-white bg-primary rounded-full"
+                  onClick={() => {
+                    doSignOut();
+                    navigate("/login");
+                  }}
+                >
+                  Sign out
+                </Link>
+              ) : (
+                <Link
+                  to="/register"
+                  className="inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-secondary font-semibold text-white bg-primary rounded-full"
+                >
+                  Get Started
+                </Link>
+              )}
             </ul>
           </div>
         )}

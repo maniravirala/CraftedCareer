@@ -1,15 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { useDarkMode } from "../../contexts/Theme/DarkModeContext";
+import blue from "../../assets/blue.svg";
+import violet from "../../assets/violet.svg";
 
-const ResumeBuilder = () => {
+const templates = [
+  {
+    id: 1,
+    name: "Professional",
+    description:
+      "A sleek and professional template for showcasing your skills and experience.",
+    image: "url-to-image1.jpg",
+  },
+  {
+    id: 2,
+    name: "Modern",
+    description: "A modern and creative template with unique design elements.",
+    image: "url-to-image2.jpg",
+  },
+  {
+    id: 3,
+    name: "Creative",
+    description:
+      "A creative and visually appealing template for making a lasting impression.",
+    image: "url-to-image3.jpg",
+  },
+];
+
+const PublicDashboard = () => {
+  const { darkMode } = useDarkMode();
+
+  const [currentTemplateIndex, setCurrentTemplateIndex] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTemplateIndex(
+        (prevIndex) => (prevIndex + 1) % templates.length
+      );
+    }, 5000); // Change template every 5 seconds
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <div className="h-[calc(100vh-4rem)] overflow-auto">
-      <div className="bg-background dark:bg-background-dark">
-        <section className="py-16 sm:py-10">
-          <div className="px-4 mx-auto sm:px-6 lg:px-8">
-            <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
-              <div>
+      <div className="bg-transparent h-full">
+        {/* bg-background dark:bg-background-dark */}
+        {/* Hero Section */}
+        <section className="py-10 sm:py-20">
+          <div className="px-4 mx-auto sm:px-6 lg:px-8 h-full">
+            <div className="grid items-center gap-12 lg:grid-cols-5">
+              <div className="space-y-6 lg:col-span-3">
                 <p className="text-base font-semibold tracking-wider text-primary dark:text-secondary uppercase">
                   Create a Professional Resume
                 </p>
@@ -41,7 +83,7 @@ const ResumeBuilder = () => {
                 </p>
               </div>
 
-              <div>
+              <div className="lg:col-span-2">
                 <img
                   className="w-full"
                   src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/1/hero-img.png"
@@ -51,9 +93,122 @@ const ResumeBuilder = () => {
             </div>
           </div>
         </section>
+
+        {/* Features Section */}
+        <section className="py-20 bg-gray-100 dark:bg-gray-800 relative">
+          <div className="relative z-10 w-[75%] flex lg:w-full">
+            <img
+              src={blue}
+              className="absolute animate-breath lg:right-20 top-40 lg:top-0"
+              alt="Blue Image"
+            />
+            <img
+              src={violet}
+              className="absolute lg:right-40 right-50 top-60 lg:top-0 animate-breath"
+              alt="Violet Image"
+            />
+          </div>
+          <div className="px-4 mx-auto sm:px-6 lg:px-8 relative z-20">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl">
+                Why Choose Our Resume Builder?
+              </h2>
+              <p className="mt-3 text-lg text-gray-600 dark:text-gray-300">
+                Our resume builder offers a range of features to help you create
+                a standout resume that gets noticed by Interviewers.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-6 mt-12 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="flex flex-col items-center justify-center p-6 space-y-4 bg-white rounded-lg shadow-md dark:bg-gray-700">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                  Easy to Use
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Our intuitive interface makes it simple to create and
+                  customize your resume.
+                </p>
+              </div>
+              <div className="flex flex-col items-center justify-center p-6 space-y-4 bg-white rounded-lg shadow-md dark:bg-gray-700">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                  Professional Templates
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Choose from a variety of professionally designed templates to
+                  make your resume stand out.
+                </p>
+              </div>
+              <div className="flex flex-col items-center justify-center p-6 space-y-4 bg-white rounded-lg shadow-md dark:bg-gray-700">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                  Customization Options
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Customize fonts, colors, and layouts to create a unique resume
+                  that reflects your style.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Templates Section */}
+        <section className="py-20">
+          <div className="px-4 mx-auto sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl">
+                Choose Your Template
+              </h2>
+              <p className="mt-3 text-lg text-gray-600 dark:text-gray-300">
+                Select a professional template that suits your style and
+                profession.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-6 mt-12 sm:grid-cols-2 lg:grid-cols-3">
+              {templates.map((template, index) => (
+                <div
+                  key={template.id}
+                  className={`flex flex-col items-center justify-center p-6 space-y-4 bg-white rounded-lg shadow-md dark:bg-gray-700 ${
+                    index === currentTemplateIndex ? "opacity-100" : "opacity-0"
+                  } transition-opacity duration-500`}
+                >
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                    {template.name}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {template.description}
+                  </p>
+                  <button className="px-4 py-2 mt-4 text-sm font-semibold text-white transition-all duration-200 bg-primary rounded-full hover:bg-secondary">
+                    Choose Template
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Get Started Section */}
+        <section className="py-20">
+          <div className="px-4 mx-auto sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl">
+                Get Started Today
+              </h2>
+              <p className="mt-3 text-lg text-gray-600 dark:text-gray-300">
+                Start building your professional resume today and land your
+                dream job.
+              </p>
+              <Link
+                to={"/resume"}
+                className="inline-block mt-8 px-8 py-4 text-lg font-semibold text-white transition-all duration-200 bg-primary rounded-full hover:bg-secondary"
+                role="button"
+              >
+                Start Building
+              </Link>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );
 };
 
-export default ResumeBuilder;
+export default PublicDashboard;

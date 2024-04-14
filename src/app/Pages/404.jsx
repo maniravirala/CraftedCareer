@@ -5,7 +5,7 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="h-[100vh]">
+    <div className="h-[100vh] bg-background dark:bg-background-dark">
       <div className="max-w-[50rem] flex flex-col mx-auto size-full">
         {/* <!-- ========== HEADER ========== --> */}
         <header className="mb-auto flex justify-center z-50 w-full py-4">

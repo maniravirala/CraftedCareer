@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { DarkModeProvider } from './contexts/Theme/DarkModeContext';
 
 import { ThemeProvider } from "@material-tailwind/react";
 import { BrowserRouter } from 'react-router-dom';
@@ -27,11 +28,13 @@ import { BrowserRouter } from 'react-router-dom';
 
 
 ReactDOM.render(
-  <React.StrictMode>  
+  <React.StrictMode>
     <ThemeProvider>
-      <BrowserRouter>
-      <App/>
-      </BrowserRouter>
+      <DarkModeProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </DarkModeProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -80,14 +80,23 @@ module.exports = {
           dark: '#5DADE2',
         },
 
-      }, 
+      },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
         roboto: ['Roboto', 'sans-serif'],
         verdana: ['Verdana', 'sans-serif'],
       },
+      keyframes: {
+        breath: {
+          '0%, 100%': { transform: 'scale(0.6)' },
+          '50%': { transform: 'scale(1.2)' },
+        },
+      },
+      animation: {
+        'breath': 'breath 5s infinite',
+      },
     },
-  }, 
+  },
   plugins: [],
 };
 
