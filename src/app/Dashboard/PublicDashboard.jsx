@@ -1,48 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import { useDarkMode } from "../../contexts/Theme/DarkModeContext";
-import blue from "../../assets/blue.svg";
-import violet from "../../assets/violet.svg";
-
-const templates = [
-  {
-    id: 1,
-    name: "Professional",
-    description:
-      "A sleek and professional template for showcasing your skills and experience.",
-    image: "url-to-image1.jpg",
-  },
-  {
-    id: 2,
-    name: "Modern",
-    description: "A modern and creative template with unique design elements.",
-    image: "url-to-image2.jpg",
-  },
-  {
-    id: 3,
-    name: "Creative",
-    description:
-      "A creative and visually appealing template for making a lasting impression.",
-    image: "url-to-image3.jpg",
-  },
-];
+import TemplateCarousel from "../../components/templateCarousel";
+import { blue, violet } from "../../assets";
 
 const PublicDashboard = () => {
-  const { darkMode } = useDarkMode();
-
-  const [currentTemplateIndex, setCurrentTemplateIndex] = useState(0);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentTemplateIndex(
-        (prevIndex) => (prevIndex + 1) % templates.length
-      );
-    }, 5000); // Change template every 5 seconds
-
-    return () => clearInterval(intervalId);
-  }, []);
-
   return (
     <div className="h-[calc(100vh-4rem)] overflow-auto">
       <div className="bg-transparent h-full">
@@ -93,19 +55,18 @@ const PublicDashboard = () => {
             </div>
           </div>
         </section>
-
         {/* Features Section */}
         <section className="py-20 bg-gray-100 dark:bg-gray-800 relative">
           <div className="relative z-10 w-[75%] flex lg:w-full">
             <img
               src={blue}
               className="absolute animate-breath lg:right-20 top-40 lg:top-0"
-              alt="Blue Image"
+              alt={""}
             />
             <img
               src={violet}
               className="absolute lg:right-40 right-50 top-60 lg:top-0 animate-breath"
-              alt="Violet Image"
+              alt={""}
             />
           </div>
           <div className="px-4 mx-auto sm:px-6 lg:px-8 relative z-20">
@@ -149,9 +110,9 @@ const PublicDashboard = () => {
             </div>
           </div>
         </section>
-
         {/* Templates Section */}
-        <section className="py-20">
+        <TemplateCarousel />
+        {/*        <section className="py-20">
           <div className="px-4 mx-auto sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl">
@@ -162,29 +123,28 @@ const PublicDashboard = () => {
                 profession.
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-6 mt-12 sm:grid-cols-2 lg:grid-cols-3">
-              {templates.map((template, index) => (
-                <div
-                  key={template.id}
-                  className={`flex flex-col items-center justify-center p-6 space-y-4 bg-white rounded-lg shadow-md dark:bg-gray-700 ${
-                    index === currentTemplateIndex ? "opacity-100" : "opacity-0"
-                  } transition-opacity duration-500`}
-                >
-                  <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
-                    {template.name}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    {template.description}
-                  </p>
-                  <button className="px-4 py-2 mt-4 text-sm font-semibold text-white transition-all duration-200 bg-primary rounded-full hover:bg-secondary">
-                    Choose Template
-                  </button>
-                </div>
-              ))}
+            <div className="grid grid-cols-3 gap-20 mx-10 mt-12 overflow-hidden">
+              <div className="col-span-1 justify-center flex">
+                {before.map((template) => (
+                  <TemplateCard key={template.id} template={template} />
+                ))}
+              </div>
+              <div
+                //key={center.id}
+                //className="flex-shrink-0 col-span-4 flex items-center justify-center p-6 space-y-4 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-lg transform scale-200 transition-transform duration-1000"
+                className="flex col-span-1 justify-center"
+              >
+                <TemplateCard key={center.id} template={center} />
+              </div>
+              <div className="flex col-span-1 justify-center">
+                {after.map((template) => (
+                  <TemplateCard key={template.id} template={template} />
+                ))}
+              </div>
             </div>
           </div>
         </section>
-
+*/}
         {/* Get Started Section */}
         <section className="py-20">
           <div className="px-4 mx-auto sm:px-6 lg:px-8">

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
 import { doSignOut } from "../../firebase/auth";
-import { useDarkMode } from "../../contexts/Theme/DarkModeContext";
 import ThemeToggle from "../../components/Inputs/ThemeToggle";
 import { BiMenu, BiCross } from "react-icons/bi";
 
@@ -15,18 +14,11 @@ const navigation = [
 const Header = () => {
   const navigate = useNavigate();
   const { userLoggedIn } = useAuth();
-  const { toggleDarkMode } = useDarkMode();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleToggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
-
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
-
-  console.log("userLoggedIn", userLoggedIn);
 
   return (
     <div className="">
@@ -36,13 +28,11 @@ const Header = () => {
         <div className="px-4 mx-auto sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 lg:h-16">
             <div className="flex-shrink-0">
-              <a href="#" title="" className="flex">
-                <img
-                  className="w-auto h-8"
-                  src="https://cdn.rareblocks.xyz/collection/celebration/images/logo.svg"
-                  alt=""
-                />
-              </a>
+              <img
+                className="w-auto h-8"
+                src="https://cdn.rareblocks.xyz/collection/celebration/images/logo.svg"
+                alt=""
+              />
             </div>
 
             {/* Desktop navigation */}

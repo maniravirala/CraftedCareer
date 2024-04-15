@@ -88,9 +88,6 @@ const Template1 = () => {
     }
   };
 
-  console.log(getFontFamilyClass(), getTitleCaseClass())
-
-
   return (
     <div id='a4' className={`${getFontFamilyClass()} bg-white text-black `} style={{ width: '210mm', height: '297mm', margin: '0 auto' }}>
       <div className={`${getPageMarginClass()} text-border bg-main-template1 text-main flex gap-6 justify-between`}>

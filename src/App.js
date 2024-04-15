@@ -11,8 +11,7 @@ import Login from './app/Auth/Login';
 import Register from './app/Auth/Register';
 import NotFound from './app/Pages/404';
 import { FormDataProvider } from './contexts/Data/FormDataContext';
-import hero_dark from "./assets/hero_dark.jpg";
-import hero_light from "./assets/light_background_gradient.svg";
+import { hero_dark, hero_light } from './assets';
 import { useDarkMode } from "./contexts/Theme/DarkModeContext";
 
 function App() {
