@@ -8,3 +8,4 @@ export { default as blue } from './blue.svg';
 export { default as violet } from './violet.svg';
 export { default as hero_dark } from './hero_dark.jpg';
 export { default as hero_light } from './light_background_gradient.svg';
+export { default as logo } from './logo.svg';

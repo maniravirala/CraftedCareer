@@ -12,7 +12,7 @@ import DraggableTag from '../Inputs/DraggableTag';
 const Template3 = () => {
   const sensors = useSensors(useSensor(PointerSensor));
 
-const handleDragEnd = (event) => {
+  const handleDragEnd = (event) => {
     const { active, over } = event;
     if (!over) {
       return;
@@ -24,7 +24,7 @@ const handleDragEnd = (event) => {
         return arrayMove(data, oldIndex, newIndex);
       });
     }
-  };  
+  };
 
   const [inputValue, setInputValue] = useState("");
   const [tags, setTags] = useState([]);
@@ -67,11 +67,12 @@ const handleDragEnd = (event) => {
         <SortableContext items={tags} strategy={horizontalListSortingStrategy}>
           <Flex gap="4px 0" wrap="wrap">
             {tags.map((tag) => (
-              <DraggableTag tag={tag} key={tag.id} handleTagClose={handleTagClose}/>
+              <DraggableTag tag={tag} key={tag.id} handleTagClose={handleTagClose} />
             ))}
           </Flex>
         </SortableContext>
       </DndContext>
+
     </>
   );
 };

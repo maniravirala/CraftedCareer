@@ -28,11 +28,14 @@ const Header = () => {
         <div className="px-4 mx-auto sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 lg:h-16">
             <div className="flex-shrink-0">
-              <img
+              {/* <img
                 className="w-auto h-8"
                 src="https://cdn.rareblocks.xyz/collection/celebration/images/logo.svg"
                 alt=""
-              />
+              /> */}
+              <Link to="/" className="text-2xl font-semibold text-primary">
+                Craft My Resume
+              </Link>
             </div>
 
             {/* Desktop navigation */}
