@@ -1,23 +1,17 @@
 import React from "react";
-import { useAuth } from "../../contexts/authContext"; 
-import PublicDashboard from "./PublicDashboard";
+import { useAuth } from "../../contexts/authContext/AuthContext"; 
 
-const Dashboard = () => {
-  const { currentUser } = useAuth();  
-  
-  if (!currentUser) {
-    return <PublicDashboard />;
-  }
-  
+const AuthDashboard = () => {
+  const { userData } = useAuth();
+
   return (
     <div className="">
       <div className="text-2xl font-bold pt-14 h-[calc(100vh-4rem)] overflow-auto">
-        Hello{" "}
-        {currentUser.displayName ? currentUser.displayName : currentUser.email},
-        you are now logged in.
+        Hello {userData.name ? userData.name : userData.email}, you are now
+        logged in.
       </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default AuthDashboard;

@@ -1,40 +1,21 @@
 import React, { useState } from "react";
 import Input from "../../../components/Inputs/Input";
 import { Link } from "react-router-dom";
-import {
-  doSignInWithEmailAndPassword,
-  doSignInWithGoogle,
-} from "../../../firebase/auth";
+import AuthService from "../../../mongoDB/AuthService";
 
 const LoginTemplate = () => {
+  const { loading, error, loginUser } = AuthService();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isSigningIn, setIsSigningIn] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (!isSigningIn) {
-      setIsSigningIn(true);
-      // await doSignInWithEmailAndPassword(email, password);
-      try {
-        await doSignInWithEmailAndPassword(email, password);
-      } catch (err) {
-        setErrorMessage(err.message);
-      }
-      setIsSigningIn(false);
-    }
+    loginUser({ email, password });    
   };
 
   const onGoogleSignIn = (e) => {
     e.preventDefault();
-    if (!isSigningIn) {
-      setIsSigningIn(true);
-      doSignInWithGoogle().catch((err) => {
-        setIsSigningIn(false);
-        setErrorMessage(err.message);
-      });
-    }
+    
   };
 
   return (
@@ -58,13 +39,13 @@ const LoginTemplate = () => {
 
           <div className="mt-5">
             <button
-              disabled={isSigningIn}
+              disabled={loading}
               onClick={(e) => {
                 onGoogleSignIn(e);
               }}
               type="button"
               className={`w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg bg-tertiary text-background-dark shadow-sm hover:bg-tertiary disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-slate-900 ${
-                isSigningIn ? "cursor-not-allowed" : ""
+                loading ? "cursor-not-allowed" : ""
               }`}
             >
               <svg
@@ -98,7 +79,7 @@ const LoginTemplate = () => {
               Or
             </div>
 
-            <form onSubmit={onSubmit}>
+            <form>
               <div className="grid gap-y-4">
                 <div>
                   <label
@@ -115,7 +96,6 @@ const LoginTemplate = () => {
                       onChange={(e) => setEmail(e.target.value)}
                       attributes={{
                         required: true,
-                        ariaDescribedby: "email-error",
                       }}
                       className="bg-tertiary dark:bg-slate-900 dark:text-white text-background-dark "
                     />
@@ -161,7 +141,6 @@ const LoginTemplate = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       attributes={{
                         required: true,
-                        ariaDescribedby: "password-error",
                       }}
                       className="bg-tertiary dark:bg-slate-900 dark:text-white text-background-dark"
                       inputClassName="pr-10"
@@ -180,8 +159,8 @@ const LoginTemplate = () => {
                     </div>
                   </div>
 
-                  {errorMessage && (
-                    <p className="text-xs text-red-600 mt-2">{errorMessage}</p>
+                  {error && (
+                    <p className="text-xs text-red-600 mt-2">{error}</p>
                   )}
 
                   <p
@@ -193,13 +172,14 @@ const LoginTemplate = () => {
                 </div>
 
                 <button
+                  onClick={(e) => onSubmit(e)}
                   type="submit"
-                  disabled={isSigningIn}
+                  disabled={loading}
                   className={`w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  text-white disabled:opacity-50 disabled:pointer-events-none bg-primary hover:bg-secondary dark:bg-primary-dark dark:hover:bg-secondary ${
-                    isSigningIn ? "cursor-not-allowed " : ""
+                    loading ? "cursor-not-allowed " : ""
                   }`}
                 >
-                  {isSigningIn ? "Signing In..." : "Sign In"}
+                  {loading ? "Signing In..." : "Sign In"}
                 </button>
               </div>
             </form>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/authContext";
-import { doSignOut } from "../../firebase/auth";
+import { useAuth } from "../../contexts/authContext/AuthContext";
 import ThemeToggle from "../../components/Inputs/ThemeToggle";
 import { BiMenu, BiCross } from "react-icons/bi";
 
@@ -13,12 +12,17 @@ const navigation = [
 
 const Header = () => {
   const navigate = useNavigate();
-  const { userLoggedIn } = useAuth();
+  const { isAuthenticated, SignOut } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleToggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  const handleLogout = async () => {
+    await SignOut();
+    // navigate("/login");
+  }
 
   return (
     <div className="">
@@ -49,11 +53,11 @@ const Header = () => {
             <div className="flex items-center justify-center lg:space-x-4">
               <ThemeToggle ButtonClassName={"lg:scale-[0.9] scale-[0.8]"} />
 
-              {userLoggedIn ? (
+              {isAuthenticated ? (
                 <Link
                   className="hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-secondary font-semibold text-white bg-primary rounded-full"
                   onClick={() => {
-                    doSignOut();
+                    SignOut()
                     navigate("/login");
                   }}
                 >
@@ -97,12 +101,11 @@ const Header = () => {
                   </li>
                 </>
               ))}
-              {userLoggedIn ? (
+              {isAuthenticated ? (
                 <Link
                   className="inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-secondary font-semibold text-white bg-primary rounded-full"
                   onClick={() => {
-                    doSignOut();
-                    navigate("/login");
+                    handleLogout();
                   }}
                 >
                   Sign out

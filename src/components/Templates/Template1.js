@@ -59,19 +59,17 @@ const Template1 = () => {
   const getFontFamilyClass = () => {
     switch (settings.fontFamily) {
       case "Arial":
-        return "font-sans";
+        return "'Arial', 'sans-serif'";
       case "Courier New":
-        return "font-mono";
+        return "'Courier New', 'monospace'";
       case "Poppins":
-        return "font-poppins";
-      case "Roboto":
-        return "font-roboto";
+        return "'Poppins', 'sans-serif'";
       case "Times New Roman":
-        return "font-serif";
+        return "'Times New Roman', 'serif'";
       case "Verdana":
-        return "font-verdana";
+        return "'Verdana', 'sans-serif'";
       default:
-        return "font-poppins";
+        return "'Poppins', 'sans-serif'";
     }
   };
 
@@ -91,17 +89,16 @@ const Template1 = () => {
   if (!formData) return null;
 
   return (
-    <div id='a4' className={`${getFontFamilyClass()} bg-white text-black `} style={{ width: '210mm', height: '297mm', margin: '0 auto' }}>
-      <div className={`${getPageMarginClass()} text-border bg-main-template1 text-main flex gap-6 justify-between`}>
+    <div id='a4' className={`bg-white text-black `} style={{ width: '210mm', height: '297mm', margin: '0 auto', fontFamily: `${getFontFamilyClass()}`}}>
+      <div className={`${getPageMarginClass()} text-[#c4a079] bg-[#0c3760] text-main flex gap-6 justify-between`}>
         <div className="w-[20%] flex items-center justify-center">
           {/* <img src='https://via.placeholder.com/120' alt='profile' className='rounded-full' /> */}
           <img
+          id='profilePic'
             src={formData.profilePic || 'https://via.placeholder.com/120'}
             alt='profile'
             className='rounded-full w-[120px] h-[120px]'
           />
-
-
         </div>
         <div className={` max-w-[40%] flex flex-col justify-center items-center break-all uppercase`}>
           <span className='text-center text-2xl font-bold'>{formData.personalInfo.name}</span>
@@ -111,24 +108,24 @@ const Template1 = () => {
         >
           <div className={`${getLineHeightClass()} flex flex-col justify-center items-start`}>
             <div className='flex gap-1 items-center'>
-              <div className='bg-border p-1 rounded-full'><BiLogoGmail size="0.825rem" className='text-white'/></div>
+              <div className='bg-[#c4a079] p-1 rounded-full'><BiLogoGmail size="0.825rem" className='text-white' /></div>
               <div>{formData.personalInfo.email}</div>
             </div>
             <div className='flex gap-1 items-center'>
-              <div className='bg-border p-1 rounded-full'><BiSolidPhone size="0.825rem" className='text-white' /></div>
+              <div className='bg-[#c4a079] p-1 rounded-full'><BiSolidPhone size="0.825rem" className='text-white' /></div>
               <div>{formData.personalInfo.phone}</div>
             </div>
             <div className='flex gap-1 items-center'>
-              <div className='bg-border p-1 rounded-full'><BiSolidMap size="0.825rem" className='text-white' /></div>
+              <div className='bg-[#c4a079] p-1 rounded-full'><BiSolidMap size="0.825rem" className='text-white' /></div>
               <div>{formData.personalInfo.address}</div>
             </div>
             <div className='flex gap-1 items-center'>
-              <div className='bg-border p-1 rounded-full'><BiLogoGithub size="0.825rem" className='text-white' /></div>
+              <div className='bg-[#c4a079] p-1 rounded-full'><BiLogoGithub size="0.825rem" className='text-white' /></div>
               {/* <div>{formData.personalInfo.github}</div> */}
               <a href={formData.personalInfo.github} target="_blank" rel="noreferrer">{formData.personalInfo.github}</a>
             </div>
             <div className='flex gap-1 items-center'>
-              <div className='bg-border p-1 rounded-full'><BiLogoLinkedinSquare size="0.825rem" className='text-white' /></div>
+              <div className='bg-[#c4a079] p-1 rounded-full'><BiLogoLinkedinSquare size="0.825rem" className='text-white' /></div>
               {/* <div>{formData.personalInfo.linkedin}</div> */}
               <a href={formData.personalInfo.linkedin} target="_blank" rel="noreferrer">{formData.personalInfo.linkedin}</a>
             </div>
@@ -145,13 +142,13 @@ const Template1 = () => {
       >
         <div className={`${getPageMarginClass()} col-span-1`}>
           <div className={`${getLineHeightClass()} flex flex-col`}>
-            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} font-semibold text-main`}>Summary</h1>
+            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} text-[#c4a079] font-semibold text-main`}>Summary</h1>
             <p className={`${getFontSizeClass()}`}>{formData.personalInfo.summary}</p>
-            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-[#c4a079] h-[1px] rounded-lg mt-1 mb-3' />
           </div>
 
           <div className={`${getLineHeightClass()} flex flex-col`}>
-            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} font-semibold text-main`}>Technical Skills</h1>
+            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} text-[#c4a079] font-semibold text-main`}>Technical Skills</h1>
             <div className="flex flex-col gap-1">
               {formData.technicalSkills.map((skill, index) => (
                 <div key={index} className={`${getFontSizeClass()} flex flex-col ${getLineHeightClass()}`}>
@@ -167,11 +164,11 @@ const Template1 = () => {
                 </div>
               ))}
             </div>
-            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-[#c4a079] h-[1px] rounded-lg mt-1 mb-3' />
           </div>
 
           <div className={`flex flex-col ${getLineHeightClass()} ${formData.visibility.certifications ? '' : 'hidden'}`} >
-            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} font-semibold text-main`}>Certifications</h1>
+            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} text-[#c4a079] font-semibold text-main`}>Certifications</h1>
 
             <ul className="flex flex-col gap-0">
               {formData.certifications.map((certification, index) => (
@@ -189,11 +186,11 @@ const Template1 = () => {
                 </li>
               ))}
             </ul>
-            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-[#c4a079] h-[1px] rounded-lg mt-1 mb-3' />
           </div>
 
           <div className={`flex flex-col ${getLineHeightClass()} ${formData.visibility.extraCurricularActivities ? '' : 'hidden'}`} >
-            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} font-semibold text-main`}>Extra Curricular Activities</h1>
+            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} text-[#c4a079] font-semibold text-main`}>Extra Curricular Activities</h1>
             <ul className='flex flex-col gap-1'>
               {formData.extraCurricularActivities.map((activity, index) => (
                 <li key={index} className="ml-4 list-disc">
@@ -208,17 +205,17 @@ const Template1 = () => {
                 </li>
               ))}
             </ul>
-            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-[#c4a079] h-[1px] rounded-lg mt-1 mb-3' />
           </div>
 
         </div>
 
-        <div className="col-span-1 bg-border my-6 rounded-lg">
+        <div className="col-span-1 bg-[#c4a079] my-6 rounded-lg">
         </div>
 
         <div className={`${getPageMarginClass()} col-span-1`}>
           <div className={`flex flex-col ${getLineHeightClass()} ${formData.visibility.internships ? '' : 'hidden'}`} >
-            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} font-semibold text-main`}>Internship</h1>
+            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} text-[#c4a079] font-semibold text-main`}>Internship</h1>
             {/* <span>{formData.visibility.internships ? "True" : "False"}</span> */}
             <div className={`${getLineHeightClass()} flex flex-col `}>
               {formData.internships.map((intern, index) => (
@@ -238,10 +235,10 @@ const Template1 = () => {
                 </div>
               ))}
             </div>
-            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-[#c4a079] h-[1px] rounded-lg mt-1 mb-3' />
           </div>
           <div className={`flex flex-col ${getLineHeightClass()} ${formData.visibility.summerTraining ? '' : 'hidden'}`}>
-            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} font-semibold text-main`}>Summer Training</h1>
+            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} text-[#c4a079] font-semibold text-main`}>Summer Training</h1>
             <div className={`${getLineHeightClass()} flex flex-col `}>
               {formData.summerTraining.map((training, index) => (
                 <div key={index} className={`${getFontSizeClass()} flex flex-col ${getLineHeightClass()}`}>
@@ -262,10 +259,10 @@ const Template1 = () => {
                 </div>
               ))}
             </div>
-            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-[#c4a079] h-[1px] rounded-lg mt-1 mb-3' />
           </div>
           <div className={`flex flex-col ${getLineHeightClass()}${formData.visibility.projects ? '' : 'hidden'}`} >
-            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} font-semibold text-main`}>Projects</h1>
+            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} text-[#c4a079] font-semibold text-main`}>Projects</h1>
             <div className={`${getLineHeightClass()} flex flex-col `}>
               {formData.projects.map((project, index) => (
                 <div key={index} className={`${getFontSizeClass()} flex flex-col ${getLineHeightClass()}`}>
@@ -286,10 +283,10 @@ const Template1 = () => {
                 </div>
               ))}
             </div>
-            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-[#c4a079] h-[1px] rounded-lg mt-1 mb-3' />
           </div>
           <div className={`flex flex-col ${getLineHeightClass()} ${formData.visibility.achievements ? '' : 'hidden'}`} >
-            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} font-semibold text-main`}>Achievements</h1>
+            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} text-[#c4a079] font-semibold text-main`}>Achievements</h1>
             <div className="flex flex-col gap-1">
               {formData.achievements.map((achievement, index) => (
                 <div key={index} className={`${getFontSizeClass()} flex flex-col ${getLineHeightClass()}`}>
@@ -303,10 +300,10 @@ const Template1 = () => {
                 </div>
               ))}
             </div>
-            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-[#c4a079] h-[1px] rounded-lg mt-1 mb-3' />
           </div>
           <div className={`${getLineHeightClass()} flex flex-col `}>
-            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} font-semibold text-main`}>Education</h1>
+            <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} text-[#c4a079] font-semibold text-main`}>Education</h1>
             <div className="flex flex-col gap-1">
               {formData.education.map((edu, index) => (
                 <div key={index} className={`${getFontSizeClass()} flex flex-col ${getLineHeightClass()}`}>
@@ -330,7 +327,7 @@ const Template1 = () => {
                 </div>
               ))}
             </div>
-            <Divider className='bg-border h-[1px] rounded-lg mt-1 mb-3' />
+            <Divider className='bg-[#c4a079] h-[1px] rounded-lg mt-1 mb-3' />
           </div>
         </div>
       </div>

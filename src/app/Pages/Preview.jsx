@@ -21,7 +21,7 @@ const Preview = () => {
       default:
         return <Template1 />;
     }
-  }
+  };
 
   useEffect(() => {
     localStorage.setItem("selectedTemplate", selectedTemplate);
@@ -44,7 +44,9 @@ const Preview = () => {
           { value: "Template3", label: "Template 3" },
         ]}
       />
-      <TemplateComponent />
+      <div className="mt-8">
+        <TemplateComponent />
+      </div>
     </div>
   );
 };

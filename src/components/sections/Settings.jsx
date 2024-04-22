@@ -37,7 +37,6 @@ const Settings = () => {
     { label: "Arial", value: "Arial" },
     { label: "Courier New", value: "Courier New" },
     { label: "Poppins", value: "Poppins" },
-    { label: "Roboto", value: "Roboto" },
     { label: "Times New Roman", value: "Times New Roman" },
     { label: "Verdana", value: "Verdana" },
   ];

@@ -1,41 +1,32 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './index.css';
-// import './style.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { DarkModeProvider } from './contexts/Theme/DarkModeContext';
+import { AuthProvider } from './contexts/authContext/AuthContext';
+import { FormDataProvider } from './contexts/Data/FormDataContext';
 import { BrowserRouter } from 'react-router-dom';
+import { PrimeReactProvider } from 'primereact/api';
 
-// import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-// import { getStorage } from "firebase/storage";
-
-// const firebaseConfig = {
-//   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-//   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-//   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-//   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-//   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-//   appId: process.env.REACT_APP_FIREBASE_APP_ID,
-//   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
-// };
-
-// const firebaseapp = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(firebaseapp);
-// const storage = getStorage(app);
-
-
-ReactDOM.render(
-  <React.StrictMode>
-      <DarkModeProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </DarkModeProvider>
-  </React.StrictMode>,
+createRoot(
   document.getElementById('root')
-);
+).render(
+  <React.StrictMode>
+    <PrimeReactProvider>
+    <AuthProvider>
+      <FormDataProvider>
+        <DarkModeProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </DarkModeProvider>
+      </FormDataProvider>
+    </AuthProvider>
+    </PrimeReactProvider>
+  </React.StrictMode>
+)
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
