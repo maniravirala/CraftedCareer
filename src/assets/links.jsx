@@ -1,11 +1,11 @@
 const Links = {
     API: { 
-        GENERATE_PDF: 'http://localhost:8000/api/auth/generate',
-        LOGIN: 'http://localhost:8000/api/auth/login',
-        REGISTER: 'http://localhost:8000/api/auth/register',
-        UPDATE_PROFILE: 'http://localhost:8000/api/profile/update/:userId',
-        GET_PROFILE: 'http://localhost:8000/api/profile/get/:userId',
-        DELETE_PROFILE: 'http://localhost:8000/api/profile/delete/:userId',
+        GENERATE_PDF: 'https://craftedcareer.vercel.app/api/auth/generate',
+        LOGIN: 'https://craftedcareer.vercel.app/api/auth/login',
+        REGISTER: 'https://craftedcareer.vercel.app/api/auth/register',
+        UPDATE_PROFILE: 'https://craftedcareer.vercel.app/api/profile/update/:userId',
+        GET_PROFILE: 'https://craftedcareer.vercel.app/api/profile/get/:userId',
+        DELETE_PROFILE: 'https://craftedcareer.vercel.app/api/profile/delete/:userId',
     },
     ROUTE: {
         HOME: '/home',
