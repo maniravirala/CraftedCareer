@@ -1,7 +1,5 @@
 const Links = {
-    API: {
-        REQUEST_PDF: 'https://api.tailwindstream.io/request',
-        RETRY_PDF: 'https://api.tailwindstream.io/request/:requestId/download',
+    API: { 
         GENERATE_PDF: 'http://localhost:8000/api/auth/generate',
         LOGIN: 'http://localhost:8000/api/auth/login',
         REGISTER: 'http://localhost:8000/api/auth/register',
