@@ -56,7 +56,9 @@ const PublicDashboard = () => {
           </div>
         </section>
         {/* Features Section */}
-        <section className="py-20 bg-gray-100 dark:bg-gray-800 relative">
+        <section className="py-20 relative ">
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-100 via-transparent to-transparent dark:from-gray-800 dark:via-transparent dark:to-transparent"></div>
+
           <div className="relative z-10 w-[75%] flex lg:w-full">
             <img
               src={blue}
@@ -111,7 +113,20 @@ const PublicDashboard = () => {
           </div>
         </section>
         {/* Templates Section */}
-        <TemplateCarousel />
+        <section className="py-10">
+          <div className="px-4 mx-auto mb-20 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl">
+                Choose Your Template
+              </h2>
+              <p className="mt-3 text-lg text-gray-600 dark:text-gray-300">
+                Select a professional template that suits your style and
+                profession.
+              </p>
+            </div>
+          </div>
+          <TemplateCarousel />
+        </section>
         {/*        <section className="py-20">
           <div className="px-4 mx-auto sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">

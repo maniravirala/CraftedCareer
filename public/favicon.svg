@@ -1,0 +1,22 @@
+<svg data-v-0dd9719b="" version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 340 250" preserveAspectRatio="xMidYMid meet" color-interpolation-filters="sRGB" style="margin: auto;">
+  <g data-v-0dd9719b="" fill="#6B6B6B" class="icon-text-wrapper icon-svg-group iconsvg">
+    <g class="iconsvg-imagesvg" >
+      <g>
+        <rect fill="#6B6B6B" fill-opacity="0" stroke-width="2" x="0" y="0" class="image-rect"></rect>
+        <svg x="0" y="0" filtersec="colorsb3973744967" class="image-svg-svg primary" style="overflow: visible;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 65.30999755859375 74.88999938964844">
+            <g>
+              <g>
+                <path fill="#0ca579" d="M0 49.83l22.62 13.62V32.54L0 49.83z"></path>
+                <path fill="#00ea90" d="M34.85 0v29.75L0 49.83V19.62L34.85 0z"></path>
+                <path fill="#c1c1c1" d="M65.31 25.07L42.7 11.45v30.9l22.61-17.28z"></path>
+                <path fill="#6b6b6b" d="M30.46 74.89V45.15l34.85-20.08v30.21L30.46 74.89z"></path>
+              </g>
+            </g>
+          </svg>
+        </svg> 
+      </g>
+    </g> 
+  </g>
+  <defs v-gra="od"></defs>
+</svg>
