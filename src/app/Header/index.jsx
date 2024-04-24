@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext/AuthContext";
 import ThemeToggle from "../../components/Inputs/ThemeToggle";
-import { BiMenu, BiCross } from "react-icons/bi";
+import { BiMenu, BiX } from "react-icons/bi";
 
 const navigation = [
   { name: "Dashboard", to: "/dashboard", current: true },
@@ -79,7 +79,7 @@ const Header = () => {
                   onClick={handleToggleMobileMenu}
                 >
                   {isMobileMenuOpen ? (
-                    <BiCross size={24} />
+                    <BiX size={24} />
                   ) : (
                     <BiMenu size={24} />
                   )}
