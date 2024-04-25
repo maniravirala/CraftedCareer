@@ -4,17 +4,82 @@ import { Link } from "react-router-dom";
 import AuthService from "../../../mongoDB/AuthService";
 
 const RegisterTemplate = () => {
-  // const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setconfirmPassword] = useState("");
-
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { loading, error, registerUser } = AuthService();
+  const [errors, setErrors] = useState({});
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    registerUser({ name, email, password, confirmPassword });
+    if (validateForm()) {
+      registerUser({ name, email, password, confirmPassword });
+    }
+  };
+
+  const validateEmail = (email) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
+  const validatePassword = (password) => {
+    // Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasDigit = /\d/.test(password);
+    const hasSpecialChar = /[^A-Za-z0-9]/.test(password);
+    const maxLength = password.length >= 8;
+
+    let passwordError = "";
+    if (!hasUpperCase) {
+      passwordError += "an uppercase letter, ";
+    }
+    if (!hasLowerCase) {
+      passwordError += "a lowercase letter, ";
+    }
+    if (!hasDigit) {
+      passwordError += "a digit, ";
+    }
+    if (!hasSpecialChar) {
+      passwordError += "a special character, ";
+    }
+    if (!maxLength) {
+      passwordError += "8 characters, ";
+    }
+    return passwordError === ""
+      ? true
+      : `Password must contain ${passwordError.slice(0, -2)}.`;
+  };
+
+  const validateConfirmPassword = (password, confirmPassword) => {
+    return password === confirmPassword ? true : "Passwords do not match.";
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!validateEmail(email)) {
+      errors.email = "Please enter a valid email address.";
+    }
+    if (validatePassword(password) !== true) {
+      errors.password = validatePassword(password);
+    }
+    if (validateConfirmPassword(password, confirmPassword) !== true) {
+      errors.confirmPassword = validateConfirmPassword(
+        password,
+        confirmPassword
+      );
+    }
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleConfirmPasswordBlur = () => {
+    validateConfirmPassword(password, confirmPassword);
+  };
+
+  const handlePasswordBlur = () => {
+    validatePassword(password);
   };
 
   return (
@@ -37,7 +102,7 @@ const RegisterTemplate = () => {
           </div>
 
           <div className="mt-5">
-            <form>
+            <form onSubmit={onSubmit}>
               <div className="grid gap-y-4">
                 <div>
                   <label
@@ -79,23 +144,12 @@ const RegisterTemplate = () => {
                       className="bg-tertiary dark:bg-slate-900 dark:text-white text-background-dark "
                       disabled={loading}
                     />
-                    <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
-                      <svg
-                        className="size-5 text-red-500"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                        aria-hidden="true"
-                      >
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                      </svg>
-                    </div>
+                    {errors.email && (
+                      <p className="text-xs text-red-600 mt-2">
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
-                  <p className="hidden text-xs text-red-600 mt-2">
-                    Please include a valid email address so we can get back to
-                    you
-                  </p>
                 </div>
 
                 <div>
@@ -113,32 +167,20 @@ const RegisterTemplate = () => {
                       name="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                      onBlur={handlePasswordBlur}
                       attributes={{
                         required: true,
                       }}
                       className="bg-tertiary dark:bg-slate-900 dark:text-white text-background-dark "
                       disabled={loading}
                     />
-                    <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
-                      <svg
-                        className="size-5 text-red-500"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                        aria-hidden="true"
-                      >
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                      </svg>
-                    </div>
-                  </div>
 
-                  <p
-                    className="hidden text-xs text-red-600 mt-2"
-                    id="password-error"
-                  >
-                    8+ characters required
-                  </p>
+                    {errors.password && (
+                      <p className="text-xs text-red-600 mt-2">
+                        {errors.password}
+                      </p>
+                    )}
+                  </div>
                 </div>
 
                 <div>
@@ -156,32 +198,23 @@ const RegisterTemplate = () => {
                       type="password"
                       name="confirm-password"
                       value={confirmPassword}
-                      onChange={(e) => setconfirmPassword(e.target.value)}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      onBlur={handleConfirmPasswordBlur}
                       attributes={{
                         required: true,
                       }}
                       className="bg-tertiary dark:bg-slate-900 dark:text-white text-background-dark "
                       disabled={loading}
                     />
-                    <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
-                      <svg
-                        className="size-5 text-red-500"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                        aria-hidden="true"
-                      >
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                      </svg>
-                    </div>
+                    {errors.confirmPassword && (
+                      <p className="text-xs text-red-600 mt-2">{errors.confirmPassword}</p>
+                    )}
                   </div>
                 </div>
 
                 {error && <p className="text-xs text-red-600 mt-2">{error}</p>}
 
                 <button
-                  onClick={onSubmit}
                   type="submit"
                   disabled={loading}
                   className={`w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  text-white disabled:opacity-50 disabled:pointer-events-none bg-primary hover:bg-secondary dark:bg-primary-dark dark:hover:bg-secondary ${

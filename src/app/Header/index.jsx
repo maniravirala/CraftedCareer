@@ -7,7 +7,7 @@ import { BiMenu, BiX } from "react-icons/bi";
 const navigation = [
   { name: "Dashboard", to: "/dashboard", current: true },
   { name: "Resume", to: "/resume", current: false },
-  { name: "Download", to: "/download", current: false },
+  { name: "Profile", to: "/profile", current: false },
 ];
 
 const Header = () => {
@@ -22,21 +22,16 @@ const Header = () => {
   const handleLogout = async () => {
     await SignOut();
     // navigate("/login");
-  }
+  };
 
   return (
     <div className="">
       {" "}
       {/*bg-background dark:bg-background-dark*/}
-      <header className="mx-auto max-w-7xl ">
+      <header className="mx-auto max-w-7xl relative">
         <div className="px-4 mx-auto sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 lg:h-16">
             <div className="flex-shrink-0">
-              {/* <img
-                className="w-auto h-8"
-                src="https://cdn.rareblocks.xyz/collection/celebration/images/logo.svg"
-                alt=""
-              /> */}
               <Link to="/" className="text-2xl font-semibold text-primary">
                 Craft My Resume
               </Link>
@@ -45,7 +40,7 @@ const Header = () => {
             {/* Desktop navigation */}
             <div className="hidden lg:flex lg:items-center lg:justify-center lg:space-x-10 text-background-dark dark:text-white">
               {navigation.map((item) => (
-                <NavLink key={item.name} to={item.to}>
+                <NavLink to={item.to} key={item.name}>
                   {item.name}
                 </NavLink>
               ))}
@@ -57,7 +52,7 @@ const Header = () => {
                 <Link
                   className="hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-secondary font-semibold text-white bg-primary rounded-full"
                   onClick={() => {
-                    SignOut()
+                    SignOut();
                     navigate("/login");
                   }}
                 >
@@ -78,49 +73,50 @@ const Header = () => {
                   className="p-2 -m-2 text-background-dark dark:text-tertiary dark:hover:text-opacity-80 hover:text-opacity-80 transition-all duration-200"
                   onClick={handleToggleMobileMenu}
                 >
-                  {isMobileMenuOpen ? (
-                    <BiX size={24} />
-                  ) : (
-                    <BiMenu size={24} />
-                  )}
+                  {isMobileMenuOpen ? <BiX size={24} /> : <BiMenu size={24} />}
                 </button>
               </div>
             </div>
           </div>
+
+          {/* Mobile menu */}
+          {isMobileMenuOpen && (
+            <div className="absolute left-0 z-50 w-full lg:hidden bg-gray-100 dark:bg-gray-800 text-background-dark dark:text-tertiary">
+              <ul className="flex flex-col items-center py-4 space-y-4">
+                {navigation.map((item, index) => (
+                  <>
+                    <li className="list-none">
+                      <NavLink
+                        to={item.to}
+                        key={`${item.name}-${index}`}
+                        onClick={handleToggleMobileMenu}
+                      >
+                        {item.name}
+                      </NavLink>
+                    </li>
+                  </>
+                ))}
+                {isAuthenticated ? (
+                  <Link
+                    className="inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-secondary font-semibold text-white bg-primary rounded-full"
+                    onClick={() => {
+                      handleLogout();
+                    }}
+                  >
+                    Sign out
+                  </Link>
+                ) : (
+                  <Link
+                    to="/register"
+                    className="inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-secondary font-semibold text-white bg-primary rounded-full"
+                  >
+                    Get Started
+                  </Link>
+                )}
+              </ul>
+            </div>
+          )}
         </div>
-        {/* Mobile menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden bg-gray-100 dark:bg-gray-800 text-background-dark dark:text-tertiary">
-            <ul className="flex flex-col items-center py-4 space-y-4">
-              {navigation.map((item) => (
-                <>
-                  <li key={item.name} className="list-none">
-                    <NavLink to={item.to} onClick={handleToggleMobileMenu}>
-                      {item.name}
-                    </NavLink>
-                  </li>
-                </>
-              ))}
-              {isAuthenticated ? (
-                <Link
-                  className="inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-secondary font-semibold text-white bg-primary rounded-full"
-                  onClick={() => {
-                    handleLogout();
-                  }}
-                >
-                  Sign out
-                </Link>
-              ) : (
-                <Link
-                  to="/register"
-                  className="inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-secondary font-semibold text-white bg-primary rounded-full"
-                >
-                  Get Started
-                </Link>
-              )}
-            </ul>
-          </div>
-        )}
       </header>
     </div>
   );

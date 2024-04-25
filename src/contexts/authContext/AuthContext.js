@@ -6,6 +6,7 @@ export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
     const [userData, setUserData] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [loading, setLoading] = useState(true);
     const storedData = JSON.parse(localStorage.getItem('userData'));
 
     useEffect(() => {
@@ -14,6 +15,7 @@ export const AuthProvider = ({ children }) => {
             setUserData(storedData.user);
             setIsAuthenticated(true);
         }
+        setLoading(false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -32,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ token, userData, isAuthenticated, SignIn, SignOut }}>
+        <AuthContext.Provider value={{ token, userData, isAuthenticated, SignIn, SignOut, loading }}>
             {children}
         </AuthContext.Provider>
     );

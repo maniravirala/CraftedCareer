@@ -15,6 +15,7 @@ const Input = ({
   attributes = {},
   onKeyDown,
   passwordClassName = "",
+  placeholder,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -31,7 +32,7 @@ const Input = ({
         className={`peer block w-full p-3 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-0 appearance-none ${
           disabled ? "bg-gray-200 rounded-r-xl" : "bg-transparent"
         } ${decoration ? "rounded-r-lg" : "rounded-lg"} ${inputClassName}`}
-        placeholder=" "
+        placeholder={placeholder}
         disabled={disabled}
         {...attributes}
         onKeyDown={onKeyDown}

@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation, Navigate, Routes, Route } from 'react-router-dom';
 import Header from './app/Header';
-//import Header from './app/Header/Header';
-import GuardedRoute from './guards/GuardedRoute';
+//import Header from './app/Header/Header'; 
 import Resume from './app/Resume/Resume';
-import DownloadResume from './app/Resume/DownloadResume';
 import AuthDashboard from './app/Dashboard/AuthDashboard';
 import PublicDashboard from './app/Dashboard/PublicDashboard';
 import Login from './app/Auth/Login';
@@ -15,13 +13,22 @@ import { hero_dark, hero_light } from './assets';
 // Contexts
 import { useAuth } from './contexts/authContext/AuthContext';
 import { useDarkMode } from "./contexts/Theme/DarkModeContext";
+import Profile from './app/Profile/Profile';
+import { Spin } from 'antd';
 
 
 function App() {
     const location = useLocation();
     const shouldRenderHeader = location.pathname !== '/404' && location.pathname !== '/download';
     const { darkMode } = useDarkMode();
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, loading } = useAuth();
+
+    useEffect(() => {
+    }, [loading]);
+
+    if (loading) {
+        return <Spin fullscreen />;
+    }
 
     return (
         <>
@@ -45,7 +52,7 @@ function App() {
                     <Route path="/" element={<Navigate to="/dashboard" replace={true} />} />
                     <Route path="/dashboard" element={isAuthenticated ? <AuthDashboard /> : <PublicDashboard />} />
                     <Route path="/resume" element={<Resume />} />
-                    <Route path="/download" element={<GuardedRoute><DownloadResume /></GuardedRoute>} />
+                    <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/login" replace={true} />} />
                 </Routes>
             </div>
         </>

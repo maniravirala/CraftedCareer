@@ -74,7 +74,7 @@ const TemplateCarousel = () => {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center dark:text-white text-gray-900">
       <div className="carousel flex flex-row sm:flex-row justify-center gap-10">
         <div className="items-center flex">
           <button
@@ -84,7 +84,7 @@ const TemplateCarousel = () => {
             {"<"}
           </button>
         </div>
-        <div className="carousel-content w-1/3 sm:w-1/5 bg-[#00000010] p-4 rounded-lg">
+        <div className="sm:scale-90 carousel-content w-1/3 sm:w-1/5 bg-[#00000010] dark:bg-[#ffffff10] p-4 rounded-lg">
           <img
             src={templates[prevSlide].imageUrl}
             alt="template"
@@ -98,7 +98,7 @@ const TemplateCarousel = () => {
           </div>
         </div>
         <div
-          className={`carousel-content w-1/3 sm:w-1/5 bg-[#00000010] p-4 rounded-lg `}
+          className={`carousel-content w-1/3 sm:w-1/5 bg-[#00000010] dark:bg-[#ffffff10] p-4 rounded-lg `}
         >
           <img
             src={templates[currentSlide].imageUrl}
@@ -112,7 +112,7 @@ const TemplateCarousel = () => {
             <p className="text-sm">{templates[currentSlide].description}</p>
           </div>
         </div>
-        <div className="carousel-content w-full sm:w-1/5 sm:block hidden bg-[#00000010] p-4 rounded-lg">
+        <div className="sm:scale-90 carousel-content w-full sm:w-1/5 sm:block hidden bg-[#00000010] dark:bg-[#ffffff10] p-4 rounded-lg">
           <img
             src={templates[nextSlide].imageUrl}
             alt="template"
