@@ -22,6 +22,8 @@ const AuthService = () => {
             if (response.status === 201) {
                 message.success(response.data.message);
                 SignIn(response.data.token, response.data.user);
+                
+
             } else {
                 message.error("Registration Failed");
             }
