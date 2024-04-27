@@ -36,7 +36,7 @@ function App() {
             <div className=""> {/*h-[calc(100vh-4rem)] overflow-auto*/}
 
                 <div
-                    className="absolute inset-0 z-[-100] bg-cover bg-no-repeat"
+                    className="absolute inset-0 z-[-100] bg-cover bg-no-repeat h-screen"
                     style={{
                         backgroundImage: darkMode
                             ? `url(${hero_dark})`

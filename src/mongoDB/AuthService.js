@@ -2,6 +2,7 @@ import { useState } from "react";
 import Links from "../assets/links";
 import { message } from "antd";
 import { useAuth } from "../contexts/authContext/AuthContext";
+import axios from "axios";
 
 const AuthService = () => {
     const { SignIn } = useAuth();
@@ -17,22 +18,23 @@ const AuthService = () => {
         try {
             setLoading(true);
             setError(null);
-            const response = await fetch(Links.API.REGISTER, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(values),
-            });
-            const data = await response.json();
+            const response = await axios.post(Links.API.REGISTER, values);
             if (response.status === 201) {
-                message.success(data.message);
-                SignIn(data.token, data.user);
-            } else if (response.status === 400) {
-                setError(data.message);
+                message.success(response.data.message);
+                SignIn(response.data.token, response.data.user);
             } else {
                 message.error("Registration Failed");
             }
         } catch (error) {
-            message.error(error.message);
+            // message.error(error.message);
+            if (error.response && error.response.status === 429) {
+                message.error(error.response.data.error);
+            } else if (error.response && error.response.status === 400) {
+                setError(error.response.data.message);
+            } else {
+                message.error(error.message);
+            }
+
         } finally {
             setLoading(false);
         }
@@ -42,23 +44,23 @@ const AuthService = () => {
         try {
             setLoading(true);
             setError(null);
-            const response = await fetch(Links.API.LOGIN, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(values),
-            });
-            const data = await response.json();
+            const response = await axios.post(Links.API.LOGIN, values);
             if (response.status === 200) {
                 message.success('Login successful');
-                SignIn(data.token, data.user);
-            } else if (response.status === 401) {
-                setError(data.message);
+                SignIn(response.data.token, response.data.user);
             }
-            else{
+            else {
                 message.error("Login Failed");
             }
         } catch (error) {
-            message.error('An error occurred while logging in');
+            // message.error('An error occurred while logging in');
+            if (error.response && error.response.status === 429) {
+                message.error(error.response.data.error);
+            } else if (error.response && error.response.status === 401) {
+                setError(error.response.data.message);
+            } else {
+                message.error(error.message);
+            }
         } finally {
             setLoading(false);
         }

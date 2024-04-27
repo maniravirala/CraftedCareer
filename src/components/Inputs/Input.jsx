@@ -6,6 +6,7 @@ const Input = ({
   name,
   value,
   onChange,
+  onClick,
   type = "text",
   disabled,
   decoration,
@@ -36,6 +37,7 @@ const Input = ({
         disabled={disabled}
         {...attributes}
         onKeyDown={onKeyDown}
+        onClick={onClick}
       />
       <label
         htmlFor={name}

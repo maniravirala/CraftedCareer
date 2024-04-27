@@ -14,3 +14,5 @@ export { default as refer1 } from './refer1.svg';
 export { default as refer2 } from './refer2.svg';
 export { default as refer3 } from './refer3.svg';
 export { default as refer4 } from './refer4.svg';
+export { default as notFound } from './notFound.svg';
+export { default as avatar } from './avatar.jpg';
