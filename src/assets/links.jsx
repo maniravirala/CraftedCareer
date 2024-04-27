@@ -7,6 +7,7 @@ const Links = {
     GENERATE_PDF: `${link}/api/auth/generate`,
     LOGIN: `${link}/api/auth/login`,
     REGISTER: `${link}/api/auth/register`,
+    LOGOUT: `${link}/api/auth/logout`,
     UPDATE_PROFILE: `${link}/api/profile/update/:userId`,
     GET_PROFILE: `${link}/api/profile/get/:userId`,
     DELETE_PROFILE: `${link}/api/profile/delete/:userId`,

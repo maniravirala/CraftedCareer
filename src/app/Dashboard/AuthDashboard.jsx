@@ -1,12 +1,10 @@
 import React from "react";
-// import { useAuth } from "../../contexts/authContext/AuthContext"; 
 import { BiRightArrowAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import TemplateCarousel from "../../components/templateCarousel";
 import { blue, violet } from "../../assets";
 
 const AuthDashboard = () => {
-  // const { userData } = useAuth();
 
   return (
     <div className="h-[calc(100vh-4rem)] overflow-auto">

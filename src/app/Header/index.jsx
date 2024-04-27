@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext/AuthContext";
+import AuthService from "../../mongoDB/AuthService";
 import ThemeToggle from "../../components/Inputs/ThemeToggle";
 import { BiMenu, BiX } from "react-icons/bi";
+
+import axios from "axios";
+import { message } from "antd";
 
 const navigation = [
   { name: "Dashboard", to: "/dashboard", current: true },
@@ -12,16 +16,17 @@ const navigation = [
 
 const Header = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, SignOut } = useAuth();
+  const { isAuthenticated } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { logoutUser } = AuthService();
 
   const handleToggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const handleLogout = async () => {
-    await SignOut();
-    // navigate("/login");
+    logoutUser();
+    navigate("/login");
   };
 
   return (
@@ -35,6 +40,28 @@ const Header = () => {
               <Link to="/" className="text-2xl font-semibold text-primary">
                 Craft My Resume
               </Link>
+              {/* <button
+                className="bg-primary text-white px-2 py-1 rounded-full text-xs font-semibold ml-2"
+                onClick={async () => {
+                  // use withCredentials: true to send cookies
+                  axios
+                    .get("http://localhost:8000/verify", {
+                      withCredentials: true,
+                    })
+                    .then((res) => {
+                      console.log(res.data.message);
+                      message.success(res.data.message);
+                    })
+                    .catch((err) => {
+                      // reload the page if the token is invalid
+                      console.log(err.response.data.message);
+                      message.error(err.response.data.message);
+                      window.location.reload();
+                    });
+                }}
+              >
+                Verify
+              </button> */}
             </div>
 
             {/* Desktop navigation */}
@@ -52,8 +79,7 @@ const Header = () => {
                 <Link
                   className="hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-secondary font-semibold text-white bg-primary rounded-full"
                   onClick={() => {
-                    SignOut();
-                    navigate("/login");
+                    handleLogout();
                   }}
                 >
                   Sign out
