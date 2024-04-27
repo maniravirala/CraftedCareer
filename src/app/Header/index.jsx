@@ -5,8 +5,8 @@ import AuthService from "../../mongoDB/AuthService";
 import ThemeToggle from "../../components/Inputs/ThemeToggle";
 import { BiMenu, BiX } from "react-icons/bi";
 
-import axios from "axios";
-import { message } from "antd";
+// import axios from "axios";
+// import { message } from "antd";
 
 const navigation = [
   { name: "Dashboard", to: "/dashboard", current: true },
