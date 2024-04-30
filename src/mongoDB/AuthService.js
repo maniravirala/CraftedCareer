@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Links from "../assets/links";
-import { message } from "antd";
 import { useAuth } from "../contexts/authContext/AuthContext";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const AuthService = () => {
     const { SignIn, SignOut } = useAuth();
@@ -14,7 +14,7 @@ const AuthService = () => {
             setError('Passwords are not the same');
             return;
         }
-
+        const toastRegisterLoading = toast.loading("Registering...");
         try {
             setLoading(true);
             setError(null);
@@ -22,20 +22,22 @@ const AuthService = () => {
                 withCredentials: true,
             });
             if (response.status === 201) {
-                message.success(response.data.message);
+                toast.dismiss(toastRegisterLoading.id);
+                toast.success(response.data.message);
                 SignIn(response.data.token)
 
             } else {
-                message.error("Registration Failed");
+                toast.dismiss(toastRegisterLoading.id);
+                toast.error("Registration Failed");
             }
         } catch (error) {
-            // message.error(error.message);
+            toast.dismiss(toastRegisterLoading.id);
             if (error.response && error.response.status === 429) {
-                message.error(error.response.data.error);
+                toast.error(error.response.data.error);
             } else if (error.response && error.response.status === 400) {
                 setError(error.response.data.message);
             } else {
-                message.error(error.message);
+                toast.error(error.message);
             }
 
         } finally {
@@ -44,6 +46,7 @@ const AuthService = () => {
     };
 
     const loginUser = async (values) => {
+        const toastLoginLoading = toast.loading("Logging in...");
         try {
             setLoading(true);
             setError(null);
@@ -51,20 +54,23 @@ const AuthService = () => {
                 withCredentials: true,
             });
             if (response.status === 200) {
-                message.success('Login successful');
+                toast.dismiss(toastLoginLoading.id);
+                toast.success('Login successful');
                 SignIn(response.data.token);
             }
             else {
-                message.error("Login Failed");
+                toast.dismiss(toastLoginLoading.id);
+                toast.error("Login Failed");
             }
         } catch (error) {
-            // message.error('An error occurred while logging in');
+            // toast.error('An error occurred while logging in');
+            toast.dismiss(toastLoginLoading.id);
             if (error.response && error.response.status === 429) {
-                message.error(error.response.data.error);
+                toast.error(error.response.data.error);
             } else if (error.response && error.response.status === 401) {
                 setError(error.response.data.message);
             } else {
-                message.error(error.message);
+                toast.error(error.message);
             }
         } finally {
             setLoading(false);
@@ -72,6 +78,7 @@ const AuthService = () => {
     };
 
     const logoutUser = async () => {
+        const toastLogoutLoading = toast.loading("Logging out...");
         try {
             setLoading(true);
             setError(null);
@@ -81,18 +88,21 @@ const AuthService = () => {
             });
 
             if (response.status === 200) {
-                message.success('Logout successful');
+                toast.dismiss(toastLogoutLoading.id);
+                toast.success('Logout successful');
                 SignOut();
             }
             else {
-                message.error("Logout Failed");
+                toast.dismiss(toastLogoutLoading.id);
+                toast.error("Logout Failed");
             }
         } catch (error) {
-            // message.error('An error occurred while logging out');
+            // toast.error('An error occurred while logging out');
+            toast.dismiss(toastLogoutLoading.id);
             if (error.response && error.response.status === 429) {
-                message.error(error.response.data.error);
+                toast.error(error.response.data.error);
             } else {
-                message.error(error.message);
+                toast.error(error.message);
             }
         } finally {
             setLoading(false);

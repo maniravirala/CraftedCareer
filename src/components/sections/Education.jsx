@@ -11,9 +11,14 @@ import Input from "../Inputs/Input";
 import DropDownMani from "../Inputs/DropDownMani";
 
 import { useFormData } from "../../contexts/Data/FormDataContext";
+import { useDarkMode } from "../../contexts/Theme/DarkModeContext";
+import Lottie from "react-lottie";
+import { arrowDarkLottie, arrowLottie } from "../../assets";
+
 
 const Education = () => {
   const { formData, handleChange } = useFormData();
+  const { darkMode } = useDarkMode();
 
   const [education, setEducation] = useState(formData.education || []);
 
@@ -89,6 +94,39 @@ const Education = () => {
           />
         </button>
       </div>
+      
+      {education.length === 0 ? (
+        <div className="grid grid-rows-12 grid-cols-12 gap-4 p-4">
+          {/* create a div starting from row 5 to row 12 and col 1 to col 5 that consists of the arrow */}
+          <div className="h-48 col-start-5 col-end-13 row-start-1 row-end-6 relative overflow-hidden">
+            <div className="flex items-center gap-2 -z-10 absolute -right-6 transform translate-x-1/4 -translate-y-1/4 rotate-180">
+              <Lottie
+                options={{
+                  loop: true,
+                  autoplay: true,
+                  animationData: darkMode ? arrowDarkLottie : arrowLottie,
+                  rendererSettings: {
+                    preserveAspectRatio: "xMidYMid slice",
+                  },
+                }}
+                isClickToPauseDisabled={true}
+                // style={{ transform: "rotate(180deg)", margin: "0 20px" }}
+                height={300}
+                width={300}
+              />
+            </div>
+          </div>
+
+          <div className="row-start-6 row-end-13 col-span-12 flex flex-col items-center">
+            <h3 className="text-xl font-semibold">
+              Add your Education
+            </h3>
+            <p className="text-sm text-center text-gray-500 dark:text-gray-400">
+              Add your education details to showcase your academic background.
+            </p>
+          </div>
+        </div>
+      ) : (
       <div>
         {education.map((edu, eduIndex) => (
           <div key={eduIndex} className="flex flex-col w-full p-5 gap-8">
@@ -173,6 +211,7 @@ const Education = () => {
           </div>
         ))}
       </div>
+      )}
     </div>
   );
 };

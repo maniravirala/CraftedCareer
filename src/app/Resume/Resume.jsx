@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Form from "../Pages/Form";
 import Preview from "../Pages/Preview";
+import Links from "../../assets/links";
 import LeftSectionChanger from "../Pages/LeftSectionChanger";
-import { FloatButton } from "antd";
+import { FloatButton, FloatButtonGroup } from "../../components/FloatButtons";
 import {
   PlusOutlined,
   CloudDownloadOutlined,
@@ -10,6 +11,13 @@ import {
   DownloadOutlined,
   ClearOutlined,
 } from "@ant-design/icons";
+import axios from "axios";
+import { renderToStaticMarkup } from "react-dom/server";
+import { FormDataProvider } from "../../contexts/Data/FormDataContext";
+import Template1 from "../../components/Templates/Template1";
+import Template2 from "../../components/Templates/Template2";
+import Template3 from "../../components/Templates/Template3";
+import toast from "react-hot-toast";
 
 const Resume = () => {
   const [currentSection, setCurrentSection] = useState(() => {
@@ -17,12 +25,29 @@ const Resume = () => {
     return savedSection || "personalInfo";
   });
 
+  const selectedTemplate = useState(
+    localStorage.getItem("selectedTemplate") || "Template 1"
+  )[0];
+
+  const TemplateComponent = () => {
+    switch (selectedTemplate) {
+      case "Template 1":
+        return <Template1 />;
+      case "Template 2":
+        return <Template2 />;
+      case "Template 3":
+        return <Template3 />;
+      default:
+        return <Template1 />;
+    }
+  };
+
+  const savedSection = localStorage.getItem("currentSection");
   useEffect(() => {
-    const savedSection = localStorage.getItem("currentSection");
     if (!savedSection) {
       localStorage.setItem("currentSection", "personalInfo");
     }
-  }, []);
+  }, [savedSection]);
 
   const handleJSONUpload = (e) => {
     const file = document.createElement("input");
@@ -55,16 +80,60 @@ const Resume = () => {
   };
 
   const handlePDFDownload = () => {
-    const data = localStorage.getItem("formData");
-    const json = JSON.stringify(data);
-    const blob = new Blob([json], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a"); // Add parentheses here
-    a.href = url;
-    a.download = "resume.pdf";
-    a.click();
-    URL.revokeObjectURL(url);
+    const loadingToast = toast.loading("Generating PDF...");
+    try {
+      const html = renderToStaticMarkup(
+        <FormDataProvider>
+          <TemplateComponent />
+        </FormDataProvider>
+      );
+      axios
+        .post(
+          Links.API.GENERATE_PDF,
+          { html: html },
+          {
+            withCredentials: true,
+          }
+        )
+        .then((response) => {
+          setTimeout(() => {
+            toast.dismiss(loadingToast.id);
+            downloadPdf(response.data.downloadUrl);
+          }, 6000);
+        })
+        .catch(() => {
+          toast.dismiss(loadingToast.id);
+          toast.error("Error downloading PDF");
+        });
+    } catch (err) {
+      toast.dismiss(loadingToast.id);
+      toast.error("Error downloading PDF");
+    }
   };
+
+  function downloadPdf(url) {
+    const loadingToast = toast.loading("Downloading PDF...");
+    fetch(url)
+      .then((res) => res.blob())
+      .then((blob) => {
+        toast.dismiss(loadingToast.id);
+        downloadToBrowser(blob);
+      })
+      .catch(() => {
+        toast.dismiss(loadingToast.id);
+        toast.error("Error downloading PDF");
+      });
+  }
+
+  function downloadToBrowser(blob) {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = new Date().toISOString() + "." + blob.type.split("/")[1];
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
 
   const handleClear = () => {
     localStorage.removeItem("formData");
@@ -76,7 +145,7 @@ const Resume = () => {
       {" "}
       {/* bg-background dark:bg-background-dark */}
       <div className="flex">
-        <div className="flex items-center ">
+      <div className="sm:flex hidden items-center ">
           <LeftSectionChanger
             currentSection={currentSection}
             setCurrentSection={setCurrentSection}
@@ -95,9 +164,9 @@ const Resume = () => {
           </div>
         </div>
       </div>
-      <FloatButton.Group
-        trigger="click"
-        type="primary"
+      <FloatButtonGroup
+        trigger="both"
+        type="circle"
         style={{
           right: 24,
           bottom: 20,
@@ -107,14 +176,24 @@ const Resume = () => {
         <FloatButton
           icon={<CloudDownloadOutlined />}
           onClick={handleJSONDownload}
+          tooltip="Download JSON"
         />
         <FloatButton
           icon={<CloudUploadOutlined />}
           onClick={handleJSONUpload}
+          tooltip="Upload JSON"
         />
-        <FloatButton icon={<DownloadOutlined />} onClick={handlePDFDownload} />
-        <FloatButton icon={<ClearOutlined />} onClick={handleClear} />
-      </FloatButton.Group>
+        <FloatButton
+          icon={<DownloadOutlined />}
+          onClick={handlePDFDownload}
+          tooltip="Download PDF"
+        />
+        <FloatButton
+          icon={<ClearOutlined />}
+          onClick={handleClear}
+          tooltip="Clear Data"
+        />
+      </FloatButtonGroup>
     </div>
   );
 };

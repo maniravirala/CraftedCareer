@@ -5,14 +5,18 @@ const link = process.env.NODE_ENV === "production" ? link1 : link2;
 const Links = {
   API: {
     GENERATE_PDF: `${link}/api/auth/generate`,
+    SEND_INVITAION: `${link}/api/mail/send-invitation`,
+
     LOGIN: `${link}/api/auth/login`,
     REGISTER: `${link}/api/auth/register`,
     LOGOUT: `${link}/api/auth/logout`,
+    FORGOT_PASSWORD: `${link}/api/auth/forgot-password`,
+    RESET_PASSWORD: `${link}/api/auth/reset-password/:token`,
+
     UPDATE_PROFILE: `${link}/api/profile/update/:userId`,
     GET_PROFILE: `${link}/api/profile/get/:userId`,
     DELETE_PROFILE: `${link}/api/profile/delete/:userId`,
-    REFER_DETAILS:
-      "https://run.mocky.io/v3/b0166856-e070-445d-9649-847f9c28721e",
+    REFER_DETAILS: `${link}/api/refer/details`,
   },
   ROUTE: {
     HOME: "/home",

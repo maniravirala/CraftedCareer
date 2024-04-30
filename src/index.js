@@ -8,21 +8,29 @@ import { AuthProvider } from './contexts/authContext/AuthContext';
 import { FormDataProvider } from './contexts/Data/FormDataContext';
 import { BrowserRouter } from 'react-router-dom';
 import { PrimeReactProvider } from 'primereact/api';
+import { Toaster } from 'react-hot-toast';
 
 createRoot(
   document.getElementById('root')
 ).render(
   <React.StrictMode>
     <PrimeReactProvider>
-    <AuthProvider>
-      <FormDataProvider>
-        <DarkModeProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </DarkModeProvider>
-      </FormDataProvider>
-    </AuthProvider>
+      <AuthProvider>
+        <FormDataProvider>
+          <DarkModeProvider>
+            <BrowserRouter>
+              <App />
+              <Toaster
+                toastOptions={{
+                  style: {
+                  },
+                  className: 'text-red-500 rounded-lg shadow-lg !px-4 !py-2 text-sm font-medium !dark:bg-slate-700 !dark:text-gray-200 !bg-white !text-gray-800',
+                }}
+              />
+            </BrowserRouter>
+          </DarkModeProvider>
+        </FormDataProvider>
+      </AuthProvider>
     </PrimeReactProvider>
   </React.StrictMode>
 )

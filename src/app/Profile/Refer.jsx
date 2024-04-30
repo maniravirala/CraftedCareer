@@ -1,14 +1,18 @@
 import React, { useState } from "react";
-import { message } from "antd";
+import moment from "moment/moment";
+import axios from "axios";
+
 import { refer2, notFound, avatar } from "../../assets";
 import Input from "../../components/Inputs/Input";
+import Links from "../../assets/links";
+import toast from "react-hot-toast";
 
 const ReferHistory = ({ referalDetails }) => {
   const referredUsers = referalDetails.referredUsers || [];
 
   if (referredUsers.length === 0) {
     return (
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-4 m-6">
         <h1 className="text-xl font-semibold">Referral History</h1>
         <img src={notFound} alt="not found" className="w-1/2" />
         <p className="text-gray-600 dark:text-gray-400 text-sm">
@@ -35,7 +39,7 @@ const ReferHistory = ({ referalDetails }) => {
                 <div className="flex flex-col items-start gap-0">
                   <h1 className="text-sm font-semibold">{user.name}</h1>
                   <p className="text-gray-600 dark:text-gray-400 text-xs">
-                    Joined on {user.joinedDate}
+                    Joined on {moment(user.date).format("DD MMM YYYY")}
                   </p>
                 </div>
               </div>
@@ -51,7 +55,7 @@ const ReferAndEarn = ({ referalDetails }) => {
   const [referralCodeCopied, setReferralCodeCopied] = useState(false);
   const [email, setEmail] = useState("");
 
-  const referralCode = referalDetails.referralCode || "Loading...";
+  const referralCode = referalDetails.code || "Loading...";
 
   const handleCopyReferralCode = () => {
     const tempInput = document.createElement("input");
@@ -69,7 +73,24 @@ const ReferAndEarn = ({ referalDetails }) => {
 
   const handleSendInvitation = () => {
     // Implement email invitation logic here
-    message.success(`Invitation sent to ${email}`);
+    const toastLoading = toast.loading("Sending invitation...");
+    try {
+      axios
+        .post(Links.API.SEND_INVITAION, { email }, { withCredentials: true })
+        .then((response) => {
+          if (response.status === 200) {
+            toast.dismiss(toastLoading.id);
+            toast.success(response.data.message);
+          }
+        })
+        .catch((err) => {
+          toast.dismiss(toastLoading.id);
+          toast.error("Error sending invitation");
+        });
+    } catch (err) {
+      toast.dismiss(toastLoading.id);
+      toast.error("Error sending invitation");
+    }
   };
 
   return (

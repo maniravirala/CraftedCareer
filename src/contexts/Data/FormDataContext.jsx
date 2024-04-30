@@ -30,7 +30,7 @@ export const FormDataProvider = ({ children }) => {
           projects: [],
           achievements: [],
           education: [],
-          visibility: {
+          visibility: { 
             certifications: true,
             extraCurricularActivities: true,
             internships: true,
@@ -74,11 +74,16 @@ export const FormDataProvider = ({ children }) => {
 
   const handleVisibility = (section) => {
     setFormData((prevData) => {
-      const updatedData = { ...prevData };
-      updatedData.visibility[section] = !updatedData.visibility[section];
-      return updatedData;
+      return {
+        ...prevData,
+        visibility: {
+          ...prevData.visibility,
+          [section]: !prevData.visibility[section]
+        }
+      };
     });
   };
+  
 
   return (
     <FormDataContext.Provider

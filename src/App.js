@@ -7,6 +7,8 @@ import AuthDashboard from './app/Dashboard/AuthDashboard';
 import PublicDashboard from './app/Dashboard/PublicDashboard';
 import Login from './app/Auth/Login';
 import Register from './app/Auth/Register';
+import ForgotPassword from './app/Auth/PasswordReset/ForgotPassword';
+import ResetPassword from './app/Auth/PasswordReset/ResetPassword';
 import NotFound from './app/Pages/404';
 import { hero_dark, hero_light } from './assets';
 
@@ -15,7 +17,7 @@ import { useAuth } from './contexts/authContext/AuthContext';
 import { useDarkMode } from "./contexts/Theme/DarkModeContext";
 import Profile from './app/Profile/Profile';
 import { Spin } from 'antd';
-
+import Test from './app/Test/Test';
 
 function App() {
     const location = useLocation();
@@ -34,7 +36,6 @@ function App() {
         <>
             {shouldRenderHeader && <Header />}
             <div className=""> {/*h-[calc(100vh-4rem)] overflow-auto*/}
-
                 <div
                     className="absolute inset-0 z-[-100] bg-cover bg-no-repeat h-screen"
                     style={{
@@ -49,10 +50,13 @@ function App() {
                     <Route path="*" element={<Navigate to="/404" replace={true} />} />
                     <Route path="/login" element={isAuthenticated ? <Navigate to="/dashboard" replace={true} /> : <Login />} />
                     <Route path="/register" element={isAuthenticated ? <Navigate to="/dashboard" replace={true} /> : <Register />} />
+                    <Route path="/forgot-password" element={isAuthenticated ? <Navigate to="/dashboard" replace={true} /> : <ForgotPassword />} />
+                    <Route path="/reset-password/:id/:token" element={isAuthenticated ? <Navigate to="/dashboard" replace={true} /> : <ResetPassword />} />
                     <Route path="/" element={<Navigate to="/dashboard" replace={true} />} />
                     <Route path="/dashboard" element={isAuthenticated ? <AuthDashboard /> : <PublicDashboard />} />
                     <Route path="/resume" element={<Resume />} />
                     <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/login" replace={true} />} />
+                    <Route path="/test" element={<Test />} />
                 </Routes>
             </div>
         </>

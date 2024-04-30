@@ -1,28 +1,33 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios"; 
+import axios from "axios";
 import { ReferAndEarn, ReferHistory } from "./Refer";
 import Info from "./Info";
 import Links from "../../assets/links";
-import { message } from "antd";
+import toast from "react-hot-toast";
 
 const Profile = () => {
   const [referalDetails, setReferalDetails] = useState("");
 
   const getReferDetails = async () => {
     try {
-      const response = await axios.get(Links.API.REFER_DETAILS);
-      if (response.status === 200) { 
+      const response = await axios.get(Links.API.REFER_DETAILS, {
+        withCredentials: true,
+      });
+      if (response.status === 200) {
         return response.data;
       }
     } catch (err) {
-      message.error("Error fetching data");
+      toast.error("Error fetching data");
     }
   };
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await getReferDetails();
-      setReferalDetails(response);
+      if (response) {
+        setReferalDetails(response);
+      }
+      // setReferalDetails(response);
     };
     fetchData();
   }, []);

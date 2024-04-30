@@ -261,7 +261,7 @@ const Template1 = () => {
             </div>
             <Divider className='bg-[#c4a079] h-[1px] rounded-lg mt-1 mb-3' />
           </div>
-          <div className={`flex flex-col ${getLineHeightClass()}${formData.visibility.projects ? '' : 'hidden'}`} >
+          <div className={`flex flex-col ${getLineHeightClass()} ${formData.visibility.projects ? '' : 'hidden'}`} >
             <h1 className={`${getTitleCaseClass()} ${getHeadingFontSizeClass()} text-[#c4a079] font-semibold text-main`}>Projects</h1>
             <div className={`${getLineHeightClass()} flex flex-col `}>
               {formData.projects.map((project, index) => (

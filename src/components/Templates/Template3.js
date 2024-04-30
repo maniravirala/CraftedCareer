@@ -5,9 +5,10 @@ import {
   horizontalListSortingStrategy,
   SortableContext,
 } from '@dnd-kit/sortable';
-import { Flex, message } from 'antd';
+import { Flex } from 'antd';
 
 import DraggableTag from '../Inputs/DraggableTag';
+import toast from 'react-hot-toast';
 
 const Template3 = () => {
   const sensors = useSensors(useSensor(PointerSensor));
@@ -42,7 +43,7 @@ const Template3 = () => {
       setTags([...tags, newTag]);
       setInputValue("");
     } else {
-      message.error("Skill already exists or empty tag");
+      toast.error("Skill already exists or empty tag");
     }
   };
 

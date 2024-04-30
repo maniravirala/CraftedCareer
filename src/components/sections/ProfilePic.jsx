@@ -3,11 +3,12 @@ import UploadMani from "../Inputs/UploadMani";
 import { BiMinusCircle } from "react-icons/bi";
 import Links from "../../assets/links";
 import axios from "axios";
-import { Spin, message } from "antd";
+import { Spin } from "antd";
 
 import { useFormData } from "../../contexts/Data/FormDataContext";
 import DangerAlert from "../Modals/DangerAlert";
 import ClipLoader from "react-spinners/ClipLoader";
+import toast from "react-hot-toast";
 
 const ProfilePic = () => {
   const { formData, handleProfilePic } = useFormData();
@@ -27,7 +28,7 @@ const ProfilePic = () => {
     e.preventDefault();
     try {
       if (!file) {
-        message.error("Please select a file to upload.");
+        toast.error("Please select a file to upload.");
         return;
       }
       setIsUploading(true);
@@ -42,13 +43,13 @@ const ProfilePic = () => {
       );
       if (res.status === 200) {
         handleProfilePic(res.data.data.profilePicture);
-        message.success("Profile picture uploaded successfully.");
+        toast.success("Profile picture uploaded successfully.");
         setFile(null);
       } else {
-        message.error("An error occurred. Please try again.");
+        toast.error("An error occurred. Please try again.");
       }
     } catch (error) {
-      message.error("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.");
     } finally {
       setIsUploading(false);
     }
@@ -65,12 +66,12 @@ const ProfilePic = () => {
       );
       if (res.status === 200) {
         handleProfilePic("");
-        message.success("Profile picture deleted successfully.");
+        toast.success("Profile picture deleted successfully.");
       } else {
-        message.error("An error occurred. Please try again.");
+        toast.error("An error occurred. Please try again.");
       }
     } catch (error) {
-      message.error("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.");
     } finally {
       setIsDeleting(false);
     }

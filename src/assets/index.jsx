@@ -16,3 +16,9 @@ export { default as refer3 } from './refer3.svg';
 export { default as refer4 } from './refer4.svg';
 export { default as notFound } from './notFound.svg';
 export { default as avatar } from './avatar.jpg';
+export { default as arrowSvg } from './arrow.svg';
+export { default as emptySvg } from './empty.svg';
+
+export { default as arrowLottie } from './arrow.json';
+export { default as arrowDarkLottie } from './arrowDark.json';
+export { default as emptyLottie } from './empty.json';

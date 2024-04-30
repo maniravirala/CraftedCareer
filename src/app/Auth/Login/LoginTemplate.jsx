@@ -5,6 +5,7 @@ import AuthService from "../../../mongoDB/AuthService";
 
 const LoginTemplate = () => {
   const { loading, error, loginUser } = AuthService();
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(null);
@@ -73,11 +74,11 @@ const LoginTemplate = () => {
 
           <div className="mt-5">
             <form>
-              <div className="grid gap-y-4">
+              <div className="grid gap-y-2">
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm mb-2 dark:text-white"
+                    className="block text-sm mb-1 dark:text-white"
                   >
                     Email address
                   </label>
@@ -102,16 +103,16 @@ const LoginTemplate = () => {
                   <div className="flex justify-between items-center">
                     <label
                       htmlFor="password"
-                      className="block text-sm mb-2 dark:text-white"
+                      className="block text-sm mb-1 dark:text-white"
                     >
                       Password
                     </label>
-                    <a
+                    <Link
+                      to="/forgot-password"
                       className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
-                      href="../examples/html/recover-account.html"
                     >
                       Forgot password?
-                    </a>
+                    </Link>
                   </div>
                   <div className="relative">
                     <Input
@@ -126,7 +127,9 @@ const LoginTemplate = () => {
                       inputClassName="pr-10"
                     />
                     {passwordError && (
-                      <p className="text-xs text-red-600 mt-2">{passwordError}</p>
+                      <p className="text-xs text-red-600 mt-2">
+                        {passwordError}
+                      </p>
                     )}
                     {error && (
                       <p className="text-xs text-red-600 mt-2">{error}</p>
@@ -138,7 +141,7 @@ const LoginTemplate = () => {
                   onClick={onSubmit}
                   type="submit"
                   disabled={loading}
-                  className={`w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  text-white disabled:opacity-50 disabled:pointer-events-none bg-primary hover:bg-secondary dark:bg-primary-dark dark:hover:bg-secondary ${
+                  className={`w-full mt-2 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  text-white disabled:opacity-50 disabled:pointer-events-none bg-primary hover:bg-secondary dark:bg-primary-dark dark:hover:bg-secondary ${
                     loading ? "cursor-not-allowed " : ""
                   }`}
                 >

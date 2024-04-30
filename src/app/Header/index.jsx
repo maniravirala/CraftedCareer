@@ -5,8 +5,8 @@ import AuthService from "../../mongoDB/AuthService";
 import ThemeToggle from "../../components/Inputs/ThemeToggle";
 import { BiMenu, BiX } from "react-icons/bi";
 
-// import axios from "axios";
-// import { message } from "antd";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const navigation = [
   { name: "Dashboard", to: "/dashboard", current: true },
@@ -40,28 +40,29 @@ const Header = () => {
               <Link to="/" className="text-2xl font-semibold text-primary">
                 Craft My Resume
               </Link>
-              {/* <button
+              <button
                 className="bg-primary text-white px-2 py-1 rounded-full text-xs font-semibold ml-2"
                 onClick={async () => {
                   // use withCredentials: true to send cookies
+                  const toastLoading = toast.loading("Verifying token...");
                   axios
                     .get("http://localhost:8000/verify", {
                       withCredentials: true,
                     })
                     .then((res) => {
-                      console.log(res.data.message);
-                      message.success(res.data.message);
+                      toast.dismiss(toastLoading.id);
+                      toast.success(res.data.message);
                     })
                     .catch((err) => {
                       // reload the page if the token is invalid
-                      console.log(err.response.data.message);
-                      message.error(err.response.data.message);
+                      toast.dismiss(toastLoading.id);
+                      toast.error('Access Denied');
                       window.location.reload();
                     });
                 }}
               >
                 Verify
-              </button> */}
+              </button> 
             </div>
 
             {/* Desktop navigation */}

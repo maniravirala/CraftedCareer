@@ -1,6 +1,7 @@
 import React from 'react';
-import { DatePicker, message } from 'antd';
+import { DatePicker } from 'antd';
 import dayjs from 'dayjs'
+import toast from 'react-hot-toast';
 
 const DatePickerMani = ({ range, onChange, name, index, value, className }) => {
     const isValidDate = (date) => dayjs(date, 'MM/YYYY').isValid();
@@ -30,7 +31,7 @@ const DatePickerMani = ({ range, onChange, name, index, value, className }) => {
             defaultValue={[getDefaultValue(value[0]), getDefaultValue(value[1])]}
             className={`${className} peer outline-none rounded-xl shadow-[0_4px_10px_rgba(0,0,0,0.03)]  w-full p-3 focus:outline-none focus:ring-0 appearance-none border-0 border-success_mani-light`}
             onError={() => {
-                message.error('Some error occurred while selecting date');
+             toast.error('Some error occurred while selecting date');
             }}
         />
     ) : (
@@ -44,7 +45,7 @@ const DatePickerMani = ({ range, onChange, name, index, value, className }) => {
             defaultValue={getDefaultValue(value)}
             className={`${className} peer outline-none rounded-xl shadow-[0_4px_10px_rgba(0,0,0,0.03)] block w-full p-3 focus:outline-none focus:ring-0 appearance-none border-0 border-success_mani-light`}
             onError={() => {
-                message.error('Some error occurred while selecting date');
+                toast.error('Some error occurred while selecting date');
             }}
         />
     );

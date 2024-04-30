@@ -11,9 +11,14 @@ import TextAreaMani from "../Inputs/TextAreaMani";
 import { Switch } from "antd";
 
 import { useFormData } from "../../contexts/Data/FormDataContext";
+import { useDarkMode } from "../../contexts/Theme/DarkModeContext";
+import Lottie from "react-lottie";
+import { arrowDarkLottie, arrowLottie } from "../../assets";
+
 
 const SummerTraining = () => {
   const { formData, handleChange, handleVisibility } = useFormData();
+  const { darkMode } = useDarkMode();
 
   const [summerTraining, setSummerTraining] = useState(
     formData.summerTraining || []
@@ -85,6 +90,39 @@ const SummerTraining = () => {
           </button>
         </div>
       </div>
+      
+      {summerTraining.length === 0 ? (
+        <div className="grid grid-rows-12 grid-cols-12 gap-4 p-4">
+          {/* create a div starting from row 5 to row 12 and col 1 to col 5 that consists of the arrow */}
+          <div className="h-48 col-start-5 col-end-13 row-start-1 row-end-6 relative overflow-hidden">
+            <div className="flex items-center gap-2 -z-10 absolute -right-6 transform translate-x-1/4 -translate-y-1/4 rotate-180">
+              <Lottie
+                options={{
+                  loop: true,
+                  autoplay: true,
+                  animationData: darkMode ? arrowDarkLottie : arrowLottie,
+                  rendererSettings: {
+                    preserveAspectRatio: "xMidYMid slice",
+                  },
+                }}
+                isClickToPauseDisabled={true}
+                // style={{ transform: "rotate(180deg)", margin: "0 20px" }}
+                height={300}
+                width={300}
+              />
+            </div>
+          </div>
+
+          <div className="row-start-6 row-end-13 col-span-12 flex flex-col items-center">
+            <h3 className="text-xl font-semibold">
+              Add your Summer Trainings
+            </h3>
+            <p className="text-sm text-center text-gray-500 dark:text-gray-400">
+              Add your summer training experiences here. You can add as many training experiences as you want.
+            </p>
+          </div>
+        </div>
+      ) : (
       <div>
         {summerTraining.map((training, trainingIndex) => (
           <div
@@ -151,6 +189,7 @@ const SummerTraining = () => {
           </div>
         ))}
       </div>
+      )}
     </div>
   );
 };

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../../components/Inputs/Input";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import AuthService from "../../../mongoDB/AuthService";
 
 const RegisterTemplate = () => {
@@ -8,13 +8,25 @@ const RegisterTemplate = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { loading, error, registerUser } = AuthService();
+  const [referralCode, setReferralCode] = useState("");
   const [errors, setErrors] = useState({});
+
+  const { loading, error, registerUser } = AuthService();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const referral = params.get("referralCode");
+    if (referral) {
+      setReferralCode(referral);
+    }
+  }, [location]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      registerUser({ name, email, password, confirmPassword });
+      registerUser({ name, email, password, confirmPassword, referralCode });
     }
   };
 
@@ -103,11 +115,11 @@ const RegisterTemplate = () => {
 
           <div className="mt-5">
             <form onSubmit={onSubmit}>
-              <div className="grid gap-y-4">
+              <div className="grid gap-y-2">
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm mb-2 dark:text-white"
+                    className="block text-sm mb-1 dark:text-white"
                   >
                     Name
                   </label>
@@ -128,7 +140,7 @@ const RegisterTemplate = () => {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm mb-2 dark:text-white"
+                    className="block text-sm mb-1 dark:text-white"
                   >
                     Email address
                   </label>
@@ -145,7 +157,7 @@ const RegisterTemplate = () => {
                       disabled={loading}
                     />
                     {errors.email && (
-                      <p className="text-xs text-red-600 mt-2">
+                      <p className="text-xs dark:text-danger_mani text-danger_mani-dark mt-2 font-medium">
                         {errors.email}
                       </p>
                     )}
@@ -156,7 +168,7 @@ const RegisterTemplate = () => {
                   <div className="flex justify-between items-center">
                     <label
                       htmlFor="password"
-                      className="block text-sm mb-2 dark:text-white"
+                      className="block text-sm mb-1 dark:text-white"
                     >
                       Password
                     </label>
@@ -176,7 +188,7 @@ const RegisterTemplate = () => {
                     />
 
                     {errors.password && (
-                      <p className="text-xs text-red-600 mt-2">
+                      <p className="text-xs dark:text-danger_mani text-danger_mani-dark mt-2 font-medium">
                         {errors.password}
                       </p>
                     )}
@@ -187,7 +199,7 @@ const RegisterTemplate = () => {
                   <div className="flex justify-between items-center">
                     <label
                       htmlFor="confirm-password"
-                      className="block text-sm mb-2 dark:text-white"
+                      className="block text-sm mb-1 dark:text-white"
                     >
                       Confirm Password
                     </label>
@@ -207,17 +219,39 @@ const RegisterTemplate = () => {
                       disabled={loading}
                     />
                     {errors.confirmPassword && (
-                      <p className="text-xs text-red-600 mt-2">{errors.confirmPassword}</p>
+                      <p className="text-xs dark:text-danger_mani text-danger_mani-dark mt-2 font-medium">{errors.confirmPassword}</p>
                     )}
                   </div>
                 </div>
 
-                {error && <p className="text-xs text-red-600 mt-2">{error}</p>}
+                <div>
+                  <label
+                    htmlFor="referralCode"
+                    className="block text-sm mb-1 dark:text-white"
+                  >
+                    Referral Code
+                    <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
+                      (Optional)
+                    </span>
+                  </label>
+                  <div className="relative">
+                    <Input
+                      type="text"
+                      name={"referralCode"}
+                      value={referralCode}
+                      onChange={(e) => setReferralCode(e.target.value)}
+                      className="bg-tertiary dark:bg-slate-900 dark:text-white text-background-dark "
+                      disabled={loading}
+                    />
+                  </div>
+                </div>
+
+                {error && <p className="text-xs dark:text-danger_mani text-danger_mani-dark mt-2 font-medium">{error}</p>}
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  text-white disabled:opacity-50 disabled:pointer-events-none bg-primary hover:bg-secondary dark:bg-primary-dark dark:hover:bg-secondary ${
+                  className={`w-full mt-2 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  text-white disabled:opacity-50 disabled:pointer-events-none bg-primary hover:bg-secondary dark:bg-primary-dark dark:hover:bg-secondary ${
                     loading ? "cursor-not-allowed " : ""
                   }`}
                 >
