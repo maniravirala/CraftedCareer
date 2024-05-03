@@ -52,7 +52,7 @@ function App() {
                     <Route path="/login" element={isAuthenticated ? <Navigate to="/dashboard" replace={true} /> : <Login />} />
                     <Route path="/register" element={isAuthenticated ? <Navigate to="/dashboard" replace={true} /> : <Register />} />
                     <Route path="/forgot-password" element={isAuthenticated ? <Navigate to="/dashboard" replace={true} /> : <ForgotPassword />} />
-                    <Route path="/reset-password/:id/:token" element={isAuthenticated ? <Navigate to="/dashboard" replace={true} /> : <ResetPassword />} />
+                    <Route path="/reset-password/:token" element={isAuthenticated ? <Navigate to="/dashboard" replace={true} /> : <ResetPassword />} />
                     <Route path="/" element={<Navigate to="/dashboard" replace={true} />} />
                     <Route path="/dashboard" element={isAuthenticated ? <AuthDashboard /> : <PublicDashboard />} />
                     <Route path="/resume" element={<Resume />} />
