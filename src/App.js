@@ -18,6 +18,7 @@ import { useDarkMode } from "./contexts/Theme/DarkModeContext";
 import Profile from './app/Profile/Profile';
 import { Spin } from 'antd';
 import Test from './app/Test/Test';
+import DownloadResume from './app/Resume/DownloadResume';
 
 function App() {
     const location = useLocation();
@@ -57,6 +58,7 @@ function App() {
                     <Route path="/resume" element={<Resume />} />
                     <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/login" replace={true} />} />
                     <Route path="/test" element={<Test />} />
+                    <Route path="/download" element={<DownloadResume />} />
                 </Routes>
             </div>
         </>
