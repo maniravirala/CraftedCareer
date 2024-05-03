@@ -5,6 +5,7 @@ const link = process.env.NODE_ENV === "production" ? link1 : link2;
 const Links = {
   API: {
     GENERATE_PDF: `${link}/api/auth/generate`,
+    SEND_PDF: `${link}/api/auth/sendPdf`,
     SEND_INVITAION: `${link}/api/mail/send-invitation`,
 
     LOGIN: `${link}/api/auth/login`,
