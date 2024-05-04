@@ -37,7 +37,7 @@ const Profile = () => {
       <div className="m-6 flex gap-4 flex-col lg:flex-row">
         <div className="w-full lg:w-1/4 mb-4 lg:mb-0 flex flex-col gap-4">
           <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
-            <Info />
+            <Info referalDetails={referalDetails} />
           </div>
           <div className="hidden lg:block bg-white dark:bg-gray-800 text-background-dark dark:text-background shadow-md rounded-lg">
             <ReferHistory referalDetails={referalDetails} />
