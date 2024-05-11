@@ -7,94 +7,17 @@ import { useFormData } from "../../contexts/Data/FormDataContext";
 
 const Template1 = () => {
 
-  const { formData } = useFormData();
-  const settings = formData.settings || {};
-
-  const getFontSizeClass = () => {
-    if (settings.fontSize <= 12) return 'text-xs';
-    else if (settings.fontSize <= 14) return 'text-sm';
-    else if (settings.fontSize <= 16) return 'text-base';
-    else if (settings.fontSize <= 18) return 'text-lg';
-    else if (settings.fontSize <= 20) return 'text-xl';
-    else return 'text-xs';
-  }
-
-  const getHeadingFontSizeClass = () => {
-    if (settings.fontSize <= 12) return 'text-sm';
-    else if (settings.fontSize <= 14) return 'text-base';
-    else if (settings.fontSize <= 16) return 'text-lg';
-    else if (settings.fontSize <= 18) return 'text-xl';
-    else if (settings.fontSize <= 20) return 'text-2xl';
-    else return 'text-sm';
-  }
-
-  const getLineHeightClass = () => {
-    if (settings.lineHeight === 0) return 'gap-0';
-    else if (settings.lineHeight <= 2) return 'gap-0.5';
-    else if (settings.lineHeight <= 4) return 'gap-1';
-    else if (settings.lineHeight <= 6) return 'gap-1.5';
-    else if (settings.lineHeight <= 8) return 'gap-2';
-    else if (settings.lineHeight <= 10) return 'gap-2.5';
-    else if (settings.lineHeight <= 12) return 'gap-3';
-    else if (settings.lineHeight <= 14) return 'gap-3.5';
-    else if (settings.lineHeight <= 16) return 'gap-4';
-    else if (settings.lineHeight <= 18) return 'gap-[1.125rem]';
-    else if (settings.lineHeight <= 20) return 'gap-5';
-    else return 'gap-2';
-  }
-
-  const getPageMarginClass = () => {
-    if (settings.pageMargins <= 12) return 'p-3';
-    else if (settings.pageMargins <= 14) return 'p-3.5';
-    else if (settings.pageMargins <= 16) return 'p-4';
-    else if (settings.pageMargins <= 20) return 'p-5';
-    else if (settings.pageMargins <= 24) return 'p-6';
-    else if (settings.pageMargins <= 28) return 'p-7';
-    else if (settings.pageMargins <= 32) return 'p-8';
-    else if (settings.pageMargins <= 36) return 'p-9';
-    else if (settings.pageMargins <= 40) return 'p-10';
-    else return 'p-6';
-  }
-
-  const getFontFamilyClass = () => {
-    switch (settings.fontFamily) {
-      case "Arial":
-        return "'Arial', 'sans-serif'";
-      case "Courier New":
-        return "'Courier New', 'monospace'";
-      case "Poppins":
-        return "'Poppins', 'sans-serif'";
-      case "Times New Roman":
-        return "'Times New Roman', 'serif'";
-      case "Verdana":
-        return "'Verdana', 'sans-serif'";
-      default:
-        return "'Poppins', 'sans-serif'";
-    }
-  };
-
-  const getTitleCaseClass = () => {
-    switch (settings.titleCase) {
-      case "Uppercase":
-        return "uppercase";
-      case "Lowercase":
-        return "lowercase";
-      case "Capitalize":
-        return "capitalize";
-      default:
-        return "uppercase";
-    }
-  };
+  const { formData, getFontSizeClass, getHeadingFontSizeClass, getLineHeightClass, getPageMarginClass, getFontFamilyClass, getTitleCaseClass } = useFormData();
 
   if (!formData) return null;
 
   return (
-    <div id='a4' className={`bg-white text-black `} style={{ width: '210mm', height: '297mm', margin: '0 auto', fontFamily: `${getFontFamilyClass()}`}}>
+    <div id='a4' className={`bg-white text-black `} style={{ width: '210mm', height: '297mm', margin: '0 auto', fontFamily: `${getFontFamilyClass()}` }}>
       <div className={`${getPageMarginClass()} text-[#c4a079] bg-[#0c3760] text-main flex gap-6 justify-between`}>
         <div className="w-[20%] flex items-center justify-center">
           {/* <img src='https://via.placeholder.com/120' alt='profile' className='rounded-full' /> */}
           <img
-          id='profilePic'
+            id='profilePic'
             src={formData.profilePic || 'https://via.placeholder.com/120'}
             alt='profile'
             className='rounded-full w-[120px] h-[120px]'
@@ -177,9 +100,9 @@ const Template1 = () => {
                     <div className="flex justify-between">
                       <span className=" ">{certification.title}</span>
                     </div>
-                    <div className={`${getLineHeightClass()} flex`}>
+                    <div className={`${getLineHeightClass()}`}>
                       <span>{certification.issuedBy}</span>
-                      <span>|</span>
+                      {certification.date && <span className='mx-2'>|</span>}
                       <span>{certification.date}</span>
                     </div>
                   </div>
@@ -224,9 +147,9 @@ const Template1 = () => {
                     <h1 className="font-semibold ">{intern.company}</h1>
                     <span>{intern.date}</span>
                   </div>
-                  <div className={`flex ${getLineHeightClass()}`}>
+                  <div className={`${getLineHeightClass()}`}>
                     <span>{intern.position}</span>
-                    <span>|</span>
+                    {intern.location && <span className='mx-2'>|</span>}
                     <span>{intern.location}</span>
                   </div>
                   <div className={`flex ${getLineHeightClass()}`}>
@@ -246,9 +169,9 @@ const Template1 = () => {
                     <h1 className="font-semibold ">{training.title}</h1>
                     <span>{training.date}</span>
                   </div>
-                  <div className={`flex ${getLineHeightClass()}`}>
+                  <div className={`${getLineHeightClass()}`}>
                     <span>{training.organization}</span>
-                    <span>|</span>
+                    {training.location && <span className='mx-2'>|</span>}
                     <span>{training.location}</span>
                   </div>
                   <div className={`flex ${getLineHeightClass()}`}>
@@ -270,9 +193,9 @@ const Template1 = () => {
                     <h1 className="font-semibold ">{project.title}</h1>
                     <span>{project.date}</span>
                   </div>
-                  <div className={`flex ${getLineHeightClass()}`}>
+                  <div className={` ${getLineHeightClass()}`}>
                     <span>{project.domain}</span>
-                    <span>|</span>
+                    {project.technologies && <span className='mx-2'>|</span>}
                     <span>{project.technologies}</span>
                   </div>
                   <div className={`flex ${getLineHeightClass()}`}>
@@ -312,9 +235,9 @@ const Template1 = () => {
                     <span>{edu.date}</span>
                   </div>
                   <div className="flex justify-between">
-                    <div className={`flex ${getLineHeightClass()}`}>
+                    <div className={`${getLineHeightClass()}`}>
                       <span>{edu.institute}</span>
-                      <span>|</span>
+                      {edu.location && <span className='mx-2'>|</span>}
                       <span>{edu.location}</span>
                     </div>
                     <div>

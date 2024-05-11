@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext/AuthContext";
+import { useDarkMode } from "../../contexts/Theme/DarkModeContext";
 import AuthService from "../../mongoDB/AuthService";
 import ThemeToggle from "../../components/Inputs/ThemeToggle";
 import { BiMenu, BiX } from "react-icons/bi";
+import { logoLight3, logoDark3 } from "../../assets";
 
-import axios from "axios";
-import toast from "react-hot-toast";
+// import axios from "axios";
+// import toast from "react-hot-toast";
 
 const navigation = [
   { name: "Dashboard", to: "/dashboard", current: true },
@@ -19,6 +21,7 @@ const Header = () => {
   const { isAuthenticated } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { logoutUser } = AuthService();
+  const { darkMode } = useDarkMode();
 
   const handleToggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -38,10 +41,14 @@ const Header = () => {
           <div className="flex items-center justify-between h-14 lg:h-16">
             <div className="flex-shrink-0">
               <Link to="/" className="text-2xl font-semibold text-primary">
-                Craft My Resume
+                {darkMode ? (
+                  <img src={logoLight3} alt="logo" className="h-10" />
+                ) : (
+                  <img src={logoDark3} alt="logo" className="h-10" />
+                )}
               </Link>
-              <button
-                className="bg-primary text-white px-2 py-1 rounded-full text-xs font-semibold ml-2"
+              {/* <button
+                className="bg-pri3y text-whit3 px-2 py-1 rounded-full text-xs font-semibold ml-2"
                 onClick={async () => {
                   // use withCredentials: true to send cookies
                   const toastLoading = toast.loading("Verifying token...");
@@ -62,7 +69,7 @@ const Header = () => {
                 }}
               >
                 Verify
-              </button> 
+              </button>  */}
             </div>
 
             {/* Desktop navigation */}

@@ -84,10 +84,85 @@ export const FormDataProvider = ({ children }) => {
     });
   };
   
+  const getFontSizeClass = () => {
+    if (formData.settings.fontSize <= 12) return 'text-xs';
+    else if (formData.settings.fontSize <= 14) return 'text-sm';
+    else if (formData.settings.fontSize <= 16) return 'text-base';
+    else if (formData.settings.fontSize <= 18) return 'text-lg';
+    else if (formData.settings.fontSize <= 20) return 'text-xl';
+    else return 'text-xs';
+  };
+  
+  const getHeadingFontSizeClass = () => {
+    if (formData.settings.fontSize <= 12) return 'text-sm';
+    else if (formData.settings.fontSize <= 14) return 'text-base';
+    else if (formData.settings.fontSize <= 16) return 'text-lg';
+    else if (formData.settings.fontSize <= 18) return 'text-xl';
+    else if (formData.settings.fontSize <= 20) return 'text-2xl';
+    else return 'text-sm';
+  }
+
+  const getLineHeightClass = () => {
+    if (formData.settings.lineHeight === 0) return 'gap-0';
+    else if (formData.settings.lineHeight <= 2) return 'gap-0.5';
+    else if (formData.settings.lineHeight <= 4) return 'gap-1';
+    else if (formData.settings.lineHeight <= 6) return 'gap-1.5';
+    else if (formData.settings.lineHeight <= 8) return 'gap-2';
+    else if (formData.settings.lineHeight <= 10) return 'gap-2.5';
+    else if (formData.settings.lineHeight <= 12) return 'gap-3';
+    else if (formData.settings.lineHeight <= 14) return 'gap-3.5';
+    else if (formData.settings.lineHeight <= 16) return 'gap-4';
+    else if (formData.settings.lineHeight <= 18) return 'gap-[1.125rem]';
+    else if (formData.settings.lineHeight <= 20) return 'gap-5';
+    else return 'gap-2';
+  }
+
+  const getPageMarginClass = () => {
+    if (formData.settings.pageMargins <= 12) return 'p-3';
+    else if (formData.settings.pageMargins <= 14) return 'p-3.5';
+    else if (formData.settings.pageMargins <= 16) return 'p-4';
+    else if (formData.settings.pageMargins <= 20) return 'p-5';
+    else if (formData.settings.pageMargins <= 24) return 'p-6';
+    else if (formData.settings.pageMargins <= 28) return 'p-7';
+    else if (formData.settings.pageMargins <= 32) return 'p-8';
+    else if (formData.settings.pageMargins <= 36) return 'p-9';
+    else if (formData.settings.pageMargins <= 40) return 'p-10';
+    else return 'p-6';
+  }
+
+  const getFontFamilyClass = () => {
+    switch (formData.settings.fontFamily) {
+      case "Arial":
+        return "'Arial', 'sans-serif'";
+      case "Courier New":
+        return "'Courier New', 'monospace'";
+      case "Poppins":
+        return "'Poppins', 'sans-serif'";
+      case "Times New Roman":
+        return "'Times New Roman', 'serif'";
+      case "Verdana":
+        return "'Verdana', 'sans-serif'";
+      default:
+        return "'Poppins', 'sans-serif'";
+    }
+  };
+
+  const getTitleCaseClass = () => {
+    switch (formData.settings.titleCase) {
+      case "Uppercase":
+        return "uppercase";
+      case "Lowercase":
+        return "lowercase";
+      case "Capitalize":
+        return "capitalize";
+      default:
+        return "uppercase";
+    }
+  };
 
   return (
     <FormDataContext.Provider
-      value={{ formData, handleChange, handleProfilePic, handleVisibility }}
+      value={{ formData, handleChange, handleProfilePic, handleVisibility, getFontSizeClass, getHeadingFontSizeClass, getLineHeightClass, getPageMarginClass, getFontFamilyClass, getTitleCaseClass }}
     >
       {children}
     </FormDataContext.Provider>

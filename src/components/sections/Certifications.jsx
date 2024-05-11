@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   BiCalendar,
   BiFile,
+  BiLink,
   BiPlusCircle,
   BiSolidSchool,
 } from "react-icons/bi";
@@ -33,8 +34,8 @@ const Certifications = () => {
   };
 
   const addCertificate = () => {
-    setCertificates([...certificates, { title: "", issuedBy: "", date: "" }]);
-  };
+    setCertificates([...certificates, { title: "", issuedBy: "", link:"", date: "" }]);
+  };  
 
   const removeCertificate = (index) => {
     const updatedCertificates = [...certificates];
@@ -131,6 +132,17 @@ const Certifications = () => {
                 onChange={(e) => handleCertificateChange(e, certificateIndex)}
                 decoration={
                   <BiSolidSchool size="1rem" className="text-gray-400" />
+                }
+                className="bg-white dark:bg-slate-700 text-background-dark dark:text-gray-300"
+              />
+
+              <Input
+                name={`link-${certificateIndex}`}
+                label="Link"
+                value={certificate.link}
+                onChange={(e) => handleCertificateChange(e, certificateIndex)}
+                decoration={
+                  <BiLink size="1rem" className="text-gray-400" />
                 }
                 className="bg-white dark:bg-slate-700 text-background-dark dark:text-gray-300"
               />
