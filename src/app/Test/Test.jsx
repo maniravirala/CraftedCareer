@@ -320,6 +320,7 @@ const Test = () => {
     templateOrder.template2.map((item) => ({
       id: item.id.toString(),
       component: ComponentMappings[item.component],
+      key: item.component,
     })
   );
 
@@ -334,7 +335,7 @@ const Test = () => {
     updateTemplateOrder({
       template2: newTemplateItems.map((item, index) => ({
         id: index + 1,
-        component: item.component.type.name,
+        component: item.key,
       })),
     });
 
