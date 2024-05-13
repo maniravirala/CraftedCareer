@@ -44,6 +44,7 @@
     "react-native": "^0.73.6",
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
+    "react-sortable-hoc": "^2.0.0",
     "react-spinners": "^0.13.8",
     "stream": "^0.0.2",
     "stream-browserify": "^3.0.0",

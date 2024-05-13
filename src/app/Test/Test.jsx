@@ -2,7 +2,6 @@ import React from "react";
 import Markdown from "react-markdown";
 import { useFormData } from "../../contexts/Data/FormDataContext";
 import { useTemplateOrder } from "../../contexts/Data/TemplateOrderContext";
-
 import SortableList from "../../components/DragNDropHOC/SortableList";
 
 const Test = () => {
@@ -345,21 +344,6 @@ const Test = () => {
   return (
     <div className="h-[calc(100vh-4rem)] overflow-auto">
       <h1 className="text-3xl font-bold ">Resume Template</h1>
-      {/* <div className={`flex flex-col h-full ${getPageMarginClass()}`}>
-        <SortableList
-          items={templateItems}
-          onSortEnd={onSortTemplateItems}
-          onSortStart={() => {
-            document.body.style.cursor = "grabbing";
-          }}
-          lockToContainerEdges={true}
-          lockAxis="y"
-          helperClass={
-            "w-full flex items-center border-2 border-dashed border-gray-500 shadow-lg rounded-lg"
-          }
-        />
-      </div> */}
-
       <div
         id="a4"
         className={`bg-white text-black `}
@@ -372,7 +356,8 @@ const Test = () => {
           // overflowWrap: 'anywhere',
           wordBreak: "break-all",
         }}
-      >
+      >         
+       
         <div className={`flex flex-col h-full ${getPageMarginClass()}`}>
           <SortableList
             items={templateItems}
