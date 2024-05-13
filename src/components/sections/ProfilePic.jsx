@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import UploadMani from "../Inputs/UploadMani";
 import { BiMinusCircle } from "react-icons/bi";
-import Links from "../../assets/links";
+import Links from "../../assets/Data/links";
 import axios from "axios";
 import { Spin } from "antd";
 

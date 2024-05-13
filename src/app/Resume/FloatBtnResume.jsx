@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import { renderToStaticMarkup } from "react-dom/server";
 import { FormDataProvider } from "../../contexts/Data/FormDataContext";
-import Links from "../../assets/links";
+import Links from "../../assets/Data/links";
 import toast from "react-hot-toast";
 import Template1 from "../../components/Templates/Template1";
 import Template2 from "../../components/Templates/Template2";

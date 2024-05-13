@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { DarkModeProvider } from './contexts/Theme/DarkModeContext';
 import { AuthProvider } from './contexts/authContext/AuthContext';
 import { FormDataProvider } from './contexts/Data/FormDataContext';
+import { TemplateOrderProvider } from './contexts/Data/TemplateOrderContext';
 import { BrowserRouter } from 'react-router-dom';
 import { PrimeReactProvider } from 'primereact/api';
 import { Toaster } from 'react-hot-toast';
@@ -17,6 +18,7 @@ createRoot(
     <PrimeReactProvider>
       <AuthProvider>
         <FormDataProvider>
+          <TemplateOrderProvider>
           <DarkModeProvider>
             <BrowserRouter>
               <App />
@@ -29,6 +31,7 @@ createRoot(
               />
             </BrowserRouter>
           </DarkModeProvider>
+          </TemplateOrderProvider>
         </FormDataProvider>
       </AuthProvider>
     </PrimeReactProvider>

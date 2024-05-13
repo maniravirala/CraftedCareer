@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Links from "../assets/links";
+import Links from "../assets/Data/links";
 import { useAuth } from "../contexts/authContext/AuthContext";
 import axios from "axios";
 import toast from "react-hot-toast";

@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { refer2, notFound, avatar } from "../../assets";
 import Input from "../../components/Inputs/Input";
-import Links from "../../assets/links";
+import Links from "../../assets/Data/links";
 import toast from "react-hot-toast";
 
 const ReferHistory = ({ referalDetails }) => {

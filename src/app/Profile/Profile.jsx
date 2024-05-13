@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ReferAndEarn, ReferHistory } from "./Refer";
 import Info from "./Info";
-import Links from "../../assets/links";
+import Links from "../../assets/Data/links";
 import toast from "react-hot-toast";
 
 const Profile = () => {

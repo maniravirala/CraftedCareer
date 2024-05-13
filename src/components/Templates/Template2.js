@@ -69,6 +69,7 @@ const Template2 = () => {
                     </div>
                 }
 
+                {/* Internships */}
                 {formData.internships.length > 0 &&
                     <div className={`mt-4 flex flex-col ${getLineHeightClass()} ${formData.visibility.internships ? '' : 'hidden'}`}>
                         <p className={`font-bold ${getTitleCaseClass()} ${getHeadingFontSizeClass()} ${getLineHeightClass()}`}>Internships</p>

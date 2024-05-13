@@ -1,51 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  template1,
-  template2,
-  template3,
-  template4,
-  template5,
-  template6,
-} from "../assets";
-
-const templates = [
-  {
-    id: 1,
-    name: "Simple",
-    description: "A simple and clean template with a modern design.",
-    imageUrl: template1,
-  },
-  {
-    id: 2,
-    name: "Professional",
-    description: "A professional template with a classic design.",
-    imageUrl: template2,
-  },
-  {
-    id: 3,
-    name: "Creative",
-    description: "A creative template with a unique design.",
-    imageUrl: template3,
-  },
-  {
-    id: 4,
-    name: "Modern",
-    description: "A modern template with a sleek design.",
-    imageUrl: template4,
-  },
-  {
-    id: 5,
-    name: "Minimalist",
-    description: "A minimalist template with a clean design.",
-    imageUrl: template5,
-  },
-  {
-    id: 6,
-    name: "Stylish",
-    description: "A stylish template with a sophisticated design.",
-    imageUrl: template6,
-  },
-];
+import templates from "../assets/Data/Templates";
 
 const TemplateCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

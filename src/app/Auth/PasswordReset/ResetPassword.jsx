@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Links from "../../../assets/links";
+import Links from "../../../assets/Data/links";
 import toast from "react-hot-toast";
 import Input from "../../../components/Inputs/Input";
 
