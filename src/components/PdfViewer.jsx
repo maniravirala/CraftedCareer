@@ -6,10 +6,7 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 
 import { useDarkMode } from "../../contexts/Theme/DarkModeContext";
 
-const Test = () => {
-  const fileUrl =
-    "https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf";
-
+const PdfViewer = ({ fileUrl }) => {
   const { darkMode } = useDarkMode();
 
   const renderToolbar = (Toolbar) => (
@@ -114,16 +111,12 @@ const Test = () => {
   });
 
   return (
-    <div className="h-[calc(100vh-4rem)] overflow-auto">
-      <div className={`bg-transparent h-full`}>
-        <Viewer
-          fileUrl={fileUrl}
-          plugins={[defaultLayoutPluginInstance]}
-          theme={darkMode ? "dark" : "light"}
-        />
-      </div>
-    </div>
+    <Viewer
+      fileUrl={fileUrl}
+      plugins={[defaultLayoutPluginInstance]}
+      theme={darkMode ? "dark" : "light"}
+    />
   );
 };
 
-export default Test;
+export default PdfViewer;

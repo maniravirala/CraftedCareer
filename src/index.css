@@ -4,7 +4,16 @@
 
 @import url("https://use.typekit.net/umf5tls.css");
 
+@media print {
+  iframe {
+    display: none;
+  }
 
+  #a4, #resumeA4{
+    display: none;
+  }
+
+}
 
 body {
   margin: 0;
@@ -22,29 +31,29 @@ code {
     monospace;
 }
 
-body{
+body {
   font-family: 'poppins', sans-serif !important;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 6px;
   height: 6px;
   /* background-color: #f5f5f5; */
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background-color: #cccccc;
   border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb:hover{
+::-webkit-scrollbar-thumb:hover {
   background-color: #99999990;
 }
 
 
 
 
-li{
+li {
   list-style-type: disc;
 }
 
@@ -52,28 +61,34 @@ li{
 /* ------------------- Animation ------------------- */
 
 .jello-horizontal {
-	animation: jello-horizontal 900ms both;
+  animation: jello-horizontal 900ms both;
 }
 
 @keyframes jello-horizontal {
   0% {
     transform: scale3d(1, 1, 1);
   }
+
   30% {
     transform: scale3d(1.25, 0.75, 1);
   }
+
   40% {
     transform: scale3d(0.75, 1.25, 1);
   }
+
   50% {
     transform: scale3d(1.15, 0.85, 1);
   }
+
   65% {
     transform: scale3d(0.95, 1.05, 1);
   }
+
   75% {
     transform: scale3d(1.05, 0.95, 1);
   }
+
   100% {
     transform: scale3d(1, 1, 1);
   }

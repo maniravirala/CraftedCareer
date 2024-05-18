@@ -1,4 +1,4 @@
-const link1 = "https://craftedcareer.vercel.app";
+const link1 = "https://resumestudio.vercel.app";
 const link2 = "http://localhost:8000";
 const link = process.env.NODE_ENV === "production" ? link1 : link2;
 

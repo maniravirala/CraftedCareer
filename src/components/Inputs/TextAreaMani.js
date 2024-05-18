@@ -4,6 +4,7 @@ const TextAreaMani = ({
   label,
   name,
   value,
+  placeholder,
   onChange,
   disabled,
   decoration,
@@ -36,7 +37,7 @@ const TextAreaMani = ({
         onChange={onChange}
         className={`peer block w-full p-3 focus:outline-none focus:ring-0 appearance-none  ${disabled ? "bg-gray-200 rounded-r-xl" : "bg-transparent"
           } ${inputClassName}`}
-        placeholder=" "
+        placeholder={placeholder}
         disabled={disabled}
         style={{ resize }}
         {...attributes}

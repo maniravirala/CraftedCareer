@@ -3,12 +3,14 @@ import { BiRightArrowAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import TemplateCarousel from "../../components/templateCarousel";
 import { blue, violet } from "../../assets";
+import Footer from "../Pages/Footer";
 
 const PublicDashboard = () => {
   return (
     <div className="h-[calc(100vh-4rem)] overflow-auto">
       <div className="bg-transparent h-full">
         {/* bg-background dark:bg-background-dark */}
+
         {/* Hero Section */}
         <section className="py-10 sm:py-20">
           <div className="px-4 mx-auto sm:px-6 lg:px-8 h-full">
@@ -55,6 +57,7 @@ const PublicDashboard = () => {
             </div>
           </div>
         </section>
+
         {/* Features Section */}
         <section className="py-20 relative ">
           <div className="absolute inset-0 bg-gradient-to-b from-gray-100 via-transparent to-transparent dark:from-gray-800 dark:via-transparent dark:to-transparent"></div>
@@ -112,6 +115,7 @@ const PublicDashboard = () => {
             </div>
           </div>
         </section>
+
         {/* Templates Section */}
         <section className="py-10">
           <div className="px-4 mx-auto mb-20 sm:px-6 lg:px-8">
@@ -160,6 +164,7 @@ const PublicDashboard = () => {
           </div>
         </section>
 */}
+
         {/* Get Started Section */}
         <section className="py-20">
           <div className="px-4 mx-auto sm:px-6 lg:px-8">
@@ -181,6 +186,9 @@ const PublicDashboard = () => {
             </div>
           </div>
         </section>
+
+        {/* Footer */}
+        <Footer />
       </div>
     </div>
   );

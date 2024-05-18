@@ -46,7 +46,7 @@ const ForgotPassword = () => {
   return (
     <div className="h-[calc(100vh-4rem)] overflow-auto ">
       <div className="h-full flex">
-        <div className="m-auto max-w-lg bg-white rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
+        <div className="flex-1 m-auto max-w-lg bg-white rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
           <div className="p-4 sm:p-7">
             <div className="text-center">
               <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">

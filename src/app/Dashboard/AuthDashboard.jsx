@@ -3,6 +3,7 @@ import { BiRightArrowAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import TemplateCarousel from "../../components/templateCarousel";
 import { blue, violet } from "../../assets";
+import Footer from "../Pages/Footer";
 
 const AuthDashboard = () => {
 
@@ -172,6 +173,9 @@ const AuthDashboard = () => {
             </div>
           </div>
         </section>
+
+        {/* Footer */}
+        <Footer />
       </div>
     </div>
   );
