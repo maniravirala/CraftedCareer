@@ -1,49 +1,37 @@
-import React, { useRef, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from "react";
 
-const Skeleton = ({ loading, children, variant, animation }) => {
-  const [dimensions, setDimensions] = useState({ width: '100%', height: 'auto' });
-  const ref = useRef();
-
-  useEffect(() => {
-    if (loading && ref.current) {
-      const { offsetWidth, offsetHeight } = ref.current;
-      setDimensions({ width: offsetWidth, height: offsetHeight });
-    }
-  }, [loading]);
-
-  if (loading) {
-    const skeletonClasses = classNames(
-      'bg-gray-200 dark:bg-gray-700',
-      animation === 'pulse' && 'animate-pulse',
-      animation === 'wave' && 'animate-wave',
-      variant === 'text' && 'h-6 w-full',
-      variant === 'circle' && 'h-12 w-12 rounded-full',
-      variant === 'rect' && 'w-full'
-    );
-
-    const skeletonStyle = {
-      width: dimensions.width,
-      height: dimensions.height,
-    };
-
-    return <div className={skeletonClasses} style={skeletonStyle}></div>;
+const Skeleton = ({ loading, lines, width, height, className }) => {
+  if (!loading) {
+    return null;
   }
 
-  return React.cloneElement(children, { ref });
-};
+  if (lines) {
+    return (
+      <div className="">
+        <p className="skeleton animate-pulse h-4 bg-gray-300 rounded-full dark:bg-gray-700 w-2/5"></p>
+        {lines > 1 && (
+          <ul className="mt-3 space-y-3">
+            {Array.from({ length: lines - 1 }).map((_, index) => (
+              <li
+                key={index}
+                className="skeleton animate-pulse w-full h-4 bg-gray-300 rounded-full dark:bg-gray-700"
+              ></li>
+            ))}
+          </ul>
+        )}
+      </div>
+    );
+  }
 
-Skeleton.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  children: PropTypes.element.isRequired,
-  variant: PropTypes.oneOf(['text', 'rect', 'circle']),
-  animation: PropTypes.oneOf(['pulse', 'wave']),
-};
-
-Skeleton.defaultProps = {
-  variant: 'rect',
-  animation: 'pulse',
+  return (
+    <div
+      style={{
+        width: `${width}px`,
+        height: `${height}px`,
+      }}
+      className={`${className} skeleton animate-pulse bg-gray-300 dark:bg-gray-700`}
+    />
+  );
 };
 
 export default Skeleton;

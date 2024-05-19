@@ -63,7 +63,7 @@ function App() {
                     <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/login" replace={true} />} />
 
                     <Route path="/resume" element={<Resume />} />
-                    <Route path='/resume/view/:uniqueCode' element={<ViewResume />} />
+                    <Route path='/resume/view/:uniqueCode' element={isAuthenticated ? <ViewResume /> : <Navigate to="/login" replace={true} />} />
                     <Route path="/download" element={<DownloadResume />} />
                     
                     <Route path="/test" element={<Test />} />
