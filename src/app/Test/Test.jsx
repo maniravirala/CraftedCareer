@@ -7,8 +7,7 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { useDarkMode } from "../../contexts/Theme/DarkModeContext";
 
 const Test = () => {
-  const fileUrl =
-    "https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf";
+  const fileUrl = "https://pdftron.s3.amazonaws.com/downloads/pl/demo-annotated.pdf";
 
   const { darkMode } = useDarkMode();
 

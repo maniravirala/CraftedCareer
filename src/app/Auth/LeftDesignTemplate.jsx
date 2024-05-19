@@ -19,7 +19,7 @@ const LeftDesignTemplate = () => {
       <div className="flex flex-col justify-between h-full p-8">
         <div className="flex">
           <h1 className="text-4xl font-semibold p-4 text-white">
-            Craft My Resume
+            Resume Studio
           </h1>
         </div>
 
