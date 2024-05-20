@@ -14,47 +14,6 @@ const ViewResume = () => {
 
   const { uniqueCode } = useParams();
   const previousUniqueCode = useRef(null);
-  // const pdf = "https://pdftron.s3.amazonaws.com/downloads/pl/demo-annotated.pdf";
-
-  // const resume = {
-  //   name: "John Doe",
-  //   views: 10,
-  //   uniqueViews: 5,
-  //   viewedBy: [
-  //     {
-  //       name: "Alice Markus Smith",
-  //       date: "2024-05-15T08:24:00.000Z",
-  //     },
-  //     {
-  //       name: "Jane Doe",
-  //       date: "2024-05-16T09:14:00.000Z",
-  //     },
-  //     {
-  //       name: "Jane Doe skdsv clsdkfffffffffffffffffffffffffffffddddddddddddddddddddddddddddddddddddddddddfndinf sdflidsdddddddddddddddd",
-  //       date: "2024-05-12T10:34:00.000Z",
-  //     },
-  //   ],
-  //   downloads: 2,
-  //   feedback: [
-  //     {
-  //       name: "John Doe",
-  //       feedback: "Great resume!",
-  //       date: "2024-05-15T08:24:00.000Z",
-  //     },
-  //     {
-  //       name: "Jane Doe skdsv clsdkfffffffffffffffffffffffffffffddddddddddddddddddddddddddddddddddddddddddfndinf sdflidsdddddddddddddddd",
-  //       feedback: "Nice resume!",
-  //       date: "2024-05-16T09:14:00.000Z",
-  //     },
-  //     {
-  //       name: "Alice Markus Smith",
-  //       feedback:
-  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  //       date: "2024-05-17T10:34:00.000Z",
-  //     },
-  //   ],
-  //   createdAt: "2024-05-17T04:26:33.109Z",
-  // };
 
   const fetchedResume = useMemo(
     () => async () => {
@@ -84,7 +43,6 @@ const ViewResume = () => {
               toast.error(res.error);
               return;
             }
-            // res is in binary format, so we need to convert it to blob and then to URL
             const pdfBlob = new Blob([res], { type: "application/pdf" });
             const pdfUrl = URL.createObjectURL(pdfBlob);
             setPdf(pdfUrl);
@@ -105,32 +63,8 @@ const ViewResume = () => {
     }
 
     fetchedResume();
-
-    // axiosInstance
-    //   .get(`/api/resume/get/${uniqueCode}`, { withCredentials: true })
-    //   .then((res) => {
-    //     if (res.error) {
-    //       toast.error(res.error);
-    //       return;
-    //     }
-    //     setResume(res.data.resume);
-    //   });
-
-    // axiosInstance
-    //   .get(`/api/resume/view/${uniqueCode}`, { withCredentials: true, responseType: "arraybuffer" })
-    //   .then((res) => {
-    //     if (res.error) {
-    //       toast.error(res.error);
-    //       return;
-    //     }
-    //     // res is in binary format, so we need to convert it to blob and then to URL
-    //     const pdfBlob = new Blob([res], { type: "application/pdf" });
-    //     const pdfUrl = URL.createObjectURL(pdfBlob);
-    //     setPdf(pdfUrl);
-    //   });
   }, [uniqueCode, fetchedResume]);
 
-  // Sort feedback by most recent date
   const sortedFeedback = resume
     ? [...resume.feedback].sort((a, b) => new Date(b.date) - new Date(a.date))
     : [];
@@ -173,7 +107,6 @@ const ViewResume = () => {
       return;
     }
 
-    // Submit feedback to the server
     axiosInstance
       .post(
         `/api/resume/feedback/${uniqueCode}`,
@@ -197,11 +130,6 @@ const ViewResume = () => {
   };
 
   const handleShare = () => {
-    // navigator.clipboard.writeText(window.location.href);
-    // toast.success("Link copied to clipboard!");
-
-    // onclick of share button, open share dialog with platform options like email, whatsapp, etc.
-    // get the current url and with messa gefor sharing resume link
     const shareData = {
       title: "Resume Link",
       text: "Check out this resume",
@@ -225,20 +153,17 @@ const ViewResume = () => {
 
   return (
     <div className="h-[calc(100vh-4rem)] overflow-auto bg-gray-100 dark:bg-gray-900">
-      <div className="bg-transparent h-full">
-        <div className="p-4 flex gap-4 h-full">
-          <div className="border-0 w-3/4">
-            {/* {resume && <PdfViewer fileUrl={pdf} />} */}
-            {/* if resume is not loaded, show skeleton else show PdfViewer */}
+      <div className="bg-transparent lg:h-full">
+        <div className="p-4 flex flex-col lg:flex-row gap-4 h-full overflow-y-auto">
+          <div className="border-0 w-full lg:w-3/4">
             {pdf ? (
               <PdfViewer fileUrl={pdf} />
             ) : (
               <Skeleton loading={true} className={"w-full h-full rounded-lg"} />
             )}
           </div>
-          <div className="w-1/4 flex flex-col items-center gap-4 h-full overflow-y-auto">
+          <div className="w-full lg:w-1/4 flex flex-col items-center gap-4 h-full overflow-y-auto">
             <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white p-4 rounded-lg shadow-md w-full text-center">
-              {/* if resume is not loaded, show skeleton else show resume name */}
               {resume ? (
                 <h1 className="text-2xl font-semibold">{resume.name}</h1>
               ) : (
@@ -261,6 +186,27 @@ const ViewResume = () => {
                   />
                 )}
               </span>
+
+              <div className="flex gap-4 mt-4 flex-wrap justify-center">
+                <button
+                  onClick={handleShare}
+                  className="bg-blue-500 text-white rounded-lg px-4 py-2 "
+                  style={{
+                    width: "min(50%, 120px)",
+                  }}
+                >
+                  Share
+                </button>
+                <button
+                  onClick={handleDownload}
+                  className="bg-blue-500 text-white rounded-lg px-4 py-2 "
+                  style={{
+                    width: "min(50%, 120px)",
+                  }}
+                >
+                  Download
+                </button>
+              </div>
             </div>
 
             <div className="flex gap-4 flex-wrap justify-center">
@@ -326,10 +272,8 @@ const ViewResume = () => {
                     </li>
                   ))
                 ) : (
-                  <div className="flex items-center justify-center h-24 w-full">
-                    <p className="text-center text-gray-500 dark:text-gray-400">
-                      No one has viewed this resume yet!
-                    </p>
+                  <div className="flex items-center justify-center h-24">
+                    <span>No Views</span>
                   </div>
                 )}
               </ul>
@@ -337,85 +281,67 @@ const ViewResume = () => {
 
             <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white p-4 rounded-lg shadow-md w-full">
               <h1 className="text-xl font-semibold">Feedback</h1>
-              {sortedFeedback.length > 0 ? (
-                <ul className="space-y-4 max-h-96 overflow-y-auto">
-                  {sortedFeedback.map((fb, index) => (
+              <ul className="space-y-4 max-h-96 overflow-y-auto">
+                {sortedFeedback.length > 0 ? (
+                  sortedFeedback.map((feedback, index) => (
                     <li key={index} className="flex items-start gap-4">
                       <div className="w-full">
                         <div className="bg-background dark:bg-gray-700 shadow-lg rounded-lg lg:p-3 p-2 mr-2">
                           <div className="flex justify-between items-center">
                             <h1 className="text-md font-semibold truncate">
-                              {fb.name}
+                              {feedback.name}
                             </h1>
                             <span className="text-xs text-gray-500 dark:text-gray-400">
-                              {new Date(fb.date).toLocaleDateString()}
+                              {new Date(feedback.date).toLocaleDateString()}
                             </span>
                           </div>
-                          <pre className="text-sm text-gray-600 dark:text-gray-300 whitespace-pre-wrap">
-                            {JSON.parse(fb.feedback, null, 2)}
+                          <pre className="text-sm mt-2 whitespace-pre-wrap">
+                            {JSON.parse(feedback.feedback)}
                           </pre>
                         </div>
                       </div>
                     </li>
-                  ))}
-                </ul>
-              ) : (
-                <div className="flex items-center justify-center h-24 w-full">
-                  <p className="text-center text-gray-500 dark:text-gray-400">
-                    No feedback available yet!
-                  </p>
-                </div>
-              )}
-            </div>
-
-            <div className="flex flex-col gap-4 w-full">
+                  ))
+                ) : (
+                  <div className="flex items-center justify-center h-24">
+                    <span>No Feedback</span>
+                  </div>
+                )}
+              </ul>
               <button
-                className="bg-blue-500 text-white p-2 rounded-lg shadow-md hover:bg-blue-600 transition"
-                onClick={handleDownload}
-              >
-                Download
-              </button>
-              <button
-                className="bg-blue-500 text-white p-2 rounded-lg shadow-md hover:bg-blue-600 transition"
+                className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4"
                 onClick={handleFeedback}
               >
-                Feedback
-              </button>
-              <button
-                className="bg-blue-500 text-white p-2 rounded-lg shadow-md hover:bg-blue-600 transition"
-                onClick={handleShare}
-              >
-                Share
+                Give Feedback
               </button>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Feedback Modal */}
       {isFeedbackModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg w-96">
-            <h1 className="text-xl font-semibold">Feedback</h1>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white p-6 rounded-lg shadow-lg w-full max-w-lg">
+            <h2 className="text-xl font-semibold mb-4">Give Feedback</h2>
             <textarea
-              className="w-full h-32 p-2 border-2 border-gray-300 dark:border-gray-700 rounded-lg mt-2 outline-none focus:border-blue-500 dark:focus:border-blue-500"
-              placeholder="Enter your feedback here..."
+              className="w-full p-2 ring-2 ring-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+              rows="5"
               value={feedbackText}
               onChange={(e) => setFeedbackText(e.target.value)}
+              placeholder="Write your feedback..."
               style={{ resize: "none" }}
             ></textarea>
-            <div className="flex gap-4 mt-4">
+            <div className="flex justify-end mt-4 gap-4">
               <button
-                className="bg-blue-500 text-white p-2 rounded-lg shadow-md hover:bg-blue-600 transition"
-                onClick={submitFeedback}
-              >
-                Submit
-              </button>
-              <button
-                className="bg-red-500 text-white p-2 rounded-lg shadow-md hover:bg-red-600 transition"
+                className="bg-gray-500 text-white px-4 py-2 rounded-lg"
                 onClick={() => setIsFeedbackModalOpen(false)}
               >
                 Cancel
+              </button>
+              <button
+                className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                onClick={submitFeedback}
+              >
+                Submit
               </button>
             </div>
           </div>

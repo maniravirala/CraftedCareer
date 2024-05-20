@@ -26,7 +26,7 @@ const PdfViewer = ({ fileUrl }) => {
           ZoomOut,
         } = slots;
         return (
-          <div className="flex items-center justify-between w-2/4 mx-auto text-black dark:text-white">
+          <div className="flex items-center justify-between lg:w-2/4 mx-auto text-black dark:text-white">
             <div className="flex items-center gap-2">
               <ShowSearchPopover />
               <div className="flex items-center gap-1">

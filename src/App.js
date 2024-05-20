@@ -61,6 +61,10 @@ function App() {
                     
                     <Route path="/dashboard" element={isAuthenticated ? <AuthDashboard /> : <PublicDashboard />} />
                     <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/login" replace={true} />} />
+                    <Route path="/refer" element={isAuthenticated ? <Profile /> : <Navigate to="/login" replace={true} />} />
+                    <Route path="/download-history" element={isAuthenticated ? <Profile /> : <Navigate to="/login" replace={true} />} />
+                    <Route path="/account-settings" element={isAuthenticated ? <Profile /> : <Navigate to="/login" replace={true} />} />
+                    <Route path="/help-support" element={isAuthenticated ? <Profile /> : <Navigate to="/login" replace={true} />} />
 
                     <Route path="/resume" element={<Resume />} />
                     <Route path='/resume/view/:uniqueCode' element={isAuthenticated ? <ViewResume /> : <Navigate to="/login" replace={true} />} />

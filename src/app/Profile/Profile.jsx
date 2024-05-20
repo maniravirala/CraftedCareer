@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { ReferAndEarn, ReferHistory } from "./Refer";
-import Info from "./Info";
 import Links from "../../assets/Data/links";
 import toast from "react-hot-toast";
+
+import ProfileCard from "./components/ProfileCard";
+import Sidebar from "./components/Sidebar";
+import Content from "./components/Content";
+import { useLocation } from "react-router-dom";
 
 const Profile = () => {
   const [referalDetails, setReferalDetails] = useState("");
@@ -32,28 +35,28 @@ const Profile = () => {
     fetchData();
   }, []);
 
-  return (
-    <div className="h-[calc(100vh-4rem)] overflow-auto bg-transparent w-full">
-      <div className="m-6 flex gap-4 flex-col lg:flex-row">
-        <div className="w-full lg:w-1/4 mb-4 lg:mb-0 flex flex-col gap-4">
-          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
-            <Info referalDetails={referalDetails} />
+  const location = useLocation();
+  const [activeContent, setActiveContent] = useState(
+    location.pathname.substring(1)
+  );
+
+  if (true) {
+    return (
+      <div className="h-[calc(100vh-4rem)] flex flex-col md:flex-row bg-transparent">
+        <div className="md:w-1/4 p-4 space-y-4 overflow-y-auto">
+          <div className="sticky top-0">
+            <ProfileCard referalDetails={referalDetails} />
           </div>
-          <div className="hidden lg:block bg-white dark:bg-gray-800 text-background-dark dark:text-background shadow-md rounded-lg">
-            <ReferHistory referalDetails={referalDetails} />
+          <div className="hidden md:block bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 shadow-md rounded-lg mt-4">
+            <Sidebar setActiveContent={setActiveContent} activeContent={activeContent} />
           </div>
         </div>
-        <div className="w-full lg:w-3/4 flex flex-col gap-4">
-          <div className="bg-white dark:bg-gray-800 text-background-dark dark:text-background shadow-md rounded-lg p-6">
-            <ReferAndEarn referalDetails={referalDetails} />
-          </div>
-          <div className="lg:hidden bg-white dark:bg-gray-800 text-background-dark dark:text-background shadow-md rounded-lg">
-            <ReferHistory referalDetails={referalDetails} />
-          </div>
+        <div className="flex-1 p-4 overflow-y-auto">
+          <Content activeContent={activeContent} />
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default Profile;
