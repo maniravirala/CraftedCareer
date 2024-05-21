@@ -1,9 +1,9 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Links from "../../../assets/Data/links";
 import toast from "react-hot-toast";
 import Input from "../../../components/Inputs/Input";
+import axiosInstance from "../../../utils/axiosInstance";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -24,20 +24,24 @@ const ResetPassword = () => {
     if (password !== confirmPassword)
       return toast.error("Passwords do not match");
     const loadingToast = toast.loading("Resetting password...");
-    axios
-      .post(
-        Links.API.RESET_PASSWORD.replace(":id", id).replace(":token", token),
-        { password },
-        { withCredentials: true }
-      )
+    axiosInstance.post(Links.API.RESET_PASSWORD.replace(":id", id).replace(":token",token), {password}, { withCredentials: true })
       .then((res) => {
+        if (res.error) {
+          toast.dismiss(loadingToast.id);
+          toast.error(res.error);
+          return;
+        }
         toast.dismiss(loadingToast.id);
-        toast.success(res.data.message);
+        toast.success(res.message);
         navigate("/login");
       })
       .catch((error) => {
         toast.dismiss(loadingToast.id);
-        toast.error(error.response.data.message || error.message);
+        if (error.response && error.response.status === 429) {
+          toast.error(error.response.data.error);
+        } else {
+          toast.error(error.message);
+        }
       });
   };
 

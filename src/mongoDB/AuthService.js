@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Links from "../assets/Data/links";
 import { useAuth } from "../contexts/authContext/AuthContext";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import toast from "react-hot-toast";
 
 const AuthService = () => {
@@ -18,18 +18,29 @@ const AuthService = () => {
         try {
             setLoading(true);
             setError(null);
-            const response = await axios.post(Links.API.REGISTER, values, {
-                withCredentials: true,
-            });
-            if (response.status === 201) {
-                toast.dismiss(toastRegisterLoading.id);
-                toast.success(response.data.message);
-                SignIn(response.data.token)
+            axiosInstance.post(Links.API.REGISTER, values, { withCredentials: true })
+                .then((response) => {
+                    if (response.error) {
+                        toast.dismiss(toastRegisterLoading.id);
+                        toast.error(response.error);
+                        return;
+                    }
+                    toast.dismiss(toastRegisterLoading.id);
+                    toast.success('Registration successful');
+                    SignIn(response.token);
+                }
+                )
+                .catch((error) => {
+                    toast.dismiss(toastRegisterLoading.id);
+                    if (error.response && error.response.status === 429) {
+                        toast.error(error.response.data.error);
+                    } else if (error.response && error.response.status === 400) {
+                        setError(error.response.data.message);
+                    } else {
+                        toast.error(error.message);
+                    }
+                });
 
-            } else {
-                toast.dismiss(toastRegisterLoading.id);
-                toast.error("Registration Failed");
-            }
         } catch (error) {
             toast.dismiss(toastRegisterLoading.id);
             if (error.response && error.response.status === 429) {
@@ -50,18 +61,27 @@ const AuthService = () => {
         try {
             setLoading(true);
             setError(null);
-            const response = await axios.post(Links.API.LOGIN, values, {
-                withCredentials: true,
-            });
-            if (response.status === 200) {
-                toast.dismiss(toastLoginLoading.id);
-                toast.success('Login successful');
-                SignIn(response.data.token);
-            }
-            else {
-                toast.dismiss(toastLoginLoading.id);
-                toast.error("Login Failed");
-            }
+            axiosInstance.post(Links.API.LOGIN, values, { withCredentials: true })
+                .then((response) => {
+                    if (response.error) {
+                        toast.dismiss(toastLoginLoading.id);
+                        toast.error(response.error);
+                        return;
+                    }
+                    toast.dismiss(toastLoginLoading.id);
+                    toast.success('Login successful');
+                    SignIn(response.token);
+                })
+                .catch((error) => {
+                    toast.dismiss(toastLoginLoading.id);
+                    if (error.response && error.response.status === 429) {
+                        toast.error(error.response.data.error);
+                    } else if (error.response && error.response.status === 401) {
+                        setError(error.response.data.message);
+                    } else {
+                        toast.error(error.message);
+                    }
+                });
         } catch (error) {
             // toast.error('An error occurred while logging in');
             toast.dismiss(toastLoginLoading.id);
@@ -83,19 +103,25 @@ const AuthService = () => {
             setLoading(true);
             setError(null);
             // send cookies to the server
-            const response = await axios.post(Links.API.LOGOUT, {}, {
-                withCredentials: true,
-            });
-
-            if (response.status === 200) {
-                toast.dismiss(toastLogoutLoading.id);
-                toast.success('Logout successful');
-                SignOut();
-            }
-            else {
-                toast.dismiss(toastLogoutLoading.id);
-                toast.error("Logout Failed");
-            }
+            axiosInstance.post(`${Links.API.LOGOUT}`, {}, { withCredentials: true })
+                .then((response) => {
+                    if (response.error) {
+                        toast.dismiss(toastLogoutLoading.id);
+                        toast.error(response.error);
+                        return;
+                    }
+                    toast.dismiss(toastLogoutLoading.id);
+                    toast.success('Logout successful');
+                    SignOut();
+                })
+                .catch((error) => {
+                    toast.dismiss(toastLogoutLoading.id);
+                    if (error.response && error.response.status === 429) {
+                        toast.error(error.response.data.error);
+                    } else {
+                        toast.error(error.message);
+                    }
+                });
         } catch (error) {
             // toast.error('An error occurred while logging out');
             toast.dismiss(toastLogoutLoading.id);

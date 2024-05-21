@@ -40,19 +40,24 @@ const Profile = () => {
     location.pathname.substring(1)
   );
 
+  useEffect(() => {
+    setActiveContent(location.pathname.substring(1));
+  }, [location]);
+
   if (true) {
     return (
-      <div className="h-[calc(100vh-4rem)] flex flex-col md:flex-row bg-transparent">
-        <div className="md:w-1/4 p-4 space-y-4 overflow-y-auto">
-          <div className="sticky top-0">
-            <ProfileCard referalDetails={referalDetails} />
-          </div>
+      <div className="h-[calc(100vh-4rem)] overflow-y-auto flex flex-col md:flex-row bg-transparent">
+        <div className="md:w-1/4 m-4 space-y-4 md:overflow-y-auto rounded-md">
+          <ProfileCard referalDetails={referalDetails} />
           <div className="hidden md:block bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 shadow-md rounded-lg mt-4">
-            <Sidebar setActiveContent={setActiveContent} activeContent={activeContent} />
+            <Sidebar
+              setActiveContent={setActiveContent}
+              activeContent={activeContent}
+            />
           </div>
         </div>
-        <div className="flex-1 p-4 overflow-y-auto">
-          <Content activeContent={activeContent} />
+        <div className="flex-1 p-4 md:pt-4 pt-0">
+          <Content activeContent={activeContent} referalDetails={referalDetails} />
         </div>
       </div>
     );

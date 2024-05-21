@@ -1,26 +1,60 @@
-import React, { useState } from "react";
-import { BiAward, BiLogOut, BiSolidDashboard } from "react-icons/bi";
+import React, { useEffect, useMemo } from "react";
+import { BiMenuAltLeft, BiSolidAward, BiSolidDashboard, BiSolidDownload, BiSolidHelpCircle, BiSolidLogOut, BiSolidUser, } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
 
 const Sidebar = ({ setActiveContent, activeContent }) => {
-  const navLinks = [
-    { label: "Dashboard", icon: <BiSolidDashboard className="w-5 h-5" />, path: "/dashboard" },
-    { label: "Profile", icon: <BiAward className="w-5 h-5" />, path: "/profile" },
-    { label: "Refer and Earn", icon: <BiAward className="w-5 h-5" />, path: "/refer" },
-    { label: "Download History", icon: <BiAward className="w-5 h-5" />, path: "/download-history" },
-    { label: "Account Settings", icon: <BiAward className="w-5 h-5" />, path: "/account-settings" },
-    { label: "Help and Support", icon: <BiAward className="w-5 h-5" />, path: "/help-support" },
-    { label: "Logout", icon: <BiLogOut className="w-5 h-5" />, path: "/logout" },
-  ];
+  const navLinks = useMemo(
+    () => [
+      {
+        label: "Dashboard",
+        icon: <BiSolidDashboard className="w-5 h-5" />,
+        path: "/dashboard",
+      },
+      {
+        label: "Profile",
+        icon: <BiSolidUser className="w-5 h-5" />,
+        path: "/profile",
+      },
+      {
+        label: "Refer and Earn",
+        icon: <BiSolidAward className="w-5 h-5" />,
+        path: "/refer",
+      },
+      {
+        label: "Download History",
+        icon: <BiSolidDownload className="w-5 h-5" />,
+        path: "/download-history",
+      },
+      {
+        label: "Account Settings",
+        icon: <BiMenuAltLeft className="w-5 h-5" />,
+        path: "/account-settings",
+      },
+      {
+        label: "Help and Support",
+        icon: <BiSolidHelpCircle className="w-5 h-5" />,
+        path: "/help-support",
+      },
+      {
+        label: "Logout",
+        icon: <BiSolidLogOut className="w-5 h-5" />,
+        path: "/logout",
+      },
+    ],
+    []
+  );
 
-  const [hovered, setHovered] = useState(null);
   const indicatorControls = useAnimation();
 
-  const handleLinkClick = (linkPath) => {
-    const previousIndex = navLinks.findIndex(
+  useEffect(() => {
+    const index = navLinks.findIndex(
       (link) => link.path.replace("/", "").toLowerCase() === activeContent
     );
+    indicatorControls.start({ y: index * 48 });
+  }, [activeContent, indicatorControls, navLinks]);
+
+  const handleLinkClick = (linkPath) => {
     const newIndex = navLinks.findIndex(
       (link) => link.path.replace("/", "").toLowerCase() === linkPath
     );
@@ -32,7 +66,7 @@ const Sidebar = ({ setActiveContent, activeContent }) => {
   };
 
   return (
-    <div className="space-y-2 relative">
+    <div className="space-y-2 relative overflow-y-auto">
       <div className="flex flex-col justify-between flex-1 mt-6">
         <nav className="space-y-2 relative">
           <AnimatePresence>
@@ -53,20 +87,12 @@ const Sidebar = ({ setActiveContent, activeContent }) => {
                   ? "bg-gray-100 dark:bg-gray-700"
                   : ""
               }`}
-              onMouseEnter={() => setHovered(index)}
-              onMouseLeave={() => setHovered(null)}
-              onClick={() => handleLinkClick(link.path.replace("/", "").toLowerCase())}
+              onClick={() =>
+                handleLinkClick(link.path.replace("/", "").toLowerCase())
+              }
             >
               {link.icon}
               <span className="mx-4 font-normal">{link.label}</span>
-              {hovered === index && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="w-2 h-2 bg-green-500 rounded-full ml-2"
-                ></motion.div>
-              )}
             </Link>
           ))}
         </nav>

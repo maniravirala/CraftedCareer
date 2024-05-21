@@ -1,28 +1,19 @@
-const link1 = "https://resumestudio.vercel.app";
-const link2 = "http://localhost:8000";
-const link = process.env.NODE_ENV === "production" ? link1 : link2;
-
 const Links = {
   API: {
-    GENERATE_PDF: `${link}/api/auth/generate`,
-    SEND_PDF: `${link}/api/auth/sendPdf`,
-    SEND_INVITAION: `${link}/api/mail/send-invitation`,
+    GENERATE_PDF: `/api/auth/generate`,
+    SEND_PDF: `/api/auth/sendPdf`,
+    SEND_INVITAION: `/api/mail/send-invitation`,
 
-    LOGIN: `${link}/api/auth/login`,
-    REGISTER: `${link}/api/auth/register`,
-    LOGOUT: `${link}/api/auth/logout`,
-    FORGOT_PASSWORD: `${link}/api/auth/forgot-password`,
-    RESET_PASSWORD: `${link}/api/auth/reset-password/:token`,
+    LOGIN: `/api/auth/login`,
+    REGISTER: `/api/auth/register`,
+    LOGOUT: `/api/auth/logout`,
+    FORGOT_PASSWORD: `/api/auth/forgot-password`,
+    RESET_PASSWORD: `/api/auth/reset-password/:token`,
 
-    UPDATE_PROFILE: `${link}/api/profile/update/:userId`,
-    GET_PROFILE: `${link}/api/profile/get/:userId`,
-    DELETE_PROFILE: `${link}/api/profile/delete/:userId`,
-    REFER_DETAILS: `${link}/api/refer/details`,
-  },
-  ROUTE: {
-    HOME: "/home",
-    ABOUT: "/about",
-    // Add more other links as needed
+    UPDATE_PROFILE: `/api/profile/update/:userId`,
+    GET_PROFILE: `/api/profile/get/:userId`,
+    DELETE_PROFILE: `/api/profile/delete/:userId`,
+    REFER_DETAILS: `/api/refer/details`,
   },
 };
 

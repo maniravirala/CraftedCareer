@@ -1,9 +1,9 @@
-import axios from "axios";
 import React, { useState } from "react";
 import Links from "../../../assets/Data/links";
 import toast from "react-hot-toast";
 import Input from "../../../components/Inputs/Input";
 import { Link } from "react-router-dom";
+import axiosInstance from "../../../utils/axiosInstance";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -16,33 +16,27 @@ const ForgotPassword = () => {
     e.preventDefault();
     // TODO: Implement password reset logic here
     const loadingToast = toast.loading("Sending reset link...");
-    axios
+    axiosInstance
       .post(Links.API.FORGOT_PASSWORD, { email }, { withCredentials: true })
       .then((res) => {
+        if (res.error) {
+          toast.dismiss(loadingToast.id);
+          toast.error(res.error);
+          return;
+        }
         toast.dismiss(loadingToast.id);
-        toast.success(res.data.message);
+        toast.success(res.message);
       })
       .catch((error) => {
         toast.dismiss(loadingToast.id);
-        toast.error(error.response.data.message || error.message);
+        if (error.response && error.response.status === 429) {
+          toast.error(error.response.data.error);
+        } else {
+          toast.error(error.message);
+        }
       });
   };
 
-  // return (
-  // <div>
-  //   <h2>Forgot Password</h2>
-  //   <form onSubmit={handleSubmit}>
-  //     <label htmlFor="email">Email:</label>
-  //     <input
-  //       type="email"
-  //       id="email"
-  //       value={email}
-  //       onChange={handleEmailChange}
-  //     />
-  //     <button type="submit">Reset Password</button>
-  //   </form>
-  // </div>
-  // );
   return (
     <div className="h-[calc(100vh-4rem)] overflow-auto ">
       <div className="h-full flex">

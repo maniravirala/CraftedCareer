@@ -7,7 +7,6 @@ import {
   DownloadOutlined,
   ClearOutlined,
 } from "@ant-design/icons";
-import axios from "axios";
 import { renderToStaticMarkup } from "react-dom/server";
 import { FormDataProvider } from "../../contexts/Data/FormDataContext";
 import Links from "../../assets/Data/links";
@@ -15,11 +14,14 @@ import toast from "react-hot-toast";
 import Template1 from "../../components/Templates/Template1";
 import Template2 from "../../components/Templates/Template2";
 import Template3 from "../../components/Templates/Template3";
+import axiosInstance from "../../utils/axiosInstance";
 
 const FloatBtnResume = () => {
   const selectedTemplate = useState(
     localStorage.getItem("selectedTemplate") || "Template 1"
   )[0];
+
+  const formData = localStorage.getItem("formData");
 
   const TemplateComponent = () => {
     switch (selectedTemplate) {
@@ -52,7 +54,7 @@ const FloatBtnResume = () => {
   };
 
   const handleJSONDownload = () => {
-    const json = localStorage.getItem("formData");
+    const json = formData;
     // const json = JSON.stringify(data);
     const url = URL.createObjectURL(
       new Blob([json], { type: "application/json" })
@@ -72,26 +74,28 @@ const FloatBtnResume = () => {
           <TemplateComponent />
         </FormDataProvider>
       );
-      axios
+
+      axiosInstance
         .post(
           Links.API.GENERATE_PDF,
-          { html: html },
-          {
-            withCredentials: true,
-          }
+          { html: html, formData: formData },
+          { withCredentials: true }
         )
-        .then((response) => {
+        .then((res) => {
+          if (res.error) {
+            toast.dismiss(loadingToast.id);
+            toast.error(res.error);
+            return;
+          }
           setTimeout(() => {
             toast.dismiss(loadingToast.id);
-            downloadPdf(response.data.downloadUrl);
+            downloadPdf(res.downloadUrl);
           }, 6000);
         })
-        .catch((err) => {
+        .catch(() => {
           toast.dismiss(loadingToast.id);
-          toast.error(
-            err.response ? err.response.data.message : "Error generating PDF"
-          );
-        });
+          toast.error("Error generating Pdf");
+        })
     } catch (err) {
       toast.dismiss(loadingToast.id);
       toast.error(
@@ -117,14 +121,13 @@ const FloatBtnResume = () => {
 
   function sendPdfToEmail(url) {
     try {
-      axios
-        .post(
-          Links.API.SEND_PDF,
-          { downloadUrl: url },
-          { withCredentials: true }
-        )
+      axiosInstance.post(Links.API.SEND_PDF, { downloadUrl: url }, { withCredentials: true })
         .then((response) => {
-          toast.success(response.data.message);
+          if (response.error) {
+            toast.error(response.error);
+            return;
+          }
+          toast.success(response.message);
         })
         .catch((err) => {
           toast.error(
